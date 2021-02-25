@@ -15,6 +15,7 @@ const login = (props) => {
           method: 'POST',
           body: JSON.stringify({ user }),
           headers: { 'Content-Type': 'application/json' },
+          credentials: 'include'
         })
           .then(res => res.json())
           .then(json => {console.log(json)});

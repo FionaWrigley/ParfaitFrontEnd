@@ -9,7 +9,12 @@ const GroupLine = () => {
   
     useEffect(() => {
 
-        fetch('http://localhost:5000/groups')
+        fetch('http://localhost:5000/groups',
+        {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include'
+          })
         .then(res => res.json())
         .then((data) => {
             console.log(data);
@@ -51,5 +56,4 @@ const GroupLine = () => {
 
     )
 }
-
 export default GroupLine;
