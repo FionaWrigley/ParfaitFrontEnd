@@ -11,7 +11,7 @@ export default function editprofile() {
                     <div className="px-4 sm:px-0">
                         <h2 className="text-lg font-medium leading-6 text-gray-900">Edit Profile</h2>
                         <p className="mt-1 text-sm text-gray-600">
-                            Update photo and description to help your friends find you.
+                            Upload a photo to help your friends find you.
                         </p>
                     </div>
                     <form action="#" method="POST">
@@ -38,7 +38,7 @@ export default function editprofile() {
                                         </button>
                                     </div>
                                 </div>
-                                <div>
+                                {/* <div>
                                     <label htmlFor="about" className="block text-sm font-medium text-gray-700">
                                         About
                                     </label>
@@ -53,7 +53,7 @@ export default function editprofile() {
                                     <p className="mt-2 text-sm text-gray-500">
                                         Brief description for your profile. URLs are hyperlinked.
                                     </p>
-                                </div>
+                                </div> */}
                             </div>
                             <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                                 <button
