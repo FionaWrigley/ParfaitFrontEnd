@@ -1,9 +1,72 @@
 import Plainheader from '../components/Plainheader';
+import {useState, useEffect} from 'react';
 
 
-export default function editprofile() {
+
+
+const editprofile = (props) => {
+
+        const [failed, setFailed] = useState(false);
+        const [ready,
+            setReady] = useState(false);
+        const [user,
+            setUser] = useState([]);
+        const [submit,
+            setSubmit] = useState(false);
+            const [firstLoad,
+                setFirstLoad] = useState(true);
+    
+        // console.log(JSON.stringify({user}));
+        // const router = useRouter();
+    
+        // const formSubmit = e => {
+    
+        //     e.preventDefault();
+        //     console.log("in formSubmit");
+        //     setSubmit(true);
+        // }
+    
+            useEffect(() => {
+                console.log("in edit profile use effect")
+                if (firstLoad) {
+                    console.log("first load")
+                    fetch('http://localhost:5000/profile', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                            credentials: 'include'
+                         })
+                         
+                            .then(res => res.json())
+                            .then((data) => {
+                                console.log(data);
+                                setUser(data);
+                                setReady(true);
+                                setFirstLoad(false);
+                            
+                            
+                            // switch(res.status){
+                            // case 200: 
+                            //     router.push('/groups');
+                            //     break;
+                            // case 401: 
+                            //     setFailed(true);
+                            //     setSubmit(false);
+                            //     break;
+                            // }
+                        }).catch(err => console.log("Oops: "+err));
+                
+                }
+            },
+        [submit]);
+
+
+
+
 
     return (
+        (ready) ? 
         <div>
             <Plainheader />
             <div className="mt-6">
@@ -95,6 +158,7 @@ export default function editprofile() {
                                             type="text"
                                             name="first_name"
                                             id="first_name"
+                                            defaultValue= {user.memberName}
                                             autoComplete="given-name"
                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/></div>
 
@@ -103,6 +167,7 @@ export default function editprofile() {
                                         <input
                                             type="text"
                                             name="last_name"
+                                            defaultValue= {user.memberSurname}
                                             id="last_name"
                                             autoComplete="family-name"
                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/></div>
@@ -113,6 +178,7 @@ export default function editprofile() {
                                             type="tel"
                                             name="phone"
                                             id="phone"
+                                            defaultValue= {user.phone}
                                             autoComplete="tel"
                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/></div>
 
@@ -122,6 +188,7 @@ export default function editprofile() {
                                             type="text"
                                             name="email_address"
                                             id="email_address"
+                                            defaultValue= {user.email}
                                             autoComplete="email"
                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/></div>
 
@@ -130,6 +197,7 @@ export default function editprofile() {
                                         <input
                                             id="password"
                                             name="password"
+                                            defaultValue= {user.password}
                                             type="password"
                                             autoComplete="current-password"
                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/></div>
@@ -140,6 +208,7 @@ export default function editprofile() {
                                             id="password2"
                                             name="password2"
                                             type="password"
+                                            defaultValue= {user.password}
                                             autoComplete="current-password"
                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/></div>
                                 </div>
@@ -271,5 +340,8 @@ export default function editprofile() {
                 {/* </div> */}
             </div>
         </div>
+         : <div>Loading...</div>
     )
 }
+
+export default editprofile;

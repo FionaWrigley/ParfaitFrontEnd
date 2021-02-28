@@ -1,10 +1,26 @@
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEdit} from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
+import {useEffect, useState} from 'react';
 
 const Navbar = ({page}) => {
 
     const element = <FontAwesomeIcon icon={faEdit} size="lg"/>
+    const [objectURL, setObjectURL] = useState("");
+
+    useEffect(() => {
+            fetch('http://localhost:5000/profilePic',
+            {
+                method: 'GET',
+                headers: { 'Content-Type': 'image/jpeg' },
+                credentials: 'include'
+              })
+            .then(res => res.blob())
+            .then(function(myBlob) {
+                console.log(myBlob);
+                setObjectURL(URL.createObjectURL(myBlob));
+            });
+    },[]);
 
     return (
         <nav className="bg-pink-200">
@@ -17,16 +33,15 @@ const Navbar = ({page}) => {
                                     id="user-menu"
                                     aria-haspopup="true">
                                     <img
-                                        className="h-8 w-8 rounded-full"
-                                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                        className="h-10 w-10 rounded-full"
+                                        src = {objectURL}
                                         alt=""/>
                                 </button>
                             </Link>
-                        </div>
+                    </div>
                     <div
                         className="flex-1 flex items-center justify-center sm:items-stretch ">
                         
-
                         <div className="flex-shrink-0 flex items-center text-center">
                             {/* <img className="block lg:hidden h-8 w-auto" src="/images/logo.svg" alt="Logo"/> */}
                             <p  className="font-extrabold text-indigo-800">{page}</p>

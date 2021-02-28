@@ -5,10 +5,6 @@ import FooterMenu from '../components/FooterMenu';
 export default function groups() {
 
 
-
-
-
-
 return (
     <>
     <Navbar page="My Groups" />
