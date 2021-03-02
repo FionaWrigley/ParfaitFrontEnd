@@ -1,12 +1,14 @@
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faEdit} from '@fortawesome/free-solid-svg-icons';
+import {faEdit, faUser, faPlusSquare} from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import {useEffect, useState} from 'react';
 
 const Navbar = ({page}) => {
 
-    const element = <FontAwesomeIcon icon={faEdit} size="lg"/>
+    const groupIcon = <FontAwesomeIcon icon={faEdit} size="lg"/>
+    const profileICon = <FontAwesomeIcon icon={faUser} size='lg' />
     const [objectURL, setObjectURL] = useState("");
+    const [imageExists, setImageExists] = useState(false);
 
     useEffect(() => {
             fetch('http://localhost:5000/profilePic',
@@ -19,6 +21,9 @@ const Navbar = ({page}) => {
             .then(function(myBlob) {
                 console.log(myBlob);
                 setObjectURL(URL.createObjectURL(myBlob));
+                if (myBlob.size > 0){
+                setImageExists(true);
+                }
             });
     },[]);
 
@@ -32,10 +37,25 @@ const Navbar = ({page}) => {
                                     className="bg-pink-200 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                                     id="user-menu"
                                     aria-haspopup="true">
+                                    { (imageExists) ?
                                     <img
                                         className="h-10 w-10 rounded-full"
                                         src = {objectURL}
-                                        alt=""/>
+                                        alt=""/> 
+                                        : <>
+                                        {profileICon}
+                                        </>
+                                        
+                                        
+
+                                //     <svg
+                                //    className="h-10 w-10 text-gray-300"
+                                //    fill="currentColor"
+                                //    viewBox="0 0 24 24">
+                                //    <path
+                                //        d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"/>
+                                // </svg> 
+                                    }
                                 </button>
                             </Link>
                     </div>
@@ -56,7 +76,7 @@ const Navbar = ({page}) => {
                                 <button
                                     className=" bg-pink-200 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
 
-                                    {element}
+                                    {groupIcon}
                                 </button>
                             </Link>
 

@@ -11,7 +11,6 @@ export default function Home() {
     if (typeof window !== 'undefined') {
       router.push('/login')
     }
-
     return null;
   }
   

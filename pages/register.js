@@ -1,4 +1,63 @@
-export default function register() {
+import Link from 'next/link';
+import {useEffect, useState} from 'react';
+import {useRouter} from 'next/router';
+
+
+
+const register = (props) => {
+
+  
+
+
+        const [failed, setFailed] = useState(false);
+        const [ready,
+            setReady] = useState(false);
+        const [user,
+            setUser] = useState([]);
+        const [submit,
+            setSubmit] = useState(false);
+    
+        console.log(JSON.stringify({user}));
+        const router = useRouter();
+    
+        const formSubmit = e => {
+            e.preventDefault();
+            console.log("in formSubmit");
+            setSubmit(true);
+        }
+
+        useEffect(() => {
+        if (submit) {
+            
+            fetch('http://localhost:5000/register', {
+                method: 'POST',
+                body: JSON.stringify({user}),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                    credentials: 'include'
+                 })
+                 .then(res => {
+                    
+                    switch(res.status){
+                    case 200: 
+                        router.push('/groups');
+                        break;
+                    case 401: 
+                        router.push('register');
+                         setFailed(true);
+                         setSubmit(false);
+                        break;
+           
+                    }
+                }).catch(err => console.log("Oops: "+err));
+        }
+    },
+[submit]);
+
+
+
+
 
     return (
 
@@ -8,7 +67,6 @@ export default function register() {
                 <div >
                      <img
                         className="mx-auto h-20 w-auto"
-                        // src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
                         src="/images/logo.svg"
                         alt="Workflow" /> 
                         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -16,7 +74,7 @@ export default function register() {
                         </h2>
                         
                     </div>
-                    <form className="mt-8 space-y-6" action="#" method="POST">
+                    <form className="mt-8 space-y-6" onSubmit={formSubmit}>
                         <input type="hidden" name="remember" value="true" />
                             <div className="rounded-md shadow-sm space-y-2">
                                 
@@ -29,7 +87,11 @@ export default function register() {
                                             autoComplete="given-name"
                                         required
                                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                        placeholder="First name" /></div>
+                                        placeholder="First name"
+                                        onChange={e => setUser({
+                                            ...user,
+                                            fname: e.target.value
+                                        })} /></div>
                             <div>
                                     <label htmlFor="last-name" className="sr-only">Last Name</label>
                                     <input
@@ -39,7 +101,11 @@ export default function register() {
                                             autoComplete="family-name"
                                         required
                                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                        placeholder="Last Name" /></div>    
+                                        placeholder="Last Name"
+                                        onChange={e => setUser({
+                                            ...user,
+                                            lname: e.target.value
+                                        })} /></div>    
                                 
                                 <div>
                                     <label htmlFor="phone-number" className="sr-only">Phone</label>
@@ -50,7 +116,11 @@ export default function register() {
                                             autoComplete="tel"
                                         required
                                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                        placeholder="Phone number" /></div>
+                                        placeholder="Phone number" 
+                                        onChange={e => setUser({
+                                            ...user,
+                                            phone: e.target.value
+                                        })}/></div>
                                 <div>
                                     <label htmlFor="email-address" className="sr-only">Email address</label>
                                     <input
@@ -60,7 +130,11 @@ export default function register() {
                                             autoComplete="email"
                                         required
                                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                        placeholder="Email address" /></div>
+                                        placeholder="Email address"
+                                        onChange={e => setUser({
+                                            ...user,
+                                            email: e.target.value
+                                        })} /></div>
                                     <div>
                                         <label htmlFor="password" className="sr-only">Password</label>
                                         <input
@@ -70,7 +144,11 @@ export default function register() {
                                             autoComplete="current-password"
                                             required
                                             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                            placeholder="Password" /></div>
+                                            placeholder="Password"
+                                            onChange={e => setUser({
+                                                ...user,
+                                                password: e.target.value
+                                            })} /></div>
 
                                     <div>
                                         <label htmlFor="password2" className="sr-only">Re-enter Password</label>
@@ -83,26 +161,6 @@ export default function register() {
                                             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                             placeholder="Re-enter Password" /></div>
                                     </div>
-
-                                    {/* <div className="flex items-center justify-between">
-                                         <div className="flex items-center">
-                                            <input
-                                                id="remember_me"
-                                                name="remember_me"
-                                                type="checkbox"
-                                                className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
-                                                <label htmlFor="remember_me" className="ml-2 block text-sm text-gray-900" >
-                                                    Remember me
-                                                </label>
-                                            </div>
-
-                                            <div className="text-sm">
-                                                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                                    Forgot your password?
-                                                </a>
-                                            </div>
-                                        </div> */}
-
                                         <div>
                                             <button
                                                 type="submit"
@@ -128,18 +186,5 @@ export default function register() {
                             </div>
     )
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-}
+    }
+export default register;

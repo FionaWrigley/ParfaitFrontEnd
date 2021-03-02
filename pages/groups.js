@@ -10,7 +10,6 @@ return (
     <Navbar page="My Groups" />
     <GroupLine />
     <FooterMenu />
-
     </>
 )
 
