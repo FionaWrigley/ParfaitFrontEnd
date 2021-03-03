@@ -15,7 +15,8 @@
     "next": "10.0.5",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "react-images-upload": "^1.2.8"
+    "react-images-upload": "^1.2.8",
+    "validator": "^13.5.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.4",

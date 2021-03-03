@@ -1,11 +1,36 @@
+import { useState, useEffect, getQueryParams } from 'react';
+import FindUsers from '../components/FindUsers';
 import Plainheader from '../components/Plainheader';
 
-export default function creategroup() {
+const newgroup = () => {
+
+
+    // console.log(members);
+     const [groupMembers, setGroupMembers] = useState([]);
+     const [createGroup, setCreateGroup] = useState(false);
+
+    // useEffect(() => {
+
+    //     const {members} = getQueryParams(window.location.search);
+    //     setGroupMembers(members);
+    //     console.log(groupMembers);
+    //   }, []);
+
+    const handleSubmit = (members) => {
+        console.log("submit clicked");
+        console.log(members);
+        setGroupMembers(members);
+        setCreateGroup(true);
+    }
+
 
     return (
         <>
         <Plainheader />
-        <div className="mt-6">
+        {
+        (!createGroup) ?
+        <FindUsers handleSubmit={handleSubmit}/> :
+         <div className="mt-6">
                 <div>
                     <div className="px-4 sm:px-0">
                         <h2 className="text-lg font-medium leading-6 text-gray-900">Create Group</h2>
@@ -16,15 +41,14 @@ export default function creategroup() {
                     <form action="#" method="POST">
                         <div className="shadow sm:rounded-md sm:overflow-hidden">
                             <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
-
                             <div className="col-span-6 sm:col-span-3">
                                         <label htmlFor="group_name" className="block text-sm font-medium text-gray-700">Group name</label>
                                         <input
                                             type="text"
                                             name="group_name"
                                             id="group_name"
-                                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/></div>
-                                <div>
+                                            className = "mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/></div>
+                                            <div>
                                     <label className="block text-sm font-medium text-gray-700">
                                         Photo
                                     </label>
@@ -54,14 +78,15 @@ export default function creategroup() {
                                             id="about"
                                             name="about"
                                             rows="3"
-                                            className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
-                                            placeholder="you@example.com"></textarea>
+                                            className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md focus:outline-none"
+                                            placeholder="brief bio about your group"></textarea>
                                     </div>
-                                    <p className="mt-2 text-sm text-gray-500">
-                                        Brief description for your group. URLs are hyperlinked.
-                                    </p>
                                 </div>
                             </div>
+
+                           
+                            {(groupMembers.length > 0) ? (groupMembers.map((element, index) => <div key={index}>{element}</div> ))
+                            : <div>No users selected</div>}
                             <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                                 <button
                                     type="submit"
@@ -69,12 +94,14 @@ export default function creategroup() {
                                     Save
                                 </button>
                             </div>
-                        </div>
+                         </div>               
                     </form>
                 </div>
-            </div>
+            </div> }
 </>
     );
 
 
 }
+
+export default newgroup;
