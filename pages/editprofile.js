@@ -1,4 +1,4 @@
-import Plainheader from '../components/Plainheader';
+import Plainheader from '../components/navigation/Plainheader';
 import ProfileUpdate from '../components/ProfileUpdate';
 import PasswordUpdate from '../components/PasswordUpdate';
 import NotificationUpdate from '../components/NotificationUpdate';
@@ -66,7 +66,7 @@ const editprofile = (props) => {
    
     return ((ready)
         ? <div>
-                <Plainheader/>
+                <Plainheader page="groups"/>
                 <div className="mt-6">
                     <div>
                         <div className="px-4 sm:px-0">

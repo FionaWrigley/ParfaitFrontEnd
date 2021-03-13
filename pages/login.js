@@ -9,23 +9,15 @@ const login = (props) => {
         setReady] = useState(false);
     const [user,
         setUser] = useState([]);
-    const [submit,
-        setSubmit] = useState(false);
+    const [error, setErrorMessage] = useState('');
 
     console.log(JSON.stringify({user}));
     const router = useRouter();
 
     const formSubmit = e => {
         e.preventDefault();
-        console.log("in formSubmit");
-        setSubmit(true);
-    }
 
-        useEffect(() => {
-            console.log("in useEffect")
-            if (submit) {
-                console.log("submit is true")
-                fetch('http://localhost:5000/login', {
+        fetch('http://localhost:5000/login', {
                     method: 'POST',
                     body: JSON.stringify({user}),
                     headers: {
@@ -36,20 +28,26 @@ const login = (props) => {
                      .then(res => {
                         
                         switch(res.status){
-                        case 200: 
+                        case 204: 
                             router.push('/groups');
                             break;
                         case 401: 
                             router.push('/login');
-                             setFailed(true);
-                             setSubmit(false);
+                             //setFailed(true);
+                             setErrorMessage("Invalid username or password");
+                            break;
+                        case 500:
+                            router.push('/login');
                             break;
                
                         }
-                    }).catch(err => console.log("Oops: "+err));
+                    }).catch(err => {
+
+                        setErrorMessage("Oops, we are currently experiencing problem, please try again later")
+
+                        console.log("Oops: "+err)}
+                        );
             }
-        },
-    [submit]);
 
     return (
         <div
@@ -68,7 +66,9 @@ const login = (props) => {
                         <div>
                             <label htmlFor="email-address" className="sr-only">Email address</label>
                             <input id="email-address" name="user[email]" type="user.email" // value={user.email
-                         autoComplete="email" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address" 
+                         autoComplete="email" 
+                        // required 
+                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address" 
                          onChange={e => setUser({
                                 ...user,
                                 email: e.target.value
@@ -76,7 +76,9 @@ const login = (props) => {
                         <div>
                             <label htmlFor="password" className="sr-only">Password</label>
                             <input id="password" name="user[password]" type="password" // value={user.password
-                         autoComplete="current-password" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password" onChange={e => setUser({
+                         autoComplete="current-password" 
+                         //required 
+                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password" onChange={e => setUser({
                                 ...user,
                                 password: e.target.value
                             })}/></div>
@@ -121,7 +123,7 @@ const login = (props) => {
                                 </span>
                                 Sign in
                             </button>
-                        {failed ? <>username or password is incorrect</> : <></>}
+                       <> {error} </>
                     </div>
                     <div>
                         <div className="text-sm text-center">

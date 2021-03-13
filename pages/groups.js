@@ -1,6 +1,6 @@
-import Navbar from '../components/Navbar';
+import Navbar from '../components/navigation/Navbar';
 import GroupLine from '../components/GroupLine';
-import FooterMenu from '../components/FooterMenu';
+import FooterMenu from '../components/navigation/FooterMenu';
 
 export default function groups() {
 

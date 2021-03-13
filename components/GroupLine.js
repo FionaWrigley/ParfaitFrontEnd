@@ -3,6 +3,8 @@ import Link from 'next/link';
 import {useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 
+const {PARFAIT_SERVER} = process.env;
+
 const GroupLine = () => {
 
     const [groups,
@@ -30,7 +32,7 @@ const GroupLine = () => {
                         console.log(data);
                         setGroups(data);
                         setReady(true);
-                });
+                })
             }}).catch(err => console.log("Oops: "+err));
             
 
@@ -48,12 +50,12 @@ const GroupLine = () => {
                 {groups.map((element, index) => <Link href="scheduletester" key={index}>
                     <div
                         className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 border-2 border-gray-100 space-x-3">
-                        <img
+                        {/* <img
                             className="h-11 w-11 rounded-full inline"
                             src={window
                             .URL
                             .createObjectURL(new Blob([new Uint8Array(element.groupPic.data)], {type: 'image/jpeg'}))}
-                            alt="i"/> 
+                            alt="i"/>  */}
                         <p className="mt-8 text-center  font-bold text-indigo-800 inline">{element.groupName}</p>
                     </div>
                 </Link>)}

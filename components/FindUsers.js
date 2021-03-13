@@ -1,7 +1,7 @@
-import Plainheader from './Plainheader';
+import Plainheader from './navigation/Plainheader';
 import React from 'react';
 import {useState, useEffect} from 'react';
-import useDebounce from './useDebounce';
+import useDebounce from './functional/useDebounce';
 import Link from 'next/link';
 
 const FindUsers = ({handleSubmit}) => {
@@ -16,9 +16,10 @@ useEffect(
 
   () => {
     
-    if (debouncedSearchTerm) {
+    //search will only run every .8 seconds, rather than every key stroke.
+    if (debouncedSearchTerm && !isSearching) {
       
-      setIsSearching(true);
+      setIsSearching(true); //while searching - no other requests should be made
       
       fetch('http://localhost:5000/users/'+debouncedSearchTerm, {
             method: 'GET',
@@ -39,30 +40,35 @@ useEffect(
 );
 
 
-const handleChecked = (event) => {
-  console.log('in handlechecked')
-  console.log(event.target.checked)
+const handleChecked = (event) => {//member selected so add to group member list
+  
   if(event.target.checked){
-   
-     groupMembers.push(event.target.value);
-   }else{ 
-     let index = groupMembers.indexOf(event.target.value);
-     if (index>=0){
+     let index = results.findIndex(i => i.memberID == (""+event.target.value));
+     groupMembers.push(results[index]); 
+    
+    }else{ //member has been deselected, if member is in group member list - remove
+
+     let index = 
+     groupMembers.findIndex(i => i.memberID == (""+event.target.value));
+     
+     if (index>=0){ 
      groupMembers.splice(index, 1);
-     }
+     } 
    }
 }
 
-const isSelected = (event) => {
-   if(groupMembers.includes(event+"")){
+//make checkbox appear checked for previously selected group members
+const isSelected = (id) => {
+
+   if(groupMembers.some(e => e.memberID == id)){
       return true;
     }else{
       return false;
       }
  }
 
+ //pass group member list back to create group page
  const handleClick = (event) => {
-     console.log("clicked");
     handleSubmit(groupMembers);
   }
 
@@ -107,7 +113,7 @@ const isSelected = (event) => {
                             .createObjectURL(new Blob([new Uint8Array(element.profilePic.data)]))}
                               alt="i"/> }
                               </span>
-                        <p className="mt-8  font-bold text-indigo-800 inline">{element.memberName} {element.memberSurname}</p>
+                        <p className="mt-8  font-bold text-indigo-800 inline">{element.fname} {element.lname}</p>
                         <input type ='checkbox'
                               key = {element.memberID}
                               value= {element.memberID}

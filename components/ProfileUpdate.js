@@ -10,10 +10,9 @@ const ProfileUpdate = () => {
         setReady] = useState(false);
     const [user,
         setUser] = useState([]);
-    const [submit,
-        setSubmit] = useState(false);
     const [firstLoad,
         setFirstLoad] = useState(true);
+    const [message, setMessage] = useState('');
 
 
     useEffect(() => {
@@ -39,7 +38,28 @@ const ProfileUpdate = () => {
 
     }
 
-    const handleSubmit = () => {
+    const formSubmit = (e) => {
+
+        e.preventDefault();
+        fetch('http://localhost:5000/profile', {
+                method: 'POST',
+                body: JSON.stringify({user}),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                    credentials: 'include'
+                 })
+                 .then(res => {
+                    
+                    switch(res.status){
+                    case 204: 
+                        setMessage('Profile saved');
+                        break;
+                    case 401: 
+                        break;
+                    }
+                }).catch(err => setMessage("Oops: "+err));
+
 
     }
 
@@ -58,31 +78,42 @@ const ProfileUpdate = () => {
         <p className="mt-1 text-sm text-gray-600">
             Update your personal information.
         </p>
+        <p className="mt-1 text-sm text-gray-600">
+            {message}
+        </p>
     </div>
 </div >
 
 <div>
-    <form action="#" method="POST">
+    <form onSubmit={formSubmit} method="POST">
         <div className="shadow overflow-hidden sm:rounded-md">
             <div className="px-4 py-5 bg-white sm:p-6">
                 <div className="grid grid-cols-6 gap-6">
                     <div className="col-span-6 sm:col-span-3">
-                        <label htmlFor="first_name" className="block text-sm font-medium text-gray-700">First name</label>
+                        <label htmlFor="fname" className="block text-sm font-medium text-gray-700">First name</label>
                         <input
                             type="text"
-                            name="first_name"
-                            id="first_name"
-                            defaultValue={user.memberName}
+                            name="fname"
+                            id="fname"
+                            defaultValue={user.fname}
                             autoComplete="given-name"
+                            onChange={e => setUser({
+                                ...user,
+                                fname: e.target.value
+                            })}
                             className = "mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/></div>
 
                     <div className="col-span-6 sm:col-span-3">
-                        <label htmlFor="last_name" className="block text-sm font-medium text-gray-700">Last name</label>
+                        <label htmlFor="lname" className="block text-sm font-medium text-gray-700">Last name</label>
                         <input
                             type="text"
-                            name="last_name"
-                            defaultValue={user.memberSurname}
-                            id="last_name"
+                            name="lname"
+                            defaultValue={user.lname}
+                            onChange={e => setUser({
+                                ...user,
+                                lname: e.target.value
+                            })}
+                            id="lname"
                             autoComplete="family-name"
                             className = "mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/></div>
 
@@ -93,6 +124,10 @@ const ProfileUpdate = () => {
                             name="phone"
                             id="phone"
                             defaultValue={user.phone}
+                            onChange={e => setUser({
+                                ...user,
+                                phone: e.target.value
+                            })}
                             autoComplete="tel"
                             className = "mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/></div>
 
@@ -108,18 +143,22 @@ const ProfileUpdate = () => {
                             name="email_address"
                             id="email_address"
                             defaultValue={user.email}
-                            onBlur={(e) => {
-                                    if(!validator.isEmail(e.target.value)){
-                                        e.target.setCustomValidity('Not a valid email address');
-                                        e.target.classList.add("border-red-500");
-                                        e.target.classList.remove("border-gray-300");
-                                    }else{
-                                        e.target.setCustomValidity('');
-                                        e.target.classList.add("border-gray-300");
-                                        e.target.classList.remove("border-red-500");
-                                    }
-                            }
-                            }
+                            onChange={e => setUser({
+                                ...user,
+                                email: e.target.value
+                            })}
+                            // onBlur={(e) => {
+                            //         if(!validator.isEmail(e.target.value)){
+                            //             e.target.setCustomValidity('Not a valid email address');
+                            //             e.target.classList.add("border-red-500");
+                            //             e.target.classList.remove("border-gray-300");
+                            //         }else{
+                            //             e.target.setCustomValidity('');
+                            //             e.target.classList.add("border-gray-300");
+                            //             e.target.classList.remove("border-red-500");
+                            //         }
+                            //}
+                            //}
                             autoComplete="email"
                             
                             />

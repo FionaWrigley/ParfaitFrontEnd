@@ -1,10 +1,35 @@
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faArrowLeft, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
+import {useRouter} from 'next/router';
+import Link from 'next/link';
 
-const Plainheader = () => {
 
+
+
+
+const Plainheader = (page) => {
+
+
+    const router = useRouter();
     const backIcon = <FontAwesomeIcon icon={faArrowLeft} size="lg"/>
     const logoutIcon = <FontAwesomeIcon icon={faSignOutAlt} size="lg"/>
+
+    const logOut = () => {
+
+        console.log("trying to logout");
+        
+        fetch('http://localhost:5000/logout', {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'},
+            credentials: 'include'
+        }).then((res) => {
+          
+                if(res.status == 200){
+                    router.push('/login');
+                
+                }
+            }).catch(err => console.log("Oops: "+err));
+    }
 
     return (
         <nav className="bg-pink-200">
@@ -14,12 +39,14 @@ const Plainheader = () => {
                         className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                         <div className="ml-3 absolute left-0 ">
                             <div>
+                                <Link href= {'"/'+page+'"'}>
                                 <button
                                     className="bg-pink-200 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                                     id="user-menu"
                                     aria-haspopup="true">
                                     {backIcon}
                                 </button>
+                                </Link>
                             </div>
                         </div>
 
@@ -38,6 +65,7 @@ const Plainheader = () => {
                             className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 
                                 <button
+                                    onClick={logOut}
                                     className=" bg-pink-200 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                     {logoutIcon}
                                 </button>
