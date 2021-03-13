@@ -3,8 +3,6 @@ import Link from 'next/link';
 import {useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 
-const {PARFAIT_SERVER} = process.env;
-
 const GroupLine = () => {
 
     const [groups,
@@ -29,21 +27,12 @@ const GroupLine = () => {
                     break;
                 case 200:
                     res.json().then((data) => {
-                        console.log(data);
+                        //console.log(data);
                         setGroups(data);
                         setReady(true);
                 })
             }}).catch(err => console.log("Oops: "+err));
-            
-
-        //     const requestOptions = {         method: 'POST',         headers: {
-        // 'Content-Type': 'application/json',             'Authorization': 'Bearer
-        // my-token',         },         body: JSON.stringify({ title: 'React POST
-        // Request Example' })     };
-        // fetch('https://jsonplaceholder.typicode.com/posts', requestOptions)
-        // .then(response => response.json())         .then(data => this.setState({
-        // postId: data.id })); }
-    }, []);
+            }, []);
 
     return ((ready)
         ? <div>
