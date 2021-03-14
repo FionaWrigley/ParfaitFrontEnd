@@ -9,40 +9,87 @@ export function ScheduleDay(scheduleEvents, cStyle) {
 
     events = scheduleEvents;
     let str = scheduleEvents.cStyle;
-    console.log(scheduleEvents);
-    console.log("cstyle1: "+cStyle);
-    console.log("str1: "+str);
+
+    for (let i = 0; i < 1440; i++) {
+        dayArr.push(false);
+    }
 
     for (let i = 0; i < 24; i++) {
-
-        dayArr.push({hour: i, booked: false});
 
         events
             .scheduleEvents
             .map((element, index) => {
 
-                const startTime = element
+                const startHour = element
                     .startTime
                     .substring(0, 2);
-                const endTime = element
+                const endHour = element
                     .endTime
                     .substring(0, 2);
 
-                if (i >= startTime && i <= endTime) {
+                    const startMin = element
+                        .startTime
+                        .substring(3, 5);
+                    const endMin = element
+                        .endTime
+                        .substring(3, 5);
 
-                    dayArr[i] = {
-                        hour: i,
-                        booked: true
-                    };
-                }
+
+                    if (i == startHour && i < endHour){//check for events that don't start on the hour
+                        
+                        for (let j = 0; j < 60; j++) {
+
+                            if(j >= startMin){ //mins from start minute up should be booked
+
+                            let numMins = (60* i)+j;
+                            dayArr[numMins] = true;
+                            }
+                        }
+                    }else if (i > startHour && i < endHour){ //all minutes for this hour should be booked
+                        
+                        for (let j = 0; j < 60; j++) {
+                            let numMins = (60* i)+j;
+                            dayArr[numMins] = true;
+                        }
+
+                    }else if (i == endHour && i > startHour){ //check for events that don't end on the hour
+
+                        for (let j = 0; j < 60; j++) {
+
+                            if(j < endMin){ //mins from start minute up should be booked
+                        
+                            let numMins = (60* i)+j;
+                            dayArr[numMins] = true;
+                            }
+                        }
+
+                    }else if (i == startHour && i == endHour){ //check for events less than an hour
+
+                        if(j >= startMin){ //mins from start minute up should be booked
+
+                            for (let j = 0; j < 60; j++) {
+
+                                if(j >= startMin && j < endMin){ //mins from start minute up should be booked
+                            
+                                let numMins = (60* i)+j;
+                                dayArr[numMins] = true;
+                                }   
+                            }
+                        }
+                    
+                    }
             })
-    }
+        }
+
+        console.log(dayArr);
 
     return (
-        <div class = "flex h-12 w-auto flex-nowrap">
-            {dayArr.map((entry, index) => <ScheduleCell booked={entry.booked} cStyle={scheduleEvents.cStyle} index={index} key={index}/>)}
-        </div>
+        <>
+
+            {dayArr.map((entry, index) => <ScheduleCell booked={entry} cStyle={scheduleEvents.cStyle} index={index} key={index}/>)}
+   
+    </>
     );
-}
+
 
 export default ScheduleDay;

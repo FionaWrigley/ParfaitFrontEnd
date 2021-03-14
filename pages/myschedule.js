@@ -1,43 +1,3 @@
-// import Calendar from 'react-calendar';
-// import FooterMenu from '../components/navigation/FooterMenu';
-// import EventList from '../components/EventList';
-// import Navbar from '../components/navigation/Navbar';
-// import 'react-calendar/dist/Calendar.css';
-// import {useEffect, useState} from 'react';
-
-// const {PARFAIT_SERVER} = process.env;
-
-// const myschedule = () => {
-
-//     let newDate = new Date();
-//     let today = newDate.getFullYear() + '-' + (newDate.getMonth() + 1) + '-' + newDate.getDate();
-//     const [date,
-//         setDate] = useState(new Date());
-
-//     useEffect(() => {
-
-//         console.log(date);
-
-//     },[date]);
-
-//     return (
-//         <> 
-//      <Navbar/> 
-//     <Calendar 
-//         onChange={setDate}
-//         value={date}/>
-    
-//     <EventList dateField = {date} />
-//     <FooterMenu/> 
-//         </>)
-// }
-        
-//         export default myschedule;
-
-
-
-
-
 import Calendar from 'react-calendar';
 import FooterMenu from '../components/navigation/FooterMenu';
 import EventList from '../components/EventList';
@@ -45,7 +5,6 @@ import Navbar from '../components/navigation/Navbar';
 import 'react-calendar/dist/Calendar.css';
 import {useEffect, useState} from 'react';
 
-const {PARFAIT_SERVER} = process.env;
 
 const myschedule = () => {
 
@@ -88,11 +47,6 @@ const myschedule = () => {
         }).catch(err => console.log("Oops: " + err));
 
     },[date]);
-
-
-
-
-
 
     return (<>
         <Navbar/> 

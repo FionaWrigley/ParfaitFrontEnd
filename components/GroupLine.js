@@ -36,7 +36,7 @@ const GroupLine = () => {
 
     return ((ready)
         ? <div>
-                {groups.map((element, index) => <Link href="scheduletester" key={index}>
+                {groups.map((element, index) => <Link href={{ pathname: 'groupschedule', query: {groupID: element.groupID}}} key={index}>
                     <div
                         className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 border-2 border-gray-100 space-x-3">
                         {/* <img
