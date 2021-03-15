@@ -3,12 +3,20 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
-      gridColumn: {
-          '25': '1fr repeat(24, 60px)',
 
-          
+      width: {
+
+        '1/2px': '0.5px'
+
+      },
+      
+      gridTemplateColumns: {
+        '25': '100px repeat(24, minmax(30px, 30px))'
+      },
+
+      gridColumn: {
           'span-24': 'span 24 / span 24',
-          
+          'span-25': 'span 25 / span 25' 
       },
 
       gridColumnStart: {

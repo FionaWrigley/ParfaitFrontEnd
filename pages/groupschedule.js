@@ -21,10 +21,11 @@ const groupschedule = () => {
         setScheduleData] = useState([]);
     const [ready,
         setReady] = useState(false);
+    let querystring = "/"+groupID+"/"+newdate;
 
     useEffect(() => {
 
-        fetch('http://localhost:5000/groupschedule/' + groupID, {
+        fetch('http://localhost:5000/groupschedule/'+ groupID, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -60,7 +61,7 @@ const groupschedule = () => {
                 <div>{scheduleData.groupDescripton}</div>
                 
 
-                <div className="overflow-y-scroll">
+                <div className="overflow-x-scroll">
                 {/* <div>
                     <div className="w-720 h-8 bg-gray-50">{newdate}</div>
                     <div className="w-720 h-8 bg-gray-50 flex">
@@ -73,11 +74,6 @@ const groupschedule = () => {
                 </div> */}
                     <ScheduleLine contacts={scheduleData.members}/>
                 </div>
-                <h2>
-                    <Link href="/">
-                        <a>Back to home</a>
-                    </Link>
-                </h2>
             </div>
         : <div>loading</div>)
 }

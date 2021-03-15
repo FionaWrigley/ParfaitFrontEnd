@@ -1,13 +1,13 @@
 
-const ScheduleCell = ({booked, cStyle, index}) => {
+const ScheduleCell = (props) => {
 
     return (
-            (booked)
+            (props.booked)
                 ? (
-                    <div className={cStyle}></div>
+                    <div className={`h-12 w-1/2px bg-${props.color} inline-block`}></div>
                 ) 
                 : (
-                    <div className="h-12 w-px bg-gray-100"></div>
+                    <div className="h-12 w-1/2px bg-gray-200 inline-block"></div>
                 )
     )
 }

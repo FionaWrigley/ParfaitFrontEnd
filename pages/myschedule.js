@@ -18,9 +18,6 @@ const myschedule = () => {
 
     useEffect(() => {
 
-        console.log("event list")
-        console.log(date)
-
         fetch('http://localhost:5000/scheduleday/'+date, {
             method: 'GET',
             headers: {
@@ -34,13 +31,6 @@ const myschedule = () => {
                         .json()
                         .then((data) => {
                             setEvents(data); 
-                            
-                            console.log('data')
-                            console.log(data);
-                            console.log('events')
-                            
-                            
-                            console.log(events);
                             setReady(true);
                         })
             }
