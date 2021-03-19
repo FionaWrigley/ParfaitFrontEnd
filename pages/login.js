@@ -2,6 +2,7 @@ import Link from 'next/link';
 import {useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 
+
 const login = (props) => {
 
     const [failed, setFailed] = useState(false);
@@ -39,7 +40,6 @@ const login = (props) => {
                         case 500:
                             router.push('/login');
                             break;
-               
                         }
                     }).catch(err => {
 

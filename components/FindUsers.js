@@ -44,7 +44,7 @@ const handleChecked = (event) => {//member selected so add to group member list
   
   if(event.target.checked){
      let index = results.findIndex(i => i.memberID == (""+event.target.value));
-     groupMembers.push(results[index]); 
+     groupMembers.push(results[index]);
     
     }else{ //member has been deselected, if member is in group member list - remove
 

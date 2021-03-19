@@ -6,12 +6,22 @@ module.exports = {
 
       width: {
 
-        '1/2px': '0.5px'
+        '1/2px': '0.5px',
+        '30' : '30px'
 
       },
-      
+
+      fontSize: {
+        'xxs': '.5rem'
+       },
+
       gridTemplateColumns: {
-        '25': '100px repeat(24, minmax(30px, 30px))'
+        '24': 'repeat(24, minmax(30px, 30px))',
+        '31': '100px repeat(30, minmax(720px, 720px))',
+        '30': 'repeat(30, auto)',
+        'schedule' : '100px 1frS',
+        'members' : '100px'
+
       },
 
       gridColumn: {
@@ -32,7 +42,13 @@ module.exports = {
         '22': '22',
         '23': '23',
         '24': '24',
-        '25': '25'
+        '25': '25',
+        '26': '26',
+        '27': '27',
+        '28': '28',
+        '29': '29',
+        '30': '30',
+        '31': '31'
        },  
        
        gridColumnEnd: {
@@ -48,11 +64,19 @@ module.exports = {
         '22': '22',
         '23': '23',
         '24': '24',
-        '25': '25'
+        '25': '25',
+        '26': '26',
+        '27': '27',
+        '28': '28',
+        '29': '29',
+        '30': '30',
+        '31': '31'
        }
        
+       
+       
 
-    },
+    }
   },
   variants: {
     extend: {},
