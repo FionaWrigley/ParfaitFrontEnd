@@ -18,7 +18,6 @@ const groupschedule = () => {
     const [numberOfDays,
                 setNumberOfDays] = useState(30);
 
-
     const contactColor = ["indigo-200", "pink-200", "green-200", "yellow-100", "purple-200"];
 
     let schedDate = new Date();
@@ -31,7 +30,6 @@ const groupschedule = () => {
         }
 
     useEffect(() => {
-
         let querystring = "/"+groupID+"/"+format(new Date(), "yyyy-MM-dd")+'/'+numberOfDays;
         console.log(querystring);
 
@@ -48,8 +46,6 @@ const groupschedule = () => {
                         .json()
                         .then((data) => {
 
-                            console.log('data//////');
-                            console.log(data);
                             setScheduleData(data);
                             setReady(true);
                         })

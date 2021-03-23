@@ -5,9 +5,7 @@ import Navbar from '../components/navigation/Navbar';
 import 'react-calendar/dist/Calendar.css';
 import {useEffect, useState} from 'react';
 
-
 const myschedule = () => {
-
     // let newDate = new Date();
     // let today = newDate.getFullYear() + '-' + (newDate.getMonth() + 1) + '-' + newDate.getDate();
     const [date,

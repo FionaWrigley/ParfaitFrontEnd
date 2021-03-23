@@ -16,6 +16,7 @@ const login = (props) => {
     const router = useRouter();
 
     const formSubmit = e => {
+        console.log('fffffffffffffffffff')
         e.preventDefault();
 
         fetch('http://localhost:5000/login', {
@@ -36,9 +37,6 @@ const login = (props) => {
                             router.push('/login');
                              //setFailed(true);
                              setErrorMessage("Invalid username or password");
-                            break;
-                        case 500:
-                            router.push('/login');
                             break;
                         }
                     }).catch(err => {

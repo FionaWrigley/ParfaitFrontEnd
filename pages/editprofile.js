@@ -5,10 +5,10 @@ import NotificationUpdate from '../components/NotificationUpdate';
 import {useState, useEffect, useRef} from 'react';
 import ImageLoader from '../components/ImageLoader';
 import React from 'react';
+import Image from 'next/image'
 
 
 const editprofile = (props) => {
-
     const [ready,
         setReady] = useState(false);
     const [user,
@@ -21,6 +21,9 @@ const editprofile = (props) => {
     const [selected, setSelected] = useState(false);
     const profilePic = React.useRef(null);
 
+    const myLoader = ({ src, width, quality }) => {
+        return `${src}?w=${width}&q=${quality || 75}`
+      }
 
     useEffect(() => {
         if (firstLoad) {
@@ -34,6 +37,7 @@ const editprofile = (props) => {
                     setUser(data);
                     setReady(true);
                     setFirstLoad(false);
+                    console.log(data);
                     })
                 .catch(err => console.log("Oops: " + err));
         }
@@ -47,21 +51,26 @@ const editprofile = (props) => {
             profilePic: image
         })
         //profilePic.current.src = window.URL.createObjectURL(image);
+
+        console.log(image);
+        console.log(selectedFile)
     }
 
-    const saveImage = () => {
-        console.log(selectedFile);
-        var formData = new FormData();
-        formData.append('profilePic', {selectedFile});
-        alert(JSON.stringify(selectedFile));
+    const saveImage = (e) => {
+        e.preventDefault();
+         //console.log(selectedFile);
+          var formData = new FormData();
+   
+          formData.append('profilePic', selectedFile);
+          console.log(formData.get('profilePic'));
     
-        fetch('http://localhost:5000/updateProfilePic', {
-                method: 'POST',
+         fetch('http://localhost:5000/profilepic', {
+                 method: 'POST',
                 credentials: 'include',
-                body: {selectedFile}
+                body: formData,
             })
                 .then(res => console.log(res.status))
-                .catch(err => console.log("Oops: " + err));      
+                .catch(err => alert("Oops: " + err));      
     }
    
     return ((ready)
@@ -75,7 +84,7 @@ const editprofile = (props) => {
                                 Upload a photo to help your friends find you.
                             </p>
                         </div>
-                        <form action="#" method="POST">
+                        <form method="POST">
                             <div className="shadow sm:rounded-md sm:overflow-hidden">
                                 <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                                     <div>
@@ -85,25 +94,27 @@ const editprofile = (props) => {
                                         <div className="mt-2 flex items-center">
                                             <span
                                                 className="inline-block h-20 w-20 rounded-full overflow-hidden bg-gray-100 items-center">
-                                                { (!user.profilePic) ?
+                                                {/* { (!user.profilePic) ?
                                                  <svg
                                                     className="h-full w-full text-gray-300"
                                                     fill="currentColor"
                                                     viewBox="0 0 24 24">
                                                     <path
                                                         d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"/>
-                                                </svg> :
+                                                </svg> : */}
+                                                   
+
+
                                                 <img
                                                     className="min-h-full min-w-full rounded-full inline overflow-hidden"
                                                     ref={profilePic}
-                                                    src={(selected) ? window
+                                                     src={
+                                                         (selected) ? window
                                                         .URL
                                                         .createObjectURL(selectedFile) 
-                                                        : window
-                                                    .URL
-                                                    .createObjectURL(
-                                                        new Blob([new Uint8Array(user.profilePic.data)], {type: 'image/jpeg'}))}
-                                                    alt="i"/>   }  
+                                                        : 
+                                                    `http://localhost:5000/public/images/profilePic-1616383049985.jpg`}
+                                                     alt="i"/>   }    
                                             </span>
                                            <ImageLoader handleFile={uploadImage}/>
                                         </div>
