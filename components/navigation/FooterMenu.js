@@ -1,27 +1,37 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faUser, faUsers, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
+import {useState, useEffect} from 'react';
 
-const FooterMenu= () => {
+const FooterMenu= (props) => {
+
+  const [groupFormat, setGroupFormat] = useState('bg-black');
+  const [scheduleFormat, setScheduleFormat] = useState('');
+
+
+  useEffect(() => {
+
+  if(props.page === 'myschedule'){
+    console.log('in click handler')
+    setScheduleFormat('bg-black');
+    setGroupFormat('');
+  }
+})
 
     const backIcon = <FontAwesomeIcon icon={faArrowLeft} size = "lg" />
     const groupsIcon = <FontAwesomeIcon icon={faUsers} size = "lg" />
     const calIcon = <FontAwesomeIcon icon={faCalendarAlt} size = "lg" />
 
-
 return (
-<nav className="bg-pink-200">
+<nav>
   <div className="w-full mx-auto sm:px-6 lg:px-8 fixed bottom-0">
-    <div className="w-full relative flex items-center  h-12">
-           {/* <div className="flex-1 flex items-stretch items-center"> */}
-        <Link href="/groups"><div className= "w-1/2 h-full"><>{groupsIcon}</></div></Link>
-        <Link href="/myschedule"><div className= "w-1/2 h-full bg-pink-100"><>{calIcon}</></div></Link>
-        {/* </div> */}
+    <div className="w-full relative flex items-center  h-12 bg-gradient-to-r from-pink-200 to-indigo-200">
+        <Link href="/groups" ><div className= {` ${groupFormat} bg-opacity-5 text-gray-600 w-1/2 h-full flex content-center justify-center items-center`}><>{groupsIcon}</></div></Link>
+        <Link href="/myschedule" ><div className= {` ${scheduleFormat} bg-opacity-5 text-gray-600 w-1/2 h-full flex justify-center content-center items-center`} ><>{calIcon}</></div></Link>
       </div>
       </div>
 </nav>
 )
 }
-
 
 export default FooterMenu;

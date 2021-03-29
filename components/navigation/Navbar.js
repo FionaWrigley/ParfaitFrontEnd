@@ -6,7 +6,7 @@ import {useEffect, useState} from 'react';
 const Navbar = ({page}) => {
 
     const groupIcon = <FontAwesomeIcon icon={faEdit} size="lg"/>
-    const profileICon = <FontAwesomeIcon icon={faUser} size='lg' />
+    const profileIcon = <FontAwesomeIcon icon={faUser} size='lg' />
     const [objectURL, setObjectURL] = useState("");
     const [imageExists, setImageExists] = useState(false);
 
@@ -28,13 +28,13 @@ const Navbar = ({page}) => {
     },[]);
 
     return (
-        <nav className="bg-pink-200">
+        <nav className="bg-gradient-to-r from-pink-200 to-indigo-200">
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                 <div className="relative flex items-center justify-between h-12">
                 <div className="ml-3 absolute left-0 ">
                             <Link href='/editprofile'>
                                 <button
-                                    className="bg-pink-200 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                                    className=" text-gray-600 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                                     id="user-menu"
                                     aria-haspopup="true">
                                     { (imageExists) ?
@@ -43,11 +43,8 @@ const Navbar = ({page}) => {
                                         src = {objectURL}
                                         alt=""/> 
                                         : <>
-                                        {profileICon}
+                                        {profileIcon}
                                         </>
-                                        
-                                        
-
                                 //     <svg
                                 //    className="h-10 w-10 text-gray-300"
                                 //    fill="currentColor"
@@ -64,7 +61,7 @@ const Navbar = ({page}) => {
                         
                         <div className="flex-shrink-0 flex items-center text-center">
                             {/* <img className="block lg:hidden h-8 w-auto" src="/images/logo.svg" alt="Logo"/> */}
-                            <p  className="font-extrabold text-indigo-800">{page}</p>
+                            <p  className="font-bold text-indigo-900 text-black text-xl">{page}</p>
                         </div>
                     </div>
 
@@ -74,7 +71,7 @@ const Navbar = ({page}) => {
 
                             <Link href="newgroup">
                                 <button
-                                    className=" bg-pink-200 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                                    className="p-1 rounded-full text-gray-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                     {groupIcon}
                                     
                                 </button>

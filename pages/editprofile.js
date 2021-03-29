@@ -114,7 +114,7 @@ const editprofile = (props) => {
                                                         .createObjectURL(selectedFile) 
                                                         : 
                                                     `http://localhost:5000/public/images/profilePic-1616383049985.jpg`}
-                                                     alt="i"/>   }    
+                                                     alt="i"/>  
                                             </span>
                                            <ImageLoader handleFile={uploadImage}/>
                                         </div>

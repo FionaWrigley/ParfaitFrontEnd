@@ -7,8 +7,7 @@ import Link from 'next/link';
 
 
 
-const Plainheader = (page) => {
-
+const Plainheader = (props) => {
 
     const router = useRouter();
     const backIcon = <FontAwesomeIcon icon={faArrowLeft} size="lg"/>
@@ -32,16 +31,16 @@ const Plainheader = (page) => {
     }
 
     return (
-        <nav className="bg-pink-200">
+        <nav className="bg-gradient-to-r from-pink-200 to-indigo-200">
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                 <div className="relative flex items-center justify-between h-12">
                     <div
                         className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                         <div className="ml-3 absolute left-0 ">
                             <div>
-                                <Link href= {'"/'+page+'"'}>
+                                <Link href= {props.page}>
                                 <button
-                                    className="bg-pink-200 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                                    className=" text-gray-600 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:ring-white"
                                     id="user-menu"
                                     aria-haspopup="true">
                                     {backIcon}
@@ -58,15 +57,13 @@ const Plainheader = (page) => {
                         </div>
 
                         <div className="ml-3 relative">
-                        
                     </div>
 
                     <div
                             className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-
                                 <button
                                     onClick={logOut}
-                                    className=" bg-pink-200 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                                    className=" p-1 rounded-full text-gray-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                     {logoutIcon}
                                 </button>
                         </div>
