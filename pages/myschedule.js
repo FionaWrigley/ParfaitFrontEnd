@@ -14,16 +14,37 @@ import {
   } from 'react-swipeable-list';
  
 
-  const trailingActions = () => (
+  const trailingActions = (id) => (
     <TrailingActions>
       <SwipeAction
         destructive={true}
-        onClick={() => console.info('swipe action triggered')}>
-        Delete
+        onClick={() => deleteEvent(id)}>
+        <div className="bg-red-500 text-2xl flex justify-center align-items-center text-white text-center text-weight-xbold">
+            Delete
+        </div>
       </SwipeAction>
     </TrailingActions>
   );
 
+
+const deleteEvent = (eventID) => {
+
+    fetch('http://localhost:5000/deleteevent', {
+        method: 'POST',
+        body: JSON.stringify({eventID}),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+            credentials: 'include'
+        })
+        .then(res => {
+            //do something
+        }).catch(err => {
+            //setErrorMessage("Oops, we are currently experiencing problem, please try again later")
+            console.log("Oops: "+err)}
+            );
+}
+  
 const myschedule = () => {
     
     const [date,
@@ -69,13 +90,10 @@ const myschedule = () => {
                 <SwipeableList
                     fullSwipe = {true}
                     // type = 'IOS'
-                >
-                    {/* <div className='bg-gradient-to-r from-gray-100 to-gray-100 via-white'> */}
-                        
+                > 
                         {events.map((element, index) =>
-                    <SwipeableListItem
-                        
-                        trailingActions={trailingActions()} key = {index}>
+                    <SwipeableListItem 
+                        trailingActions={trailingActions(element.eventID)} key = {element.eventID}>
                         <div className='bg-gradient-to-r from-gray-100 to-gray-100 via-white min-w-full  border-b border-b-2 border-gray-200'>               
                             <div className="px-5 py-4 text-md font-semibold min-w-full">
                                 <div className="flex items-center">

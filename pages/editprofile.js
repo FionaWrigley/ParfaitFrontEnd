@@ -2,6 +2,7 @@ import Plainheader from '../components/navigation/Plainheader';
 import ProfileUpdate from '../components/ProfileUpdate';
 import PasswordUpdate from '../components/PasswordUpdate';
 import NotificationUpdate from '../components/NotificationUpdate';
+import ImageSaver from '../components/ImageSaver'
 import {useState, useEffect, useRef} from 'react';
 import ImageLoader from '../components/ImageLoader';
 import React from 'react';
@@ -43,35 +44,33 @@ const editprofile = (props) => {
         }
     }, [submit]);
 
-    function uploadImage(image){
-        setSelectedFile(image);
-        setSelected(true);
-        setUser({
-            ...user,
-            profilePic: image
-        })
-        //profilePic.current.src = window.URL.createObjectURL(image);
+    // function uploadImage(image){
+    //     setSelectedFile(image);
+    //     setSelected(true);
+    //     setUser({
+    //         ...user,
+    //         profilePic: image
+    //     })
+    //     //profilePic.current.src = window.URL.createObjectURL(image);
+    //     console.log(image);
+    //     console.log(selectedFile)
+    // }
 
-        console.log(image);
-        console.log(selectedFile)
-    }
-
-    const saveImage = (e) => {
-        e.preventDefault();
-         //console.log(selectedFile);
-          var formData = new FormData();
+    // const saveImage = (e) => {
+    //     e.preventDefault();
+    //       var formData = new FormData();
    
-          formData.append('profilePic', selectedFile);
-          console.log(formData.get('profilePic'));
+    //       formData.append('profilepic', selectedFile);
+    //       console.log(formData.get('profilePic'));
     
-         fetch('http://localhost:5000/profilepic', {
-                 method: 'POST',
-                credentials: 'include',
-                body: formData,
-            })
-                .then(res => console.log(res.status))
-                .catch(err => alert("Oops: " + err));      
-    }
+    //      fetch('http://localhost:5000/profilepic', {
+    //              method: 'POST',
+    //             credentials: 'include',
+    //             body: formData,
+    //         })
+    //             .then(res => console.log(res.status))
+    //             .catch(err => alert("Oops: " + err));      
+    // }
    
     return ((ready)
         ? <div>
@@ -84,7 +83,8 @@ const editprofile = (props) => {
                                 Upload a photo to help your friends find you.
                             </p>
                         </div>
-                        <form method="POST">
+                        <ImageSaver />
+                        {/* <form method="POST">
                             <div className="shadow sm:rounded-md sm:overflow-hidden">
                                 <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                                     <div>
@@ -94,15 +94,7 @@ const editprofile = (props) => {
                                         <div className="mt-2 flex items-center">
                                             <span
                                                 className="inline-block h-20 w-20 rounded-full overflow-hidden bg-gray-100 items-center">
-                                                {/* { (!user.profilePic) ?
-                                                 <svg
-                                                    className="h-full w-full text-gray-300"
-                                                    fill="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"/>
-                                                </svg> : */}
-                                                   
+                                              
 
 
                                                 <img
@@ -130,7 +122,7 @@ const editprofile = (props) => {
                                     </button>
                                 </div>
                             </div>
-                        </form>
+                        </form> */}
                     </div>
                 </div>
 

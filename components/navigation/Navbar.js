@@ -11,7 +11,7 @@ const Navbar = ({page}) => {
     const [imageExists, setImageExists] = useState(false);
 
     useEffect(() => {
-            fetch('http://localhost:5000/profilePic',
+            fetch('http://localhost:5000/profilepic',
             {
                 method: 'GET',
                 headers: { 'Content-Type': 'image/jpeg' },
@@ -69,7 +69,7 @@ const Navbar = ({page}) => {
                         <div
                             className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 
-                            <Link href="newgroup">
+                            <Link href={(page == "My Groups" ? 'newgroup' : "event")}>
                                 <button
                                     className="p-1 rounded-full text-gray-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                     {groupIcon}
