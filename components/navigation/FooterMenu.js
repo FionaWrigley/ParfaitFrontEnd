@@ -24,7 +24,7 @@ const FooterMenu= (props) => {
 
 return (
 <nav>
-  <div className="w-full mx-auto sm:px-6 lg:px-8 fixed bottom-0">
+  <div className="min-w-full mx-auto fixed bottom-0">
     <div className="w-full relative flex items-center  h-12 bg-gradient-to-r from-pink-200 to-indigo-200">
         <Link href="/groups" ><div className= {` ${groupFormat} bg-opacity-5 text-gray-600 w-1/2 h-full flex content-center justify-center items-center`}><>{groupsIcon}</></div></Link>
         <Link href="/myschedule" ><div className= {` ${scheduleFormat} bg-opacity-5 text-gray-600 w-1/2 h-full flex justify-center content-center items-center`} ><>{calIcon}</></div></Link>

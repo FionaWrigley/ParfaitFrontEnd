@@ -1,5 +1,4 @@
 import ScheduleHour from './ScheduleHour';
-import React, {useState, useEffect} from 'react';
 
 export function ScheduleDay(props) {
 

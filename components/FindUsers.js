@@ -56,7 +56,6 @@ const handleChecked = (event) => {//member selected so add to group member list
      } 
    }
 }
-
 //make checkbox appear checked for previously selected group members
 const isSelected = (id) => {
 

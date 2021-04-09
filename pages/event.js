@@ -1,20 +1,16 @@
 
-// import {useState, useEffect} from 'react';
 import React from 'react';
-// import validator from 'validator';
 import Plainheader from '../components/navigation/Plainheader';
 import { useForm } from "react-hook-form";
  import {useRouter} from 'next/router';
-// import { router } from '../../../parfait_backend/api/app';
-
 
 const event = () => {
 
+    const router = useRouter();
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = data => formSubmit(data);
     const formSubmit = (form) => {
 
-        
         fetch('http://localhost:5000/createevent', {
                 method: 'POST',
                 body: JSON.stringify({form}),

@@ -89,7 +89,6 @@ const myschedule = () => {
             { (ready)?
                 <SwipeableList
                     fullSwipe = {true}
-                    // type = 'IOS'
                 > 
                         {events.map((element, index) =>
                     <SwipeableListItem 

@@ -1,6 +1,7 @@
 import {useState, useEffect, getQueryParams} from 'react';
 import FindUsers from '../components/FindUsers';
 import Plainheader from '../components/navigation/Plainheader';
+import {useRouter} from 'next/router';
 
 const newgroup = () => {
 
@@ -10,6 +11,7 @@ const newgroup = () => {
         setCreateGroup] = useState(false);
     const [group,
         setGroup] = useState([]);
+        const router = useRouter();
 
     const handleSubmit = (m) => {
         setGroupMembers(m);
