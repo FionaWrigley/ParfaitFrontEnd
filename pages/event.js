@@ -1,17 +1,17 @@
-
-import React from 'react';
 import Plainheader from '../components/navigation/Plainheader';
 import { useForm } from "react-hook-form";
- import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 
 const event = () => {
 
     const router = useRouter();
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = data => formSubmit(data);
+    
+    
     const formSubmit = (form) => {
 
-        fetch('http://localhost:5000/createevent', {
+        fetch(process.env.parfaitServer+'/createevent', {
                 method: 'POST',
                 body: JSON.stringify({form}),
                 headers: {
@@ -31,7 +31,6 @@ const event = () => {
                     }
                 }).catch(err => console.log("Oops: "+err));
     }
-
     return (
         <>
         <Plainheader page='myschedule'/>

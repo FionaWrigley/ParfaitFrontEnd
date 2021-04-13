@@ -1,0 +1,30 @@
+{
+    "name": "Parfait",
+    "short_name": "Parfait",
+    "start_url": "http://localhost:3000/",
+    "display": "standalone",
+    "background_color": "#fbcfe8",
+    "theme_color": "#90cdf4",
+    "orientation": "portrait-primary",
+    "icons": [
+      {
+        "src": "images/logo512.svg",
+        "sizes": "512x512"
+      },
+      {
+        "src": "images/logo192.svg",
+        "sizes": "192x192"
+      },
+      {
+        "src": "images/logo80.svg",
+        "sizes": "80x80"
+      },
+      {
+        "src": "images/logo512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any maskable"
+
+      }
+    ]
+  }

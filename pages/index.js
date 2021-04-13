@@ -1,13 +1,39 @@
-import 'react-swipeable-list/dist/styles.css';
 import { useRouter } from 'next/router'
-
-export default function Home() {
-  
+import { useEffect} from 'react'
  
+export default function Home() {
+ 
+
+
   const router = useRouter()
     // Make sure we're in the browser
     if (typeof window !== 'undefined') {
-      router.push('/login')
+
+      useEffect(() => {
+
+        fetch(process.env.parfaitServer+ '/loggedin', {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+              credentials: 'include'
+           })
+           .then(res => { 
+              switch(res.status){
+              case 204: 
+                  router.push('/groups');
+                  break;
+              case 401: 
+                  router.push('/login');
+                  break;
+              }
+          }).catch(err => {
+
+              setErrorMessage("Oops, we are currently experiencing problem, please try again later")
+              console.log("Oops: "+err)
+          });
+
+      },[])
     }
     return null;
   }

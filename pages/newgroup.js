@@ -25,7 +25,7 @@ const newgroup = () => {
     const saveGroup = (e) => {
         e.preventDefault();
 
-        fetch('http://localhost:5000/creategroup', {
+        fetch(process.env.parfaitServer+'/creategroup', {
             method: 'POST',
             body: JSON.stringify({group}),
             headers: {
@@ -33,8 +33,7 @@ const newgroup = () => {
             },
                 credentials: 'include'
             })
-            .then(res => {
-                        
+            .then(res => {           
                 switch(res.status){
                 case 200: 
                     router.push('/groups');

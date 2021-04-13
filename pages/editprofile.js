@@ -3,11 +3,7 @@ import ProfileUpdate from '../components/ProfileUpdate';
 import PasswordUpdate from '../components/PasswordUpdate';
 import NotificationUpdate from '../components/NotificationUpdate';
 import ImageSaver from '../components/ImageSaver'
-import {useState, useEffect, useRef} from 'react';
-import ImageLoader from '../components/ImageLoader';
-import React from 'react';
-import Image from 'next/image'
-
+import {useState, useEffect} from 'react';
 
 const editprofile = (props) => {
     const [ready,
@@ -18,9 +14,6 @@ const editprofile = (props) => {
         setSubmit] = useState(false);
     const [firstLoad,
         setFirstLoad] = useState(true);
-    const [selectedFile, setSelectedFile] = useState();
-    const [selected, setSelected] = useState(false);
-    const profilePic = React.useRef(null);
 
     const myLoader = ({ src, width, quality }) => {
         return `${src}?w=${width}&q=${quality || 75}`
@@ -28,7 +21,7 @@ const editprofile = (props) => {
 
     useEffect(() => {
         if (firstLoad) {
-            fetch('http://localhost:5000/profile', {
+            fetch(process.env.parfaitServer+'/profile', {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
                     credentials: 'include'

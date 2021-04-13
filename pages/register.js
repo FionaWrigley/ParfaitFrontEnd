@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import {useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 
@@ -32,7 +31,7 @@ const register = (props) => {
           
             console.log(user);
 
-            fetch('http://localhost:5000/register', {
+            fetch(process.env.parfaitServer+'/register', {
                 method: 'POST',
                 body: JSON.stringify({user}),
                 headers: {

@@ -2,7 +2,7 @@ import Plainheader from './navigation/Plainheader';
 import React from 'react';
 import {useState, useEffect} from 'react';
 import useDebounce from './functional/useDebounce';
-import Link from 'next/link';
+//import Link from 'next/link';
 
 const FindUsers = ({handleSubmit}) => {
 
@@ -21,7 +21,7 @@ useEffect(
       
       setIsSearching(true); //while searching - no other requests should be made
       
-      fetch('http://localhost:5000/users/'+debouncedSearchTerm, {
+      fetch(process.env.parfaitServer+'/users/'+debouncedSearchTerm, {
             method: 'GET',
             headers: {'Content-Type': 'application/json'},
             credentials: 'include'

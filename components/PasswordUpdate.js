@@ -18,7 +18,7 @@ const PasswordUpdate = () => {
 
     // useEffect(() => {
     //     if (firstLoad) {
-    //         fetch('http://localhost:5000/profile', {
+    //         fetch('https://localhost:5000/profile', {
     //             method: 'GET',
     //             headers: {'Content-Type': 'application/json'},
     //                 credentials: 'include'

@@ -19,6 +19,11 @@ module.exports = {
         '60' : '62px'
       },
 
+      height: {
+
+        '250': '250px'
+      },
+
       outline: {
         'gray-300' : '1px solid rgb(209, 213, 219)'
       },

@@ -1,9 +1,10 @@
-import 'react-swipeable-list/dist/styles.css';
 import Calendar from 'react-calendar';
-import FooterMenu from '../components/navigation/FooterMenu';
-import EventList from '../components/EventList';
-import Navbar from '../components/navigation/Navbar';
 import 'react-calendar/dist/Calendar.css';
+import FooterMenu from '../components/navigation/FooterMenu';
+import Navbar from '../components/navigation/Navbar';
+import { css } from "@emotion/core";
+import PulseLoader from "react-spinners/PulseLoader";
+
 import {useEffect, useState} from 'react';
 import { format } from 'date-fns'
 import {
@@ -13,7 +14,6 @@ import {
     TrailingActions,
   } from 'react-swipeable-list';
  
-
   const trailingActions = (id) => (
     <TrailingActions>
       <SwipeAction
@@ -26,10 +26,9 @@ import {
     </TrailingActions>
   );
 
-
 const deleteEvent = (eventID) => {
 
-    fetch('http://localhost:5000/deleteevent', {
+    fetch(process.env.parfaitServer+'/deleteevent', {
         method: 'POST',
         body: JSON.stringify({eventID}),
         headers: {
@@ -57,7 +56,7 @@ const myschedule = () => {
 
         let fetchDate = format(date, 'yyyy-MM-dd');
 
-        fetch('http://localhost:5000/scheduleday/'+fetchDate, {
+        fetch(process.env.parfaitServer+'/scheduleday/'+fetchDate, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -104,9 +103,10 @@ const myschedule = () => {
                         </SwipeableListItem>
                     )} 
                 </SwipeableList>
- : <>Not ready</>}
+ : <div className="mt-8 align-middle min-w-full justify-center overflow-visible text-center flex items-center">
+ <PulseLoader color="#c7d2fe" loading={!ready} size={15} />
+</div>}
     <FooterMenu page='myschedule'/> 
         </div>)
 }
-        
         export default myschedule;

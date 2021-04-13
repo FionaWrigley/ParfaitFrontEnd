@@ -1,17 +1,11 @@
 
 import {useState, useEffect} from 'react';
+import Image from 'next/image';
 import React from 'react';
-// import validator from 'validator';
 import ImageLoader from '../components/ImageLoader';
-import { useForm } from "react-hook-form";
- //import {useRouter} from 'next/router';
-// import { router } from '../../../parfait_backend/api/app';
 
 const ImageSaver = () => {
 
-    //const { register, handleSubmit, watch, errors } = useForm();
-    //const onSubmit = data => formSubmit(data);
-    // const formSubmit = (form) => {
 
         
         const [objectURL, setObjectURL] = useState("");
@@ -21,25 +15,30 @@ const ImageSaver = () => {
         const profilepic = React.useRef(null);
 
         function uploadImage(image) {
+            setObjectURL(URL.createObjectURL(image))
             setSelectedFile(image);
             setSelected(true);
         }
+
+        const myLoader = ({ src, width, quality }) => {
+           
+            return `${src}?w=${width}&q=${quality || 75}`
+          }
     
         useEffect(() => {
 
-                fetch('http://localhost:5000/profilepic',
+            console.log("in use effect")
+                fetch('http://localhost:5000/profilepic2',
                 {
                     method: 'GET',
-                    headers: { 'Content-Type': 'image/jpeg' },
                     credentials: 'include'
                   })
-                .then(res => res.blob())
-                .then(function(myBlob) {
-                    console.log(myBlob);
-                    setObjectURL(URL.createObjectURL(myBlob));
-                    if (myBlob.size > 0){
+                .then(res => res.json())
+                .then(data => {
+                    setObjectURL('http://localhost:5000/'+data.profilePicPath);
+                    
                     setImageExists(true);
-                    }
+                    
                 });
         },[]);
 
@@ -48,9 +47,8 @@ const ImageSaver = () => {
               var formData = new FormData();
        
               formData.append('profilepic', selectedFile);
-              console.log(formData.get('profilePic'));
         
-             fetch('http://localhost:5000/profilepic', {
+             fetch(process.env.parfaitServer+'/profilepic', {
                      method: 'POST',
                     credentials: 'include',
                     body: formData,
@@ -59,7 +57,7 @@ const ImageSaver = () => {
                     .catch(err => alert("Oops: " + err));      
             }
 
-    return (
+    return ((imageExists) ?
                 <form method="POST">
                             <div className="shadow sm:rounded-md sm:overflow-hidden">
                                 <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
@@ -78,16 +76,22 @@ const ImageSaver = () => {
                                                     <path
                                                         d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"/>
                                                 </svg> : */}
-                                                <img
-                                                    className="min-h-full min-w-full rounded-full inline overflow-hidden"
-                                                    ref={profilepic}
-                                                 
-                                                    src={
-                                                          (selected) ? window
-                                                         .URL
-                                                         .createObjectURL(selectedFile)
-                                                         : objectURL}  
-                                                />  
+                                                {console.log("weird ",objectURL)}
+                                                 <Image 
+                                                loader={myLoader}
+                                                src={
+                                                    // (selectedFile)?
+                                                    // window
+                                                    // .URL
+                                                    // .createObjectURL(selectedFile)
+                                                    //     : 
+                                                        `${objectURL}`}
+                                                       
+                                                    width="100"
+                                                    height="100"
+                                                    // className="min-h-full min-w-full rounded-full inline overflow-hidden"
+                                                    // ref={profilepic}
+                                                /> 
                                             </span>
                                            <ImageLoader handleFile={uploadImage}/>
                                         </div>
@@ -102,7 +106,7 @@ const ImageSaver = () => {
                                     </button>
                                 </div>
                             </div>
-                        </form> 
+                        </form> : <></>
     )
 }
 export default ImageSaver;

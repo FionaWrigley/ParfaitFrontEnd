@@ -1,51 +1,49 @@
 import Link from 'next/link';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
+import { useForm } from "react-hook-form";
 import {useRouter} from 'next/router';
 
 
 const login = (props) => {
 
-    const [failed, setFailed] = useState(false);
-    const [ready,
-        setReady] = useState(false);
-    const [user,
-        setUser] = useState([]);
-    const [error, setErrorMessage] = useState('');
-
-    console.log(JSON.stringify({user}));
     const router = useRouter();
+    const { register, handleSubmit} = useForm();
+    const onSubmit = data => formSubmit(data);
 
-    const formSubmit = e => {
-        console.log('fffffffffffffffffff')
-        e.preventDefault();
+     const [error, setErrorMessage] = useState('');
 
-        fetch('http://localhost:5000/login', {
+    const formSubmit = (user) => {
+
+        console.log(JSON.stringify(user));
+
+        fetch(process.env.parfaitServer+ '/login', {
                     method: 'POST',
-                    body: JSON.stringify({user}),
+                    body: JSON.stringify(user),
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json; charset=utf-8',
                     },
                         credentials: 'include'
                      })
-                     .then(res => {
-                        
+                     .then(res => { 
                         switch(res.status){
                         case 204: 
                             router.push('/groups');
                             break;
                         case 401: 
                             router.push('/login');
-                             //setFailed(true);
+                             setErrorMessage("Invalid username or password");
+                            break;
+                        case 422: 
+                            router.push('/login');
                              setErrorMessage("Invalid username or password");
                             break;
                         }
                     }).catch(err => {
 
                         setErrorMessage("Oops, we are currently experiencing problem, please try again later")
-
-                        console.log("Oops: "+err)}
-                        );
-            }
+                        console.log("Oops: "+err)
+                    });
+             }
 
     return (
         <div
@@ -58,28 +56,26 @@ const login = (props) => {
                         Sign in to your account
                     </h2>
                 </div>
-                <form className="mt-8 space-y-6" onSubmit={formSubmit}>
+                <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
                     <input type="hidden" name="remember" value="true"/>
                     <div className="rounded-md shadow-sm -space-y-px">
                         <div>
-                            <label htmlFor="email-address" className="sr-only">Email address</label>
-                            <input id="email-address" name="user[email]" type="user.email" // value={user.email
+                            <label htmlFor="email" className="sr-only">Email address</label>
+                            <input id="email" name="email" type="user.email" // value={user.email
                          autoComplete="email" 
-                        // required 
+                        required 
                          className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address" 
-                         onChange={e => setUser({
-                                ...user,
-                                email: e.target.value
-                            })}/></div>
+                         ref={register}
+                         required/></div>
                         <div>
                             <label htmlFor="password" className="sr-only">Password</label>
-                            <input id="password" name="user[password]" type="password" // value={user.password
+                            <input id="password" name="password" type="password" // value={user.password
                          autoComplete="current-password" 
-                         //required 
-                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password" onChange={e => setUser({
-                                ...user,
-                                password: e.target.value
-                            })}/></div>
+                         required
+                         ref={register}
+                         required 
+                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" 
+                         placeholder="Password" /></div>
                     </div>
 
                     <div className="flex items-center justify-between">
@@ -102,7 +98,6 @@ const login = (props) => {
                     </div>
 
                     <div>
-                       
                             <button
                                 type="submit"
                                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -121,7 +116,7 @@ const login = (props) => {
                                 </span>
                                 Sign in
                             </button>
-                       <> {error} </>
+                       <div className="text-red-600 mt-2"> {error} </div>
                     </div>
                     <div>
                         <div className="text-sm text-center">

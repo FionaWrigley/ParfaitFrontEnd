@@ -2,6 +2,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEdit, faUser, faPlusSquare} from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import {useEffect, useState} from 'react';
+import Image from 'next/image';
 
 const Navbar = ({page}) => {
 
@@ -11,19 +12,17 @@ const Navbar = ({page}) => {
     const [imageExists, setImageExists] = useState(false);
 
     useEffect(() => {
-            fetch('http://localhost:5000/profilepic',
+
+            fetch(process.env.parfaitServer+'/profilepic2',
             {
                 method: 'GET',
-                headers: { 'Content-Type': 'image/jpeg' },
+                headers: { 'Content-Type': 'application/json; charset=utf-8' },
                 credentials: 'include'
               })
-            .then(res => res.blob())
-            .then(function(myBlob) {
-                console.log(myBlob);
-                setObjectURL(URL.createObjectURL(myBlob));
-                if (myBlob.size > 0){
+            .then(res => res.json())
+            .then(data => {
+                setObjectURL(process.env.parfaitServer+'/'+data.profilePicPath)
                 setImageExists(true);
-                }
             });
     },[]);
 
@@ -36,22 +35,20 @@ const Navbar = ({page}) => {
                                 <button
                                     className=" text-gray-600 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                                     id="user-menu"
-                                    aria-haspopup="true">
+                                    aria-haspopup="true"
+                                    aria-label="Profile">
                                     { (imageExists) ?
-                                    <img
-                                        className="h-10 w-10 rounded-full"
+                                    <div 
+                                    className="h-10 w-10 rounded-full overflow-hidden">
+                                    <Image
                                         src = {objectURL}
-                                        alt=""/> 
-                                        : <>
-                                        {profileIcon}
-                                        </>
-                                //     <svg
-                                //    className="h-10 w-10 text-gray-300"
-                                //    fill="currentColor"
-                                //    viewBox="0 0 24 24">
-                                //    <path
-                                //        d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"/>
-                                // </svg> 
+                                        alt=""
+                                        width='100'
+                                        height='100'
+                                        /> </div>
+                                        : <div className='w-4 h-4'>
+                                         {profileIcon}
+                                        </div> 
                                     }
                                 </button>
                             </Link>
@@ -60,7 +57,6 @@ const Navbar = ({page}) => {
                         className="flex-1 flex items-center justify-center sm:items-stretch ">
                         
                         <div className="flex-shrink-0 flex items-center text-center">
-                            {/* <img className="block lg:hidden h-8 w-auto" src="/images/logo.svg" alt="Logo"/> */}
                             <p  className="font-bold text-indigo-900 text-black text-xl">{page}</p>
                         </div>
                     </div>
@@ -69,11 +65,11 @@ const Navbar = ({page}) => {
                         <div
                             className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 
-                            <Link href={(page == "My Groups" ? 'newgroup' : "event")}>
+                            <Link href={(page === "My Groups" ? 'newgroup' : "event")}>
                                 <button
+                                    aria-label="Create new"
                                     className="p-1 rounded-full text-gray-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                                    {groupIcon}
-                                    
+                                   <div className='w-5 h-5'>{groupIcon}</div> 
                                 </button>
                             </Link>
 

@@ -9,13 +9,9 @@ const EventList = (dateField) => {
     const [ready,
         setReady] = useState(false);
 
-
     useEffect(() => {
 
-        console.log("event list")
-        console.log(dateField.dateField)
-
-        fetch('http://localhost:5000/scheduleday/'+dateField.dateField, {
+        fetch(process.env.parfaitServer+'/scheduleday/'+dateField.dateField, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -47,7 +43,6 @@ const EventList = (dateField) => {
             <div>{element.eventName}</div> 
             <div>{element.eventDescription}</div> </div>
         )}
-        
         </div>
     
      </>: <>Not ready</>)

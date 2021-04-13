@@ -17,7 +17,7 @@ const ProfileUpdate = () => {
 
     useEffect(() => {
         if (firstLoad) {
-            fetch('http://localhost:5000/profile', {
+            fetch(process.env.parfaitServer+'/profile', {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
                     credentials: 'include'
@@ -41,7 +41,7 @@ const ProfileUpdate = () => {
     const formSubmit = (e) => {
 
         e.preventDefault();
-        fetch('http://localhost:5000/profile', {
+        fetch(process.env.parfaitServer+'/profile', {
                 method: 'POST',
                 body: JSON.stringify({user}),
                 headers: {

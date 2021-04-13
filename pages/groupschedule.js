@@ -1,11 +1,11 @@
-// import Link from 'next/link';
-// import Head from 'next/head';
 import {useRouter} from 'next/router'
 import {useEffect, useState} from 'react';
 import Plainheader from '../components/navigation/Plainheader';
 import ScheduleLine from '../components/schedule/ScheduleLine';
 import GroupImages from '../components/GroupImages'
 import {add, format} from 'date-fns';
+import { css } from "@emotion/core";
+import DotLoader from "react-spinners/DotLoader";
 
 const groupschedule = () => {
 
@@ -34,7 +34,7 @@ const groupschedule = () => {
         let querystring = "/"+groupID+"/"+format(new Date(), "yyyy-MM-dd")+'/'+numberOfDays;
         console.log(querystring);
 
-        fetch('http://localhost:5000/groupschedule'+ querystring, {
+        fetch(process.env.parfaitServer+'/groupschedule'+ querystring, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -91,7 +91,7 @@ const groupschedule = () => {
                 )}  
                 </div>
             </div>
-        : <div>loading</div>}   
+        : <div><DotLoader color="#c7d2fe" loading={!ready} size={60} /></div>}   
         </>)
 }
 

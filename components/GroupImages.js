@@ -1,10 +1,10 @@
 import {useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
+import Image from 'next/image'
 
 const GroupImages = (props) => {
 
-    const [groupPicData,
-        setGroupPicData] = useState([]);
+
     const [groupImages] = useState([]);
     const [ready,
         setReady] = useState(false);
@@ -16,7 +16,7 @@ const GroupImages = (props) => {
     }
 
     useEffect(() => {
-        fetch('http://localhost:5000/grouppics/' + props.groupID, {
+        fetch(process.env.parfaitServer+'/grouppics/' + props.groupID, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -34,10 +34,6 @@ const GroupImages = (props) => {
                     res
                         .json()
                         .then((data) => {
-                            setGroupPicData(data);
-                            console.log('groupID ', props.groupID)
-                            console.log(data);
-                            //setReady(true);
 
                             for (let i = 0; i < data.length; i++) {
 
@@ -56,14 +52,16 @@ const GroupImages = (props) => {
                                             </svg>
                                         </span>
                                     )
-
                                 } else {
 
-                                    groupImages.push(<img
+                                    groupImages.push(<div
                                         key={i}
-                                        className={`inline-block h-${size} w-${size} rounded-full ring-2 ring-white`}
-                                        src={`http://localhost:5000/${data[i].profilePicPath}`}
-                                        alt=""/>);
+                                        className={`inline-block h-${size} w-${size} rounded-full overflow-hidden ring-2 ring-white`}>
+                                            <Image
+                                            src={`${process.env.parfaitServer}/${data[i].profilePicPath}`}
+                                            alt=""
+                                            width={150}
+                                            height={150} /></div>);
                                 }
                                 if (i == data.length - 1) {
                                     setReady(true);
