@@ -1,33 +1,83 @@
-import {useState, useEffect, getQueryParams} from 'react';
+import { useState } from 'react';
+import { useForm } from "react-hook-form";
+import { useRouter } from 'next/router';
 import FindUsers from '../components/FindUsers';
 import Plainheader from '../components/navigation/Plainheader';
-import {useRouter} from 'next/router';
+import Image from 'next/image';
+import {
+    SwipeableList,
+    SwipeableListItem,
+    SwipeAction,
+    TrailingActions,
+  } from 'react-swipeable-list';
+
+ 
+
+// const trailingActions = () => (
+//     <TrailingActions>
+//       <SwipeAction
+//         destructive={true}
+//         onClick={() => console.info('swipe action triggered')}
+//       >
+//         Delete
+//       </SwipeAction>
+//     </TrailingActions>
+//   );
+  
+
 
 const newgroup = () => {
+
+    const { register, handleSubmit, errors} = useForm();
+    const onSubmit = data => formSubmit(data);
 
     const [groupMembers,
         setGroupMembers] = useState([]);
     const [createGroup,
         setCreateGroup] = useState(false);
-    const [group,
-        setGroup] = useState([]);
+    // const [groupD,
+    //     setGroupD] = useState([]);
         const router = useRouter();
 
-    const handleSubmit = (m) => {
+    const submitUsers = (m) => {
         setGroupMembers(m);
-        setGroup({
-            ...group,
-            members: m
-        });
+        console.log(m);
         setCreateGroup(true);
     }
 
-    const saveGroup = (e) => {
-        e.preventDefault();
+    const trailingActions = (id) => (
+        <TrailingActions>
+          <SwipeAction
+            destructive={true}
+             onClick={() => removeUser(id)}
+            >
+            <div className="px-2 py-auto bg-red-500 text-1xl flex align-middle text-center text-white text-center text-weight-xbold">
+                Remove
+            </div>
+          </SwipeAction>
+        </TrailingActions>
+      );
+
+    const removeUser = (userID) => {
+
+        console.log("members ", groupMembers)
+        let index = groupMembers.findIndex(i => i.memberID == (""+userID));
+        
+        if (index > -1) {
+            groupMembers.splice(index, 1)
+        }
+        console.log('updated members ', groupMembers)
+    }
+
+    const formSubmit = (form) => {
+        
+        let group = ({
+                    ...form, 
+                    members: groupMembers}); 
 
         fetch(process.env.parfaitServer+'/creategroup', {
             method: 'POST',
-            body: JSON.stringify({group}),
+            body: JSON.stringify(group),
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -38,87 +88,98 @@ const newgroup = () => {
                 case 200: 
                     router.push('/groups');
                     break;
-
                 case 204:
                     router.push('/groups');
                     break;
                 }
-
             }).catch(err => {
                 //setErrorMessage("Oops, we are currently experiencing problem, please try again later")
                 console.log("Oops: "+err)}
-                );
+                );      
     }
 
-    return ( <> {
+    return ( <><div className="sticky top-0 z-50"><Plainheader backpage="groups" page="newgroup"/></div>  {
         (!createGroup)
-            ? <> <Plainheader page="groups"/> < FindUsers handleSubmit = {
-                handleSubmit
+            ? <> 
+            <FindUsers handleSubmit = {
+                submitUsers
             } /> </>
-            : <> <Plainheader page="newgroup"/> < div className = "mt-6" > <div>
+            : <>< div className = "mt-6" > <div>
                 <div className="px-4 sm:px-0">
-                    <h2 className="text-lg font-medium leading-6 text-gray-900">Create Group</h2>
+                    <h2 className="text-lg font-medium leading-6 text-indigo-900">Create Group</h2>
                     <p className="mt-1 text-sm text-gray-600">
-                        Upload a photo and group description.
+                        Upload a group name and description.
                     </p>
                 </div>
-                <form onSubmit={saveGroup}>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="shadow sm:rounded-md sm:overflow-hidden">
                         <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
-                            <div className="col-span-6 sm:col-span-3">
-                                <label htmlFor="group_name" className="block text-sm font-medium text-gray-700">Group name</label>
+                            <div className="form-control col-span-6 sm:col-span-3">
+                                <label htmlFor="name" className="block text-sm font-medium text-gray-700">Group name</label>
                                 <input
                                     type="text"
-                                    name="group_name"
-                                    id="group_name"
-                                    onChange={e => setGroup({
-                                    ...group,
-                                    name: e.target.value
-                                })}
-                                    className="mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/></div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">
-                                    Photo
-                                </label>
-                                <div className="mt-2 flex items-center">
-                                    <span
-                                        className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                                        <svg
-                                            className="h-full w-full text-gray-300"
-                                            fill="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path
-                                                d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"/>
-                                        </svg>
-                                    </span>
-                                    <button
-                                        type="button"
-                                        className="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                        Change
-                                    </button>
-                                </div>
+                                    name="name"
+                                    id="name"
+                                    ref = {register({ required: true, minLength: 2, maxLength: 50, pattern: /^[ A-Za-z0-9_@./#&+-]*$/ })}
+                                    className="mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/>
+                                    {errors.name && errors.name.type === "required" && (
+                                        <p className="errorMsg text-sm text-red-600">Group name is required.</p>
+                                      )}
+                                      {errors.name && (errors.name.type === "minLength" || errors.name.type === "maxLength" ) && (
+                                        <p className="errorMsg text-sm text-red-600">Group name must be between 2 and 50 characters.</p>
+                                      )}
+                                      {errors.name && errors.name.type === "pattern" && (
+                                        <p className="errorMsg text-sm text-red-600">Group name may contain letters, numbers, or the following characters - , _, @, ., /, #, &, + ..</p>
+                                      )}
                             </div>
-                            <div>
-                                <label htmlFor="about" className="block text-sm font-medium text-gray-700">
+                            <div className="form-control">
+                                <label htmlFor="description" className="block text-sm font-medium text-gray-700">
                                     About
                                 </label>
                                 <div className="mt-1">
                                     <textarea
-                                        id="about"
-                                        name="about"
-                                        onChange={e => setGroup({
-                                        ...group,
-                                        description: e.target.value
-                                    })}
+                                        id="description"
+                                        name="description"
+                                        ref={register({pattern: /^[ A-Za-z0-9_@./#&+-]*$/})}
                                         rows="3"
                                         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md focus:outline-none"
                                         placeholder="brief bio about your group"></textarea>
                                 </div>
+                                {errors.description && errors.description.type === "pattern" && (
+                                        <p className="errorMsg text-sm text-red-600">Group name may contain letters, numbers, or the following characters - , _, @, ., /, #, &, + ..</p>
+                                )}
                             </div>
                         </div>
-
+                        
                         {(groupMembers.length > 0)
-                            ? (groupMembers.map((element, index) => <div key={element.memberID}>{element.fname + " " + element.lname}</div>))
+                            ? <SwipeableList fullSwipe = {true}> 
+                                    {groupMembers.map((element, index) => 
+                                        // <div className="ml-2 my-2" key={index}>
+                                            <SwipeableListItem trailingActions={trailingActions(element.memberID)} key = {element.memberID}>
+                                                <span
+                                                    className="mx-2 ml-2 mt-2 col-start-1 col-span-1 inline-block h-9 w-9 rounded-full overflow-hidden bg-gray-100 items-center">
+                                                    { (!element.profilePicPath) ?
+                                                        <svg
+                                                            className="h-9 w-9 text-gray-300"
+                                                            fill="currentColor"
+                                                            viewBox="0 0 24 24">
+                                                            <path
+                                                                d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"/>
+                                                        </svg> :
+                                                        <div className={`h-12 w-12 rounded-full`}>
+                                                            <Image
+                                                                src={`${process.env.parfaitServer}/${element.profilePicPath}`}
+                                                                alt=""
+                                                                width={150}
+                                                                height={150} />
+                                                        </div>
+                                                    }
+                                                </span>
+                                                <p className="text-indigo-900 text-md font-semibold">{element.fname + " " + element.lname}</p>
+                                            </SwipeableListItem>
+                                         // </div> 
+                                    )}
+                                </SwipeableList>
                             : <div>No users selected</div>}
                         <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                             <button

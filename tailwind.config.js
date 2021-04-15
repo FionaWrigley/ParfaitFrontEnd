@@ -38,8 +38,8 @@ module.exports = {
         '31': '100px repeat(30, auto)',
         '30': 'repeat(30, auto)',
         'schedule' : '100px 1fr',
-        'members' : '100px'
-
+        'members' : '100px',
+        'results': '12px 1fr 12px',
       },
 
       gridColumn: {

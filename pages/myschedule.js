@@ -1,10 +1,11 @@
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import FooterMenu from '../components/navigation/FooterMenu';
 import Navbar from '../components/navigation/Navbar';
 import { css } from "@emotion/core";
 import PulseLoader from "react-spinners/PulseLoader";
-
 import {useEffect, useState} from 'react';
 import { format } from 'date-fns'
 import {
@@ -13,14 +14,19 @@ import {
     SwipeAction,
     TrailingActions,
   } from 'react-swipeable-list';
+
+  const trashIcon = <FontAwesomeIcon icon={faTrashAlt} size="lg"/>
  
   const trailingActions = (id) => (
     <TrailingActions>
       <SwipeAction
         destructive={true}
-        onClick={() => deleteEvent(id)}>
-        <div className="bg-red-500 text-2xl flex justify-center align-items-center text-white text-center text-weight-xbold">
-            Delete
+         onClick={() => deleteEvent(id)}
+        >
+        <div className="px-3 text-right py-auto bg-red-500 text-1xl align-middle justify-items-end align-middle text-white text-weight-xbold">
+          <div className="flex justify-end m-3">
+          <div className="h-6 w-6">{trashIcon}</div></div>
+          <div>Delete</div> 
         </div>
       </SwipeAction>
     </TrailingActions>
@@ -77,19 +83,17 @@ const myschedule = () => {
     },[date]);
 
     return (
-        <div className= ''>
-            <Navbar page="My Schedule"/>
+        <>
+            <div className="sticky top-0 z-50"><Navbar page="My Schedule"/></div>
             <div className= "flex justify-center m-2">
                 <Calendar 
                 onChange={setDate}
                 value={date}/>
             </div>
-
+            <div className ='overflow-y-scroll'>
             { (ready)?
-                <SwipeableList
-                    fullSwipe = {true}
-                > 
-                        {events.map((element, index) =>
+                <SwipeableList fullSwipe = {true}> 
+                    {events.map((element, index) =>
                     <SwipeableListItem 
                         trailingActions={trailingActions(element.eventID)} key = {element.eventID}>
                         <div className='bg-gradient-to-r from-gray-100 to-gray-100 via-white min-w-full  border-b border-b-2 border-gray-200'>               
@@ -106,7 +110,8 @@ const myschedule = () => {
  : <div className="mt-8 align-middle min-w-full justify-center overflow-visible text-center flex items-center">
  <PulseLoader color="#c7d2fe" loading={!ready} size={15} />
 </div>}
-    <FooterMenu page='myschedule'/> 
-        </div>)
+</div><div>
+    <FooterMenu page='myschedule'/></div>
+        </>)
 }
         export default myschedule;

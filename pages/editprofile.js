@@ -40,7 +40,7 @@ const editprofile = (props) => {
    
     return ((ready)
         ? <div>
-                <Plainheader page="groups"/>
+                <Plainheader backpage="groups" page="profile"/>
                 <div className="mt-6">
                     <div>
                         <div className="px-4 sm:px-0">

@@ -57,7 +57,7 @@ const groupschedule = () => {
     }, [groupID, numberOfDays]);
 
     return (<><div className='landscape:hidden'>
-        <Plainheader page="groups"/></div>
+        <Plainheader backpage="groups" page="groupschedule"/></div>
         {
         (ready)
         ? <div> 

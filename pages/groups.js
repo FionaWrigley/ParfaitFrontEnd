@@ -50,6 +50,7 @@ import PulseLoader from "react-spinners/PulseLoader";
                           .json()
                           .then((data) => {
                               setGroupData(data);
+                              console.log(data);
                               setReady(true);
                           })
               }

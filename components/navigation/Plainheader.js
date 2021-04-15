@@ -4,11 +4,13 @@ import {useRouter} from 'next/router';
 import Link from 'next/link';
 
 
-const Plainheader = ({page}) => {
+const Plainheader = ({backpage, page}) => {
 
     const router = useRouter();
     const backIcon = <FontAwesomeIcon icon={faArrowLeft} size="lg"/>
     const logoutIcon = <FontAwesomeIcon icon={faSignOutAlt} size="lg"/>
+
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",page)
 
     const logOut = () => {
         fetch(process.env.parfaitServer+'/logout', {
@@ -30,7 +32,7 @@ const Plainheader = ({page}) => {
                         className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                         <div className="ml-3 absolute left-0 ">
                             <div>
-                                <Link href= {page}>
+                                <Link href= {backpage}>
                                 <button
                                     className=" text-gray-600 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:ring-white"
                                     id="user-menu"
@@ -47,7 +49,7 @@ const Plainheader = ({page}) => {
                         <div className="ml-3 relative">
                     </div>
 
-                    {/* ({page === ""}) ?  */}
+                   {(page == "profile") ? <> 
                     <div
                         className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                             <button
@@ -56,7 +58,7 @@ const Plainheader = ({page}) => {
                                 className="p-1 rounded-full text-gray-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                 <div className='w-6 h-6'>{logoutIcon}</div>
                             </button>
-                    </div>
+                    </div></>: <></>}
                 </div>
                 </div>
             </div>

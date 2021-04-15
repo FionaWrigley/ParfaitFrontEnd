@@ -14,8 +14,6 @@ const login = (props) => {
 
     const formSubmit = (user) => {
 
-        console.log(JSON.stringify(user));
-
         fetch(process.env.parfaitServer+ '/login', {
                     method: 'POST',
                     body: JSON.stringify(user),

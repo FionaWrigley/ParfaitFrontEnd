@@ -1,5 +1,5 @@
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faEdit, faUser, faPlusSquare} from '@fortawesome/free-solid-svg-icons';
+import {faEdit, faUser} from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import {useEffect, useState} from 'react';
 import Image from 'next/image';

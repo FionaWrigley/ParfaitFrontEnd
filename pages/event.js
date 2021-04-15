@@ -33,7 +33,7 @@ const event = () => {
     }
     return (
         <>
-        <Plainheader page='myschedule'/>
+        <Plainheader backpage='myschedule' page="event"/>
              <div className="mt-3 sm:mt-0">
                 <div>
                     <div className="px-4 sm:px-0">

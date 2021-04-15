@@ -18,10 +18,6 @@ settings = {
           {
             source: '/:path*',
             headers: [
-              // {
-              //   key: 'Cache-Control',
-              //   value: 'no-cache'
-              // },
               {
                 key: 'X-Content-Type-Options',
                 value: 'nosniff' 
@@ -45,7 +41,7 @@ settings = {
   //)
 
 // module.exports = process.env.NODE_ENV === 'development' ? settings : withPWA(settings);
- module.exports = withPWA(settings);
+ module.exports = settings;
 
 // const withPlugins = require('next-compose-plugins')
 // const withImages = require('next-images')
