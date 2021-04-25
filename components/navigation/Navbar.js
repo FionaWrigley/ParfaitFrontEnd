@@ -16,7 +16,7 @@ const Navbar = ({page}) => {
             fetch(process.env.parfaitServer+'/profilepic2',
             {
                 method: 'GET',
-                // headers: { 'Content-Type': 'application/json; charset=utf-8' },
+                headers: { 'Content-Type': 'application/json; charset=utf-8' },
                 credentials: 'include'
               })
             .then(res => {
