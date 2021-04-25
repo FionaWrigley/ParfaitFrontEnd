@@ -28,6 +28,8 @@ import PulseLoader from "react-spinners/PulseLoader";
           setGroupData] = useState([]);
       const [ready,
           setReady] = useState(false);
+      const [errorMessage,
+            setErrorMessage] = useState("");
       const router = useRouter();
   
       useEffect(() => {
@@ -54,7 +56,8 @@ import PulseLoader from "react-spinners/PulseLoader";
                               setReady(true);
                           })
               }
-          }).catch(err => console.log("Oops: " + err));
+          }).catch(err => setErrorMessage("Oops, we are currently experiencing problem, please try again later")
+          );
       }, []);
 
 
@@ -66,6 +69,7 @@ return (
         <div className="m-0 min-w-full min-h-full">
             <div className="min-w-full container overflow-x-auto overflow-y-auto">
                 <div className="inline-block min-w-full">
+                <p className="errorMsg text-sm text-red-600">{errorMessage}</p>
                         
         {
             groupData.map((element, index) => 

@@ -11,20 +11,6 @@ import {
     TrailingActions,
   } from 'react-swipeable-list';
 
- 
-
-// const trailingActions = () => (
-//     <TrailingActions>
-//       <SwipeAction
-//         destructive={true}
-//         onClick={() => console.info('swipe action triggered')}
-//       >
-//         Delete
-//       </SwipeAction>
-//     </TrailingActions>
-//   );
-  
-
 
 const newgroup = () => {
 
@@ -35,8 +21,8 @@ const newgroup = () => {
         setGroupMembers] = useState([]);
     const [createGroup,
         setCreateGroup] = useState(false);
-    // const [groupD,
-    //     setGroupD] = useState([]);
+    const [errorMessage,
+        setErrorMessage] = useState("");
         const router = useRouter();
 
     const submitUsers = (m) => {
@@ -91,14 +77,21 @@ const newgroup = () => {
                 case 204:
                     router.push('/groups');
                     break;
-                }
+                case 401:
+                    router.push('/login');
+                    break;
+                case 403:
+                    router.push('/login');
+                    break;
+            }
             }).catch(err => {
-                //setErrorMessage("Oops, we are currently experiencing problem, please try again later")
-                console.log("Oops: "+err)}
-                );      
+                setErrorMessage("Oops, we are currently experiencing problem, please try again later");
+            })             
     }
 
-    return ( <><div className="sticky top-0 z-50"><Plainheader backpage="groups" page="newgroup"/></div>  {
+    return ( <><div className="sticky top-0 z-50"><Plainheader backpage="groups" page="newgroup"/></div>
+             <p className="errorMsg text-sm text-red-600">{errorMessage}</p>
+      {
         (!createGroup)
             ? <> 
             <FindUsers handleSubmit = {

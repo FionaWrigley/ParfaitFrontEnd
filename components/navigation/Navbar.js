@@ -19,11 +19,23 @@ const Navbar = ({page}) => {
                 headers: { 'Content-Type': 'application/json; charset=utf-8' },
                 credentials: 'include'
               })
-            .then(res => res.json())
-            .then(data => {
-                setObjectURL(process.env.parfaitServer+'/'+data.profilePicPath)
-                setImageExists(true);
-            });
+            .then(res => {
+                console.log("res.status.........................", res.status)
+                switch(res.status){
+                    
+                    case 200: 
+                        res.json().then(data => {
+                            setObjectURL(process.env.parfaitServer+'/'+data.profilePicPath)
+                            //setImageExists(true);
+                        });
+                        break;
+                    case 422: 
+        
+                        break;
+                }
+            }).catch((err) => console.log("something went very wrong!!!!!!"));
+                
+            
     },[]);
 
     return (

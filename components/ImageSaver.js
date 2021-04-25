@@ -6,8 +6,6 @@ import ImageLoader from '../components/ImageLoader';
 
 const ImageSaver = () => {
 
-
-        
         const [objectURL, setObjectURL] = useState("");
         const [imageExists, setImageExists] = useState(false);
         const [selectedFile, setSelectedFile] = useState();
@@ -26,19 +24,15 @@ const ImageSaver = () => {
           }
     
         useEffect(() => {
-
-            console.log("in use effect")
-                fetch('http://localhost:5000/profilepic2',
+                fetch(process.env.parfaitServer+'/profilepic2',
                 {
                     method: 'GET',
                     credentials: 'include'
                   })
                 .then(res => res.json())
                 .then(data => {
-                    setObjectURL('http://localhost:5000/'+data.profilePicPath);
-                    
+                    setObjectURL(process.env.parfaitServer+'/'+data.profilePicPath);
                     setImageExists(true);
-                    
                 });
         },[]);
 
@@ -53,8 +47,20 @@ const ImageSaver = () => {
                     credentials: 'include',
                     body: formData,
                 })
-                    .then(res => console.log(res.status))
-                    .catch(err => alert("Oops: " + err));      
+
+                .then(res => {
+                    switch(res.status){
+                        case 204: 
+                            // res.json().then(data => {
+                            //     setObjectURL(process.env.parfaitServer+'/'+data.profilePicPath)
+                            //     //setImageExists(true);
+                            // });
+                            break;
+                        case 422: 
+                            console.log('invalid image type');
+                            break;
+                    }
+                }).catch((err) => console.log("something went very wrong!!!!!!"));      
             }
 
     return ((imageExists) ?

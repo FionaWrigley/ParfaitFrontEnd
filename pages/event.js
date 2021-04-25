@@ -5,9 +5,8 @@ import { useRouter } from 'next/router';
 const event = () => {
 
     const router = useRouter();
-    const { register, handleSubmit, watch, errors } = useForm();
+    const { register, handleSubmit, errors } = useForm();
     const onSubmit = data => formSubmit(data);
-    
     
     const formSubmit = (form) => {
 
@@ -50,16 +49,29 @@ const event = () => {
                                 <input
                                     type="text"
                                     name="eventName"
-                                    ref={register}
+                                    ref={register({ required: true, minLength: 2, maxLength: 50, pattern: /^[ A-Za-z0-9_@./#&+-]*$/ })}
                                     className = "mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/>
+                                       {errors.eventName && errors.eventName.type === "required" && (
+                                        <p className="errorMsg text-sm text-red-600">Event name is required.</p>
+                                      )}
+                                      {errors.eventName && (errors.eventName.type === "minLength" || errors.name.type === "maxLength" ) && (
+                                        <p className="errorMsg text-sm text-red-600">Event name must be between 2 and 50 characters.</p>
+                                      )}
+                                      {errors.eventName && errors.eventName.type === "pattern" && (
+                                        <p className="errorMsg text-sm text-red-600">Event name may contain letters, numbers, or the following characters - , _, @, ., /, #, &, + ..</p>
+                                      )}
                             </div>
 
                             <div className="col-span-6 sm:col-span-3">
                                 <label htmlFor="eventDescription" className="block text-sm font-medium text-gray-700">Event description</label>
                                 <textarea
                                     name="eventDescription"
-                                    ref={register}
+                                    ref={register({pattern: /^[ A-Za-z0-9_@./#&+-]*$/ })}
                                     className = "mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/>
+                                              
+                                      {errors.eventDescription && errors.eventDescription.type === "pattern" && (
+                                        <p className="errorMsg text-sm text-red-600">Event description may contain letters, numbers, or the following characters - , _, @, ., /, #, &, + ..</p>
+                                      )}
                             </div>
                             <div className="w-full col-span-6 sm:col-span-4 grid grid-cols-6 gap-6">           
                             <div className="col-span-3">
@@ -70,6 +82,7 @@ const event = () => {
                                     ref={register}
                                     // defaultValue={event.startDate}
                                     className = "mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/>
+
                             </div>
 
                             <div className="col-span-3">
