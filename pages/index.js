@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useEffect} from 'react'
+import { useEffect } from 'react'
  
 export default function Home() {
  
@@ -29,7 +29,7 @@ export default function Home() {
               }
           }).catch(err => {
 
-              setErrorMessage("Oops, we are currently experiencing problem, please try again later")
+              //setErrMsg("Oops, we are currently experiencing problem, please try again later")
               console.log("Oops: "+err)
           });
 
