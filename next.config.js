@@ -9,7 +9,8 @@ settings = {
     },
     
     images: {
-        domains: ['localhost', '127.0.0.1'],
+       // domains: ['localhost', '127.0.0.1'],
+        domains: ['https://parfait-findthegaps.herokuapp.com'],
       },
       pwa: {
         dest: 'public'
@@ -38,16 +39,5 @@ settings = {
 
   //)
 
-// module.exports = process.env.NODE_ENV === 'development' ? settings : withPWA(settings);
- module.exports = settings;
-
-// const withPlugins = require('next-compose-plugins')
-// const withImages = require('next-images')
-
-// const nextConfig = {
-//   images: {
-//     domains: ['localhost']
-//   }
-// }
-
-// module.exports = withPlugins([[withImages]], nextConfig)
+ module.exports = process.env.NODE_ENV === 'development' ? settings : withPWA(settings);
+ //module.exports = settings;

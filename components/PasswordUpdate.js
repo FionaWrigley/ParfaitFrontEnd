@@ -36,12 +36,12 @@ const PasswordUpdate = () => {
 
     return ( <>
       
-                        <div className="mt-10 sm:mt-0">
+                        <div className="mt-4 sm:mt-0">
 
 <div>
     <div className="px-4 sm:px-0">
-        <h3 className="text-lg font-medium leading-6 text-gray-900">Password</h3 >
-        <p className="mt-1 text-sm text-gray-600">
+        <h3 className="text-lg font-medium leading-6 text-gray-900 dark:text-white">Password</h3 >
+        <p className="mt-1 text-sm text-gray-600 dark:text-gray-200">
             Change your password.
         </p>
     </div>
@@ -50,41 +50,41 @@ const PasswordUpdate = () => {
 <div>
     <form action="#" method="POST">
         <div className="shadow overflow-hidden sm:rounded-md">
-            <div className="px-4 py-5 bg-white sm:p-6">
+            <div className="px-4 py-5 sm:p-6">
                 <div className="grid grid-cols-6 gap-6">
 
                     <div className="col-span-6 sm:col-span-4">
-                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">Current password</label>
                         <input
                             id="oldPassword"
                             name="oldPassword"
+                            placeholder="Current password"
                             // defaultValue={user.password}
                             type="password"
                             autoComplete="current-password"
-                            className = "mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/></div>
+                            className = "dark:bg-gray-700 mt-1 h-9 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/></div>
                     
                     <div className="col-span-6 sm:col-span-4">
-                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">New password</label>
                         <input
                             id="password"
+                            placeholder="New password"
                             name="password"
                             // defaultValue={user.password}
                             type="password"
                             // autoComplete="current-password"
-                            className = "mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/></div>
+                            className = "dark:bg-gray-700 mt-1 h-9 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/></div>
 
                     <div className="col-span-6 sm:col-span-4">
-                        <label htmlFor="password2" className="block text-sm font-medium text-gray-700">Re-enter Password</label>
                         <input
                             id="password2"
                             name="password2"
                             type="password"
+                            placeholder="Re-enter password"
                             // defaultValue={user.password}
                             // autoComplete="current-password"
-                            className = "mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/></div>
+                            className = "dark:bg-gray-700 mt-1 h-9 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/></div>
                 </div>
             </div>
-            <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+            <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-right sm:px-6">
                 <button
                     type="submit"
                     className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">

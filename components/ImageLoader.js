@@ -5,7 +5,6 @@ const ImageLoader = (props) => {
     const imageInput = React.useRef(null);
 
     const changeHandler = (event) => {
-        console.log("clicking");
         const fileUploaded = event.target.files[0];
         props.handleFile(fileUploaded);
     };
@@ -27,7 +26,7 @@ const ImageLoader = (props) => {
             <button 
                 type="button" 
                 onClick={handleClick}
-                className = "ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                className = "ml-5 bg-white dark:bg-indigo-600  py-2 px-3 border border-gray-300 dark:bg-indigo-600 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 dark:text-white hover:bg-gray-50 dark:hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Change 
             </button>
    </>

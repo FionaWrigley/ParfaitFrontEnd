@@ -2,7 +2,9 @@ import Plainheader from '../components/navigation/Plainheader';
 import ProfileUpdate from '../components/ProfileUpdate';
 import PasswordUpdate from '../components/PasswordUpdate';
 import NotificationUpdate from '../components/NotificationUpdate';
-import ImageSaver from '../components/ImageSaver'
+import SettingsPanel from '../components/SettingsPanel';
+import ImageSaver from '../components/ImageSaver';
+import PulseLoader from "react-spinners/PulseLoader";
 import {useState, useEffect} from 'react';
 
 const editprofile = (props) => {
@@ -38,14 +40,17 @@ const editprofile = (props) => {
     }, [submit]);
 
    
-    return ((ready)
+    return (
+        <><div className="sticky top-0 z-50"><Plainheader backpage="groups" page="profile"/></div>
+        
+        {(ready)
         ? <div>
-                <Plainheader backpage="groups" page="profile"/>
+                
                 <div className="mt-6">
                     <div>
                         <div className="px-4 sm:px-0">
-                            <h2 className="text-lg font-medium leading-6 text-gray-900">Edit Profile</h2>
-                            <p className="mt-1 text-sm text-gray-600">
+                            <h2 className="text-lg font-medium leading-6 text-gray-900 dark:text-white">Edit Profile</h2>
+                            <p className="mt-1 text-sm text-gray-600 dark:text-gray-100">
                                 Upload a photo to help your friends find you.
                             </p>
                         </div>
@@ -80,8 +85,10 @@ const editprofile = (props) => {
                     </div>
                 </div>
 
-                <NotificationUpdate/>
+                <SettingsPanel/>
             </div>
-        : <div>Loading...</div>)
+        : <div className="mt-8 align-middle min-w-full justify-center overflow-visible text-center flex items-center">
+        <PulseLoader color="#c7d2fe" loading={!ready} size={15} />
+       </div>}</>)
 }
 export default editprofile;

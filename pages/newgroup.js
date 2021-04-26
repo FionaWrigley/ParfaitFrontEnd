@@ -90,7 +90,7 @@ const newgroup = () => {
     }
 
     return ( <><div className="sticky top-0 z-50"><Plainheader backpage="groups" page="newgroup"/></div>
-             <p className="errorMsg text-sm text-red-600">{errorMessage}</p>
+             
       {
         (!createGroup)
             ? <> 
@@ -99,22 +99,22 @@ const newgroup = () => {
             } /> </>
             : <>< div className = "mt-6" > <div>
                 <div className="px-4 sm:px-0">
-                    <h2 className="text-lg font-medium leading-6 text-indigo-900">Create Group</h2>
-                    <p className="mt-1 text-sm text-gray-600">
+                    <h2 className="text-lg font-medium leading-6 text-indigo-900 dark:text-white">Create Group</h2>
+                    <p className="mt-1 text-sm text-gray-600 dark:text-gray-200">
                         Upload a group name and description.
                     </p>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="shadow sm:rounded-md sm:overflow-hidden">
-                        <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
+                        <div className="px-4 py-5 space-y-6 sm:p-6">
                             <div className="form-control col-span-6 sm:col-span-3">
-                                <label htmlFor="name" className="block text-sm font-medium text-gray-700">Group name</label>
                                 <input
                                     type="text"
                                     name="name"
+                                    placeholder="Group Name"
                                     id="name"
                                     ref = {register({ required: true, minLength: 2, maxLength: 50, pattern: /^[ A-Za-z0-9_@./#&+-]*$/ })}
-                                    className="mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/>
+                                    className="mt-1 h-9 dark:bg-gray-700 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/>
                                     {errors.name && errors.name.type === "required" && (
                                         <p className="errorMsg text-sm text-red-600">Group name is required.</p>
                                       )}
@@ -126,17 +126,14 @@ const newgroup = () => {
                                       )}
                             </div>
                             <div className="form-control">
-                                <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-                                    About
-                                </label>
                                 <div className="mt-1">
                                     <textarea
                                         id="description"
                                         name="description"
                                         ref={register({pattern: /^[ A-Za-z0-9_@./#&+-]*$/})}
                                         rows="3"
-                                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md focus:outline-none"
-                                        placeholder="brief bio about your group"></textarea>
+                                        className="dark:bg-gray-700 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md focus:outline-none"
+                                        placeholder="Brief bio about your group"></textarea>
                                 </div>
                                 {errors.description && errors.description.type === "pattern" && (
                                         <p className="errorMsg text-sm text-red-600">Group name may contain letters, numbers, or the following characters - , _, @, ., /, #, &, + ..</p>
@@ -168,18 +165,21 @@ const newgroup = () => {
                                                         </div>
                                                     }
                                                 </span>
-                                                <p className="text-indigo-900 text-md font-semibold">{element.fname + " " + element.lname}</p>
+                                                <p className="text-indigo-900 dark:text-white text-md font-semibold">{element.fname + " " + element.lname}</p>
                                             </SwipeableListItem>
                                          // </div> 
                                     )}
                                 </SwipeableList>
-                            : <div>No users selected</div>}
-                        <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                            : <div className="text-center dark:text-white">No users selected</div>}
+                        <div className="mt-2 px-4 py-3 bg-gray-50 dark:bg-gray-700 text-right sm:px-6 flex flex-nowrap justify-end">
+                        <p className="mr-2 errorMsg text-sm text-red-600 text-justify rounded-lg dark:bg-white">{errorMessage}</p>
+                        <div>
                             <button
                                 type="submit"
                                 className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                 Save
                             </button>
+                        </div>
                         </div>
                     </div>
                 </form>

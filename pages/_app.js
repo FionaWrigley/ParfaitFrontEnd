@@ -1,8 +1,9 @@
 import '../styles/globals.css'
 import "tailwindcss/tailwind.css";
 import 'react-swipeable-list/dist/styles.css';
-//import {useEffect} from 'react';
+import {useRef} from 'react';
 import Head from 'next/head';
+import { ThemeProvider } from 'next-themes'
 //import Html from 'next/document'
 
 function MyApp({ Component, pageProps }) {
@@ -34,11 +35,10 @@ function MyApp({ Component, pageProps }) {
         <title>Parfait</title>
         
       </Head>
-      <body className="bg-gradient-to-r from-pink-50 to-indigo-50">
-   
-    <Component {...pageProps} />
-    </body>
-    
+      <ThemeProvider attribute="class">
+          <Component {...pageProps} />
+          </ThemeProvider>
+ 
     </>
     
 }

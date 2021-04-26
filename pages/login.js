@@ -45,24 +45,24 @@ const login = (props) => {
 
     return (
         <div
-            className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+            className="min-h-screen flex items-center justify-center to-gray-50 from-gray-50 g-gradient-to-r  dark:from-primaryDark dark:to-secondaryDark py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-8">
                 <div>
                     <img className="mx-auto h-20 w-auto"
                         src="/images/logo.svg" alt="Workflow"/>
-                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
                         Sign in to your account
                     </h2>
                 </div>
                 <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
                     <input type="hidden" name="remember" value="true"/>
-                    <div className="rounded-md shadow-sm -space-y-px">
+                    <div className="rounded-md shadow-sm -space-y-px dark:bg-gray-200">
                         <div>
                             <label htmlFor="email" className="sr-only">Email address</label>
                             <input id="email" name="email" type="user.email" // value={user.email
                          autoComplete="email" 
                         required 
-                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address" 
+                         className="dark:bg-gray-700 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address" 
                          ref={register}
                          required/></div>
                         <div>
@@ -72,12 +72,12 @@ const login = (props) => {
                          required
                          ref={register}
                          required 
-                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" 
+                         className="dark:bg-gray-700 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" 
                          placeholder="Password" /></div>
                     </div>
 
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center">
+                        {/* <div className="flex items-center">
                             <input
                                 id="remember_me"
                                 name="remember_me"
@@ -86,19 +86,19 @@ const login = (props) => {
                             <label htmlFor="remember_me" className="ml-2 block text-sm text-gray-900">
                                 Remember me
                             </label>
-                        </div>
+                        </div> */}
 
-                        <div className="text-sm">
+                        {/* <div className="text-sm">
                             <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
                                 Forgot your password?
                             </a>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div>
                             <button
                                 type="submit"
-                                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 dark:bg-gray-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                                     <svg
                                         className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
@@ -114,12 +114,12 @@ const login = (props) => {
                                 </span>
                                 Sign in
                             </button>
-                       <div className="text-red-600 mt-2"> {error} </div>
+                       <div className="text-red-600 dark:bg-white mt-2"> {error} </div>
                     </div>
                     <div>
                         <div className="text-sm text-center">
                             <Link href="/register">
-                                <a className="font-medium text-center text-indigo-600 hover:text-indigo-500">
+                                <a className="font-medium text-center text-indigo-600 dark:text-white hover:text-indigo-500">
                                     Don't have an account yet?
                                 </a>
                             </Link>

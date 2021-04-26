@@ -60,16 +60,15 @@ import PulseLoader from "react-spinners/PulseLoader";
           );
       }, []);
 
-
 return (
     <>
     <div className="sticky top-0 z-50" ><Navbar page="My Groups"/></div>
     {(ready) ?
-     <div className="antialiased font-sans bg-gradient-to-r from-gray-100 to-gray-100 via-white">
+     <div className="antialiased font-sans mt-1">
         <div className="m-0 min-w-full min-h-full">
             <div className="min-w-full container overflow-x-auto overflow-y-auto">
                 <div className="inline-block min-w-full">
-                <p className="errorMsg text-sm text-red-600">{errorMessage}</p>
+                <p className="errorMsg dark:bg-white rounded-m text-sm text-red-600">{errorMessage}</p>
                         
         {
             groupData.map((element, index) => 
@@ -84,12 +83,12 @@ return (
                         groupID: element.groupID
                     }}}
                     key={index}>
-                    <div className='min-w-full  border-b border-b-2 border-gray-200'>               
-                        <div className="px-5 py-4 bg-white text-md font-semibold min-w-full">
+                    <div className='min-w-full  border-b border-b-2 border-gray-200 dark:border-gray-700 dark:border-none'>               
+                        <div className="px-5 py-4 text-md font-semibold min-w-full">
                             <div className="flex items-center">   
                                 <GroupImages groupID={element.groupID} size={6}/>
                                 <div className="ml-3 h-full">
-                                    <p className="text-gray-900 whitespace-no-wrap">
+                                    <p className="text-gray-900 dark:text-white whitespace-no-wrap">
                                         {element.groupName}
                                     </p>
                                 </div>

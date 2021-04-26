@@ -5,7 +5,7 @@ import ScheduleLine from '../components/schedule/ScheduleLine';
 import GroupImages from '../components/GroupImages'
 import {add, format} from 'date-fns';
 import { css } from "@emotion/core";
-import DotLoader from "react-spinners/DotLoader";
+import PulseLoader from "react-spinners/PulseLoader";
 
 const groupschedule = () => {
 
@@ -65,14 +65,14 @@ const groupschedule = () => {
                 <div className="w-full justify-center flex items-center">
                            <GroupImages groupID={groupID} size={12}/></div>
                 </div>
-                <div className="px-4 sm:px-0 text-center m-2 landscape:hidden"><p  className="font-bold text-indigo-900 text-black text-xl">{scheduleData.groupName}</p>
-                <p  className="mt-1 text-m text-gray-600">{scheduleData.groupDescripton}</p></div>
+                <div className="px-4 sm:px-0 text-center m-2 landscape:hidden"><p  className="font-bold text-indigo-900 dark:text-white text-black text-xl">{scheduleData.groupName}</p>
+                <p  className="mt-1 text-m text-gray-600 dark:text-gray-200">{scheduleData.groupDescripton}</p></div>
 
-                <div className="overflow-x-scroll grid grid-col-schedule gap-y-0.5 bg-gray-100 landscape:h-full"> {/* outer grid */}
+                <div className="overflow-x-scroll grid grid-col-schedule gap-y-0.5 landscape:h-full"> {/* outer grid */}
                 
-                <div className ='h-16 col-start-2 col-span-1 row-start-1 flex flex-row flex-nowrap'>
+                <div className ='h-16 col-start-2 col-span-1 row-start-1 flex flex-row flex-nowrap dark:text-white'>
                     {dayArray.map((day, dayIndex) =>
-                        <div key={`day${dayIndex}`} className={`overflow-y-hidden grid grid-col-24 bg-gray-100 box-border border-r border-gray-300`}> {/* calendar grid */}
+                        <div key={`day${dayIndex}`} className={`overflow-y-hidden grid grid-col-24 dark:bg-none box-border border-r border-gray-300`}> {/* calendar grid */}
                         <div className={`text-sm text-center h-8 col-start-1 col-span-24 row-start-1 row-span-1}`}>{day.toDateString()}</div>
                            { hourArray.map((hour, hourIndex) => <div key={hourIndex} className = {`w-60 col-start-${hourIndex+1} col-span-2 row-start-2 row-span-1`}>
                                 <div key={`hour${hourIndex}`} className={`text-xxs w-60 text-center h-4 col-start-${hourIndex+1} col-span-2 -left-20 row-start-2 row-span-1`}>{hour}</div>  
@@ -91,7 +91,9 @@ const groupschedule = () => {
                 )}  
                 </div>
             </div>
-        : <div><DotLoader color="#c7d2fe" loading={!ready} size={60} /></div>}   
+        : <div className="mt-8 align-middle min-w-full justify-center overflow-visible text-center flex items-center">
+        <PulseLoader color="#c7d2fe" loading={!ready} size={15} />
+       </div>}   
         </>)
 }
 

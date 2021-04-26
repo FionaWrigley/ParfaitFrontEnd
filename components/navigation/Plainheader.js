@@ -25,7 +25,7 @@ const Plainheader = ({backpage, page}) => {
     }
 
     return (
-        <nav className="bg-gradient-to-r from-pink-200 to-indigo-200 bg-opacity-75">
+        <nav className="bg-gradient-to-r from-pinkish to-pinkish bg-opacity-75 dark:from-gray-800 dark:to-gray-800">
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                 <div className="relative flex items-center justify-between h-12">
                     <div
@@ -34,7 +34,7 @@ const Plainheader = ({backpage, page}) => {
                             <div>
                                 <Link href= {backpage}>
                                 <button
-                                    className=" text-gray-600 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:ring-white"
+                                    className=" text-gray-600 dark:text-white flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:ring-white"
                                     id="user-menu"
                                     aria-haspopup="true"
                                     aria-label="Back">
@@ -55,7 +55,7 @@ const Plainheader = ({backpage, page}) => {
                             <button
                                 aria-label="Log out"
                                 onClick={logOut}
-                                className="p-1 rounded-full text-gray-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                                className="p-1 rounded-full text-gray-600 dark:text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                 <div className='w-6 h-6'>{logoutIcon}</div>
                             </button>
                     </div></>: <></>}

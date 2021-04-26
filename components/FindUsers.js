@@ -88,13 +88,13 @@ const isSelected = (id) => {
      
         <div className="mt-6">      
         <div className="px-4 sm:px-0 text-center">
-        <h3 className="text-lg font-medium leading-6 text-indigo-900">Add Group Members</h3 >
-        <p className="mt-1 text-sm text-gray-600">
+        <h3 className="text-lg font-medium leading-6 text-indigo-900 dark:text-white">Add Group Members</h3 >
+        <p className="mt-1 text-sm text-gray-600 dark:text-gray-200">
             Added group members will be able to see your availability
         </p>
     </div>
         <div className="w-full inline-flex pt-2 relative mx-auto text-gray-600 justify-center">
-        <input className="border-2 border-gray-300 bg-white h-10 px-1 w-1/2 rounded-lg text-sm focus:outline-none"
+        <input className="border-2 border-gray-300 bg-white dark:bg-gray-200 h-10 px-1 w-1/2 rounded-lg text-sm focus:outline-none"
           type="search" name="search" placeholder="Search"
           onChange={e => setSearchTerm(e.target.value)} />
       </div>
@@ -107,7 +107,7 @@ const isSelected = (id) => {
       :
       <div className="grid grid-col-results gap-y-2 mt-4">
        {results.map((element, index) => <>
-                        <span
+                        <span key={'span'+index}
                           className="mx-2 col-start-1 col-span-1 inline-block h-11 w-11 rounded-full overflow-hidden bg-gray-100 items-center">
                         { (!element.profilePicPath) ?
                                                  <svg
@@ -127,20 +127,20 @@ const isSelected = (id) => {
                             height={150} />
                         </div>}
                       </span>
-                        <p className="col-start-2 text-left col-span-1 font-bold text-indigo-800 ">{element.fname} {element.lname}</p>
+                        <p className="col-start-2 text-left col-span-1 font-bold text-indigo-800 dark:text-white">{element.fname} {element.lname}</p>
                         
                         <input type ='checkbox'
                               key = {element.memberID}
                               value= {element.memberID}
 
-                              className = "col-start-3 col-span-1 h-6 w-6 rounded-full right-0"
+                              className = "dark:bg-gray-200 col-start-3 col-span-1 h-6 w-6 rounded-full right-0"
                               defaultChecked={isSelected(element.memberID)}
                               onChange={handleChecked}
                         /></>
         // </div>
        )}
       </div>}
-      <div className="px-4 py-3 bg-gray-50 text-right sm:px-6 bottom-0">
+      <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-right sm:px-6 bottom-0">
                 <button
                     type="submit"
                     onClick={handleClick}
