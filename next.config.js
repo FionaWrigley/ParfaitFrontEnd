@@ -14,26 +14,26 @@ settings = {
       },
       pwa: {
         dest: 'public'
-    },
+    }
 
-      async headers() {
-        return [
-          {
-            source: '/:path*',
-            headers: [
-              {
-                key: 'X-Content-Type-Options',
-                value: 'nosniff' 
-              },
-              {
-                key: 'Cache-Control',
-                value: 'max-age=31536000, immutable' 
-              },
+      // async headers() {
+      //   return [
+      //     {
+      //       source: '/:path*',
+      //       headers: [
+      //         {
+      //           key: 'X-Content-Type-Options',
+      //           value: 'nosniff' 
+      //         },
+      //         {
+      //           key: 'Cache-Control',
+      //           value: 'max-age=31536000, immutable' 
+      //         },
             
-            ],
-          }
-        ]
-      }
+      //       ],
+      //     }
+      //   ]
+      // }
   }
   
 
