@@ -1,8 +1,11 @@
 module.exports = {
-  purge: [],
+  purge: [
+    './pages/*.js',
+    './components/**/*.js',
+    './components/*.js',
+  ],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
-
     gradientColorStops: theme => ({
       ...theme('colors'),
         primaryLight: '#fce7f3',
@@ -14,8 +17,6 @@ module.exports = {
      }),
     
     extend: {
-
-     
       screens: {
         'portrait': {'raw': '(orientation: portrait)'},
         // => @media (orientation: portrait) { ... }

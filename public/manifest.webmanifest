@@ -1,10 +1,10 @@
 {
     "name": "Parfait",
     "short_name": "Parfait",
-    "start_url": "http://localhost:3000/",
+    "start_url": "https://parfait-coral.vercel.app/",
     "display": "standalone",
-    "background_color": "#fbcfe8",
-    "theme_color": "#90cdf4",
+    "background_color": "#deb7c7",
+    "theme_color": "#deb7c7",
     "orientation": "portrait-primary",
     "icons": [
       {

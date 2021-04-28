@@ -14,26 +14,6 @@ const NotificationUpdate = () => {
     const [firstLoad,
         setFirstLoad] = useState(true);
 
-
-
-    // useEffect(() => {
-    //     if (firstLoad) {
-    //         fetch('http://localhost:5000/profile', {
-    //             method: 'GET',
-    //             headers: {'Content-Type': 'application/json'},
-    //                 credentials: 'include'
-    //             })
-    //             .then(res => res.json())
-    //             .then((data) => {
-    //                 setUser(data);
-    //                 setReady(true);
-    //                 setFirstLoad(false);
-    //                 })
-    //             .catch(err => console.log("Oops: " + err));
-    //     }
-    // }, [submit]);
-
-
     return ( <>
     < div className="mt-10 sm:mt-0">
                     <div>

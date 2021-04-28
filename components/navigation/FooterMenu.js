@@ -5,15 +5,15 @@ import {useState, useEffect} from 'react';
 
 const FooterMenu= (props) => {
 
-  const [groupFormat, setGroupFormat] = useState('bg-white');
-  const [scheduleFormat, setScheduleFormat] = useState('');
+  const [groupFormat, setGroupFormat] = useState('');
+  const [scheduleFormat, setScheduleFormat] = useState('bg-white');
 
 
   useEffect(() => {
 
   if(props.page === 'myschedule'){
-    setScheduleFormat('bg-white');
-    setGroupFormat('');
+    setScheduleFormat('');
+    setGroupFormat('bg-white');
   }
 })
 

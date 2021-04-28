@@ -24,7 +24,9 @@ const login = (props) => {
                      })
                      .then(res => { 
                         switch(res.status){
-                        case 204: 
+                        case 204:
+                            localStorage.setItem('loggedIn', true);
+                            localStorage.setItem('lastLogIn', new Date());
                             router.push('/groups');
                             break;
                         case 401: 
@@ -114,7 +116,7 @@ const login = (props) => {
                                 </span>
                                 Sign in
                             </button>
-                       <div className="text-red-600 dark:bg-white mt-2"> {error} </div>
+                       <div className="text-red-500  mt-2"> {error} </div>
                     </div>
                     <div>
                         <div className="text-sm text-center">

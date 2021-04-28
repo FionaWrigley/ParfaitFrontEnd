@@ -1,12 +1,23 @@
 import Plainheader from '../components/navigation/Plainheader';
 import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router';
+import { useRef } from 'react';
+var compareAsc = require('date-fns/compareAsc')
 
 const event = () => {
 
     const router = useRouter();
-    const { register, handleSubmit, errors } = useForm();
+    const { register, handleSubmit, errors, watch } = useForm();
+    const startDate = useRef({});
+    startDate.current = watch("startDate", "");
+    const endDate = useRef({});
+    endDate.current = watch("endDate", "");
+    const startTime = useRef({});
+    startTime.current = watch("startTime", "");
+    const repeated = useRef({});
+    repeated.current = watch("repeated", "");
     const onSubmit = data => formSubmit(data);
+    
     
     const formSubmit = (form) => {
         fetch(process.env.parfaitServer+'/createevent', {
@@ -17,8 +28,7 @@ const event = () => {
                 },
                     credentials: 'include'
                  })
-                 .then(res => {
-                    
+                 .then(res => {   
                     switch(res.status){
                     case 204: 
                         router.push('/myschedule')
@@ -48,29 +58,24 @@ const event = () => {
                                     type="text"
                                     placeholder="Event Name"
                                     name="eventName"
-                                    ref={register({ required: true, minLength: 2, maxLength: 50, pattern: /^[ A-Za-z0-9_@./#&+-]*$/ })}
-                                    className = "mt-1 h-9 dark:bg-gray-700 mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/>
-                                       {errors.eventName && errors.eventName.type === "required" && (
-                                        <p className="errorMsg text-sm rounded-lg mt-1 dark:bg-white text-red-600">Event name is required.</p>
-                                      )}
-                                      {errors.eventName && (errors.eventName.type === "minLength" || errors.name.type === "maxLength" ) && (
-                                        <p className="errorMsg text-sm rounded-lg mt-1 dark:bg-white text-red-600">Event name must be between 2 and 50 characters.</p>
-                                      )}
-                                      {errors.eventName && errors.eventName.type === "pattern" && (
-                                        <p className="errorMsg text-sm rounded-lg mt-1 dark:bg-white text-red-600">Event name may contain letters, numbers, or the following characters - , _, @, ., /, #, &, + ..</p>
-                                      )}
+                                    className = "mt-1 h-9 dark:bg-gray-700 mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
+                                    ref={register({ 
+                                        required: 'Event name is required', 
+                                        minLength: { value: 2, message: 'Event name must be between 2 and 50 characters' }, 
+                                        maxLength: { value: 50, message: 'Event name must be between 2 and 50 characters' }, 
+                                        pattern: { value: /^[ A-Za-z0-9_@./#&+-]*$/, message: 'Event name may contain letters, numbers, or the following characters - , _, @, ., /, #, &, + .'}
+                                    })}/>
+                                       {errors.eventName && <p className="errorMsg text-sm rounded-lg mt-1 text-red-500">{errors.eventName.message}</p>}
                             </div>
 
                             <div className="col-span-6 sm:col-span-3">
                                 <textarea
                                     name="eventDescription"
                                     placeholder="Event details"
-                                    ref={register({pattern: /^[ A-Za-z0-9_@./#&+-]*$/ })}
-                                    className = "mt-1 block dark:bg-gray-700 w-full rounded-lg mt-1 dark:bg-white shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/>
+                                    className = "mt-1 block dark:bg-gray-700 w-full rounded-lg mt-1 dark:bg-white shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
+                                    ref={register({pattern: {value: /^[ A-Za-z0-9_@./#&+-]*$/, message: 'Event description may contain letters, numbers, or the following characters - , _, @, ., /, #, &, + .' } })}/>
                                               
-                                      {errors.eventDescription && errors.eventDescription.type === "pattern" && (
-                                        <p className="errorMsg rounded-lg mt-1 dark:bg-white text-sm text-red-600">Event description may contain letters, numbers, or the following characters - , _, @, ., /, #, &, + ..</p>
-                                      )}
+                                    {errors.eventDescription && <p className="errorMsg rounded-lg mt-1 text-sm text-red-500">errors.eventDescription.message</p>}
                             </div>
                             <div className="w-full col-span-6 sm:col-span-4 grid grid-cols-6 gap-6">           
                             <div className="col-span-3">
@@ -78,9 +83,11 @@ const event = () => {
                                 <input
                                     type="date"
                                     name="startDate"
-                                    ref={register}
-                                    // defaultValue={event.startDate}
-                                    className = "mt-1 h-9 dark:bg-gray-700 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/>
+                                    className = "mt-1 h-9 dark:bg-gray-700 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
+                                    ref={register({
+                                        required: 'Event start date is required'
+                                    })}/>
+                                {errors.startDate && <p className="errorMsg rounded-lg mt-1 text-sm text-red-500">errors.startDate.message</p>}
 
                             </div>
 
@@ -88,10 +95,12 @@ const event = () => {
                                 <label htmlFor="startTime" className="block text-sm font-medium dark:text-white text-gray-700">Time</label>
                                 <input
                                     type="time"
-                                    ref={register}
                                     name="startTime"
-                                    // defaultValue={startTime}
-                                    className = "mt-1 h-9 dark:bg-gray-700 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/>
+                                    className = "mt-1 h-9 dark:bg-gray-700 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
+                                    ref={register({
+                                        required: 'Event start time is required'
+                                    })}/>
+                                {errors.startTime && <p className="errorMsg rounded-lg mt-1 text-sm text-red-500">{errors.startTime.message}</p>}
                             </div>
                             </div> 
                             
@@ -100,20 +109,28 @@ const event = () => {
                                 <label htmlFor="endDate" className="block text-sm dark:text-white font-medium text-gray-700">End date</label>
                                 <input
                                     type="date"
-                                    ref={register}
                                     name="endDate"
-                                    // defaultValue={event.endDate}
-                                    className = "mt-1 h-9 dark:bg-gray-700  block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/>
+                                    defaultValue={startDate.current}
+                                    className = "mt-1 h-9 dark:bg-gray-700  block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
+                                    ref={register({
+                                        validate: (value) =>
+                                        (value >= startDate.current || "The end date cannot be before the start date")
+                                      })} />
+                                      {errors.endDate && <p className="errorMsg rounded-lg mt-1 text-sm text-red-500">{errors.endDate.message}</p>}
                             </div>
 
                             <div className="col-span-3">
                                 <label htmlFor="endTime" className="block text-sm dark:text-white font-medium text-gray-700">End time</label>
                                 <input
                                     type="time"
-                                    ref={register}
                                     name="endTime"
-                                    // defaultValue={event.endTime}
-                                    className = "mt-1 h-9 dark:bg-gray-700 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/>
+                                    defaultValue={startTime.current}
+                                    className = "mt-1 h-9 dark:bg-gray-700 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
+                                    ref={register({
+                                        validate: (value) =>
+                                        (( endDate.current > startDate.current || (value > startTime.current)) || "End time must be after the start time")
+                                      })} />
+                                      {errors.endTime && <p className="errorMsg rounded-lg mt-1 text-sm text-red-500">{errors.endTime.message}</p>}
                             </div>
                         </div>
                         <div className="col-span-6 flex">
@@ -132,22 +149,31 @@ const event = () => {
                        
                         <label htmlFor="frequency" className=" dark:text-white block text-sm font-medium text-gray-700">Repeat</label>
                             
-                        <select className = "h-9 rounded-lg mt-1 dark:bg-gray-700 " ref={register} name={'frequency'}>
+                        <select className = "h-9 rounded-lg mt-1 dark:bg-gray-700 "name='frequency' 
+                        ref={register({
+                                validate: (value) =>
+                                         ((!repeated.current || (repeated.current && (value != 'null'))) || "Frequency is required if repeat is checked")      
+                            })} >
                             <option value='null'>--select--</option>
                             <option value="Daily">Daily</option>
                             <option value="Weekly">Weekly</option>
                             <option value="Monthly">Monthly</option>
                             <option value="Annually">Annually</option>
                         </select>
+                        {errors.frequency && <p className="errorMsg rounded-lg mt-1 text-sm text-red-500">{errors.frequency.message}</p>}
+
                         </div>
                         <div className="col-span-3">
                                 <label htmlFor="repeatUntil" className="block text-sm font-medium text-gray-700 dark:text-white">End repeat</label>
                                 <input
                                     type="date"
-                                    ref={register}
                                     name="repeatUntil"
-                                    // defaultValue={event.endDate}
-                                    className = "mt-1 dark:bg-gray-700 h-9 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/>
+                                    className = "mt-1 dark:bg-gray-700 h-9 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
+                                    ref={register({
+                                        validate: (value) =>
+                                                 ((!repeated.current || (repeated.current && (value > endDate.current ))) || "Frequency is required if repeat is checked")      
+                                    })}
+                                    />
                             </div>
                         
                     

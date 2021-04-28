@@ -20,13 +20,11 @@ const Navbar = ({page}) => {
                 credentials: 'include'
               })
             .then(res => {
-                console.log("res.status.........................", res.status)
                 switch(res.status){
                     
                     case 200: 
                         res.json().then(data => {
                             setObjectURL(process.env.parfaitServer+'/'+data.profilePicPath)
-                            //setImageExists(true);
                         });
                         break;
                     case 422: 

@@ -21,13 +21,12 @@ const newgroup = () => {
         setGroupMembers] = useState([]);
     const [createGroup,
         setCreateGroup] = useState(false);
-    const [errorMessage,
-        setErrorMessage] = useState("");
+    const [errMsg,
+        setErrMsg] = useState("");
         const router = useRouter();
 
     const submitUsers = (m) => {
         setGroupMembers(m);
-        console.log(m);
         setCreateGroup(true);
     }
 
@@ -45,14 +44,11 @@ const newgroup = () => {
       );
 
     const removeUser = (userID) => {
-
-        console.log("members ", groupMembers)
         let index = groupMembers.findIndex(i => i.memberID == (""+userID));
         
         if (index > -1) {
             groupMembers.splice(index, 1)
         }
-        console.log('updated members ', groupMembers)
     }
 
     const formSubmit = (form) => {
@@ -83,9 +79,13 @@ const newgroup = () => {
                 case 403:
                     router.push('/login');
                     break;
+                case 422:
+                    res => res.json()
+                    .then(data => setErrMsg(data));
+                    break;
             }
             }).catch(err => {
-                setErrorMessage("Oops, we are currently experiencing problem, please try again later");
+                setErrMsg("Oops, we are currently experiencing problem, please try again later");
             })             
     }
 
@@ -113,31 +113,26 @@ const newgroup = () => {
                                     name="name"
                                     placeholder="Group Name"
                                     id="name"
-                                    ref = {register({ required: true, minLength: 2, maxLength: 50, pattern: /^[ A-Za-z0-9_@./#&+-]*$/ })}
-                                    className="mt-1 h-9 dark:bg-gray-700 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"/>
-                                    {errors.name && errors.name.type === "required" && (
-                                        <p className="errorMsg text-sm text-red-600">Group name is required.</p>
-                                      )}
-                                      {errors.name && (errors.name.type === "minLength" || errors.name.type === "maxLength" ) && (
-                                        <p className="errorMsg text-sm text-red-600">Group name must be between 2 and 50 characters.</p>
-                                      )}
-                                      {errors.name && errors.name.type === "pattern" && (
-                                        <p className="errorMsg text-sm text-red-600">Group name may contain letters, numbers, or the following characters - , _, @, ., /, #, &, + ..</p>
-                                      )}
+                                    className="mt-1 h-9 dark:bg-gray-700 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
+                                    ref = {register({ 
+                                        required: 'Group name is required',
+                                        minLength: {value: 2, message: 'Group name must be between 2 and 50 characters'},
+                                        maxLength: {value: 50, message: 'Group name must be between 2 and 50 characters'}, 
+                                        pattern: {value: /^[ A-Za-z0-9_@./#&+-]*$/ , message: 'Group name may contain letters, numbers, or the following characters - , _, @, ., /, #, &, + .'}
+                                     })}/>
+                                    {errors.name && <p className="errorMsg text-sm text-red-500">{errors.name.message}</p>}    
                             </div>
                             <div className="form-control">
                                 <div className="mt-1">
                                     <textarea
                                         id="description"
                                         name="description"
-                                        ref={register({pattern: /^[ A-Za-z0-9_@./#&+-]*$/})}
                                         rows="3"
                                         className="dark:bg-gray-700 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md focus:outline-none"
-                                        placeholder="Brief bio about your group"></textarea>
+                                        placeholder="Brief bio about your group"
+                                        ref={register({pattern: {value: /^[ A-Za-z0-9_@./#&+-]*$/, message: 'Group name may contain letters, numbers, or the following characters - , _, @, ., /, #, &, + .'} })}></textarea>
                                 </div>
-                                {errors.description && errors.description.type === "pattern" && (
-                                        <p className="errorMsg text-sm text-red-600">Group name may contain letters, numbers, or the following characters - , _, @, ., /, #, &, + ..</p>
-                                )}
+                                {errors.description &&  <p className="errorMsg text-sm text-red-500">{errors.description.message}</p>} 
                             </div>
                         </div>
                         
@@ -172,7 +167,7 @@ const newgroup = () => {
                                 </SwipeableList>
                             : <div className="text-center dark:text-white">No users selected</div>}
                         <div className="mt-2 px-4 py-3 bg-gray-50 dark:bg-gray-700 text-right sm:px-6 flex flex-nowrap justify-end">
-                        <p className="mr-2 errorMsg text-sm text-red-600 text-justify rounded-lg dark:bg-white">{errorMessage}</p>
+                        <p className="mr-2 errorMsg text-sm text-red-500 text-justify rounded-lg dark:bg-white">{errMsg}</p>
                         <div>
                             <button
                                 type="submit"

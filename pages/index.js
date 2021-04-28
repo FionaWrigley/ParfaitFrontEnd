@@ -3,13 +3,13 @@ import { useEffect } from 'react'
  
 export default function Home() {
  
-
-
   const router = useRouter()
     // Make sure we're in the browser
     if (typeof window !== 'undefined') {
 
       useEffect(() => {
+
+        if (localStorage.getItem('loggedIn') === 'true'){
 
         fetch(process.env.parfaitServer+ '/loggedin', {
           method: 'GET',
@@ -33,7 +33,11 @@ export default function Home() {
               console.log("Oops: "+err)
           });
 
-      },[])
+      
+    }else{
+      router.push('/login');
+    }
+  },[])
     }
     return null;
   }

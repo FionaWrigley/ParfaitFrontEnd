@@ -10,8 +10,6 @@ const Plainheader = ({backpage, page}) => {
     const backIcon = <FontAwesomeIcon icon={faArrowLeft} size="lg"/>
     const logoutIcon = <FontAwesomeIcon icon={faSignOutAlt} size="lg"/>
 
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",page)
-
     const logOut = () => {
         fetch(process.env.parfaitServer+'/logout', {
             method: 'GET',
@@ -19,6 +17,7 @@ const Plainheader = ({backpage, page}) => {
             credentials: 'include'
         }).then((res) => {
                 if(res.status == 204){
+                    localStorage.setItem('loggedIn', false)
                     router.push('/login');
                 }
             }).catch(err => console.log("Oops: "+err));

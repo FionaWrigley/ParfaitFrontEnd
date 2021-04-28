@@ -46,10 +46,7 @@ const groupschedule = () => {
                     res
                         .json()
                         .then((data) => {
-
                             setScheduleData(data);
-                            console.log("this is the data")
-                            console.log(data);
                             setReady(true);
                         })
             }
@@ -72,7 +69,7 @@ const groupschedule = () => {
                 
                 <div className ='h-16 col-start-2 col-span-1 row-start-1 flex flex-row flex-nowrap dark:text-white'>
                     {dayArray.map((day, dayIndex) =>
-                        <div key={`day${dayIndex}`} className={`overflow-y-hidden grid grid-col-24 dark:bg-none box-border border-r border-gray-300`}> {/* calendar grid */}
+                        <div key={`day${dayIndex}`} className={`overflow-y-hidden grid grid-col-24 bg-gray-100 dark:bg-none box-border border-r border-gray-300`}> {/* calendar grid */}
                         <div className={`text-sm text-center h-8 col-start-1 col-span-24 row-start-1 row-span-1}`}>{day.toDateString()}</div>
                            { hourArray.map((hour, hourIndex) => <div key={hourIndex} className = {`w-60 col-start-${hourIndex+1} col-span-2 row-start-2 row-span-1`}>
                                 <div key={`hour${hourIndex}`} className={`text-xxs w-60 text-center h-4 col-start-${hourIndex+1} col-span-2 -left-20 row-start-2 row-span-1`}>{hour}</div>  

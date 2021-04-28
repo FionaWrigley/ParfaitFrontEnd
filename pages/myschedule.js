@@ -92,7 +92,7 @@ const myschedule = () => {
                 value={date}/>
             </div>
             <div className ='overflow-y-scroll'>
-            { (ready)?
+            { (ready)? ((events.length < 1) ?
                 <SwipeableList fullSwipe = {true}> 
                     {events.map((element, index) =>
                     <SwipeableListItem 
@@ -107,7 +107,7 @@ const myschedule = () => {
                         </div></div></div>
                         </SwipeableListItem>
                     )} 
-                </SwipeableList>
+                </SwipeableList> : <div className="text-md justify-center text-center text-weight-bold text-gray-900 dark:text-white whitespace-no-wrap">No events scheduled</div>)
  : <div className="mt-8 align-middle min-w-full justify-center overflow-visible text-center flex items-center">
  <PulseLoader color="#c7d2fe" loading={!ready} size={15} />
 </div>}

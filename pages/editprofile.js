@@ -1,43 +1,40 @@
 import Plainheader from '../components/navigation/Plainheader';
 import ProfileUpdate from '../components/ProfileUpdate';
 import PasswordUpdate from '../components/PasswordUpdate';
-import NotificationUpdate from '../components/NotificationUpdate';
 import SettingsPanel from '../components/SettingsPanel';
 import ImageSaver from '../components/ImageSaver';
 import PulseLoader from "react-spinners/PulseLoader";
 import {useState, useEffect} from 'react';
 
 const editprofile = (props) => {
-    const [ready,
-        setReady] = useState(false);
-    const [user,
-        setUser] = useState([]);
-    const [submit,
-        setSubmit] = useState(false);
-    const [firstLoad,
-        setFirstLoad] = useState(true);
+     const [ready] = useState(true);
+    // const [user,
+    //     setUser] = useState([]);
+    // const [submit,
+    //     setSubmit] = useState(false);
+    // const [firstLoad,
+    //     setFirstLoad] = useState(true);
 
-    const myLoader = ({ src, width, quality }) => {
-        return `${src}?w=${width}&q=${quality || 75}`
-      }
+    // const myLoader = ({ src, width, quality }) => {
+    //     return `${src}?w=${width}&q=${quality || 75}`
+    //   }
 
-    useEffect(() => {
-        if (firstLoad) {
-            fetch(process.env.parfaitServer+'/profile', {
-                method: 'GET',
-                headers: {'Content-Type': 'application/json'},
-                    credentials: 'include'
-                })
-                .then(res => res.json())
-                .then((data) => {
-                    setUser(data);
-                    setReady(true);
-                    setFirstLoad(false);
-                    console.log(data);
-                    })
-                .catch(err => console.log("Oops: " + err));
-        }
-    }, [submit]);
+    // useEffect(() => {
+    //    // if (firstLoad) {
+    //         fetch(process.env.parfaitServer+'/profile', {
+    //             method: 'GET',
+    //             headers: {'Content-Type': 'application/json'},
+    //                 credentials: 'include'
+    //             })
+    //             .then(res => res.json())
+    //             .then((data) => {
+    //                 setUser(data);
+    //                 setReady(true);
+    //                 //setFirstLoad(false);
+    //                 })
+    //             .catch(err => console.log("Oops: " + err));
+    //     //}
+    // }, []);
 
    
     return (
