@@ -6,6 +6,8 @@ module.exports = {
     './components/**/*.js',
     './components/*.js',
     ],
+
+    safelist: ["bg-indigo-200", "bg-pink-200", "bg-green-200", "bg-yellow-100", "bg-purple-200", /^col-start-/, /^row-start-/]
   },
 
 
