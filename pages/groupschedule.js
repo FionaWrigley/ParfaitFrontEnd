@@ -19,7 +19,7 @@ const groupschedule = () => {
     const [numberOfDays,
                 setNumberOfDays] = useState(30);
 
-    const contactColor = ["indigo-200", "pink-200", "green-200", "yellow-100", "purple-200"];
+    const contactColor = ["bg-indigo-200", "bg-pink-200", "bg-green-200", "bg-yellow-100", "bg-purple-200"];
 
     let schedDate = new Date();
     let dayArray = [];
@@ -98,3 +98,6 @@ const groupschedule = () => {
 }
 
 export default groupschedule;
+
+//  purgecss: row-start-1, row-start-2, row-start-3, row-start-4, row-start-5, row-start-6, row-start-7, row-start-8, row-start-9, row-start-10, row-start-11, row-start-12, row-start-13, row-start-14, row-start-15, row-start-16, row-start-17, row-start-18, row-start-19, row-start-20, row-start-21, row-start-22, row-start-23, row-start-24, row-start-25, row-start-26, row-start-27, row-start-28, row-start-29, row-start-30
+//  purgecss: col-start-1, col-start-2, , col-start-3, col-start-4, col-start-5, col-start-6, col-start-7, col-start-8, col-start-9, col-start-10, col-start-11, col-start-12, col-start-13, col-start-14, col-start-15, col-start-16, col-start-17, col-start-18, col-start-19, col-start-20, col-start-21, col-start-22, col-start-23, col-start-24, col-start-25, col-start-26, col-start-27, col-start-28, col-start-29, col-start-30, col-start-31

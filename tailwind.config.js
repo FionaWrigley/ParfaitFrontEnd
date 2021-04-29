@@ -6,10 +6,6 @@ module.exports = {
     './components/**/*.js',
     './components/*.js',
     ],
-
-    options: {
-      safelist: ['col-start-*', 'row-start-*']
-    }
   },
 
 
