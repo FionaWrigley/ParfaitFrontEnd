@@ -74,9 +74,9 @@ const groupschedule = () => {
                     {dayArray.map((day, dayIndex) =>
                         <div key={`day${dayIndex}`} className={`overflow-y-hidden grid grid-col-24 box-border border-r border-gray-300`}> {/* calendar grid */}
                         <div className={`text-sm text-center h-8 col-start-1 col-span-24 row-start-1 row-span-1}`}>{day.toDateString()}</div>
-                           { hourArray.map((hour, hourIndex) => <div key={hourIndex} className = {`w-60 col-start-${hourIndex+1} col-span-2 row-start-2 row-span-1`}>
-                                <div key={`hour${hourIndex}`} className={`text-xxs w-60 text-center h-4 col-start-${hourIndex+1} col-span-2 -left-20 row-start-2 row-span-1`}>{hour}</div>  
-                                <div className={`w-30 h-4 col-start-${hourIndex+1} col-span-1 row-start-3 row-span-1 border-r border-gray-300`}></div>
+                           { hourArray.map((hour, hourIndex) => <div key={hourIndex} className = {`w-60 ${'col-start-'+hourIndex+1} col-span-2 row-start-2 row-span-1`}>
+                                <div key={`hour${hourIndex}`} className={`text-xxs w-60 text-center h-4 ${'col-start-'+hourIndex+1} col-span-2 -left-20 row-start-2 row-span-1`}>{hour}</div>  
+                                <div className={`w-30 h-4 ${'col-start-'+hourIndex+1} col-span-1 row-start-3 row-span-1 border-r border-gray-300`}></div>
                            </div>)}
                         </div>
                 )}

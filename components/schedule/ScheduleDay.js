@@ -74,7 +74,7 @@ export function ScheduleDay(props) {
 
     return (
         <>
-            {hourArray.map((hour, index) => {let colStart = `col-start-${index+1}`; <div key={index} className={`w-30 box-border h-12 ${colStart} col-span-1 row-span-1 row-start-${props.row} border-r border-gray-300`}><ScheduleHour hour={hour} color={props.color} row={props.row} index={index} key={index}/></div>})}
+            {hourArray.map((hour, index) => <div key={index} className={`w-30 box-border h-12 ${'col-start-'+index+1} col-span-1 row-span-1 ${'row-start-'+props.row} border-r border-gray-300`}><ScheduleHour hour={hour} color={props.color} row={props.row} index={index} key={index}/></div>)}
         </>
     );
     }
