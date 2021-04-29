@@ -23,7 +23,7 @@ const groupschedule = () => {
 
     let schedDate = new Date();
     let dayArray = [];
-    let hourArray = ['1am', '2am', '3am', '4am', '5am', '6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', '9pm', '10pm', '11pm']
+    let hourArray = ['', '1am', '2am', '3am', '4am', '5am', '6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', '9pm', '10pm', '11pm']
 
         for( let i=0; i < numberOfDays; i++){
             dayArray.push(schedDate);
@@ -74,11 +74,12 @@ const groupschedule = () => {
                     {dayArray.map((day, dayIndex) =>
                         <div key={`day${dayIndex}`} className={`overflow-y-hidden grid grid-col-24 box-border`}> {/* calendar grid */}
                         <div className={`text-sm text-center h-8 box-border col-start-1 col-span-24 row-start-1 row-span-1}`}>{day.toDateString()}</div>
-                           { hourArray.map((hour, hourIndex) => 
-                                            <div key={hourIndex} className = {`w-60 col-start-${hourIndex+1} col-span-2 box-border row-start-2 row-span-1`}>
-                                                <div key={`hour${hourIndex}`} className={`text-xxs w-60 text-center box-border h-4 col-start-${hourIndex+1} col-span-2 -left-20 row-start-2 row-span-1`}>{hour}</div>  
-                                                <div className={`w-30 h-4 col-start-${hourIndex+1} col-span-1 row-start-3 row-span-1 box-border border-r border-gray-300`}></div>
-                           </div>)}
+                           { hourArray.map((hour, hourIndex) => (hourIndex > 0) ?
+                                            <div key={hourIndex} className = {`w-60 col-start-${(hourIndex)} col-span-2 box-border row-start-2 row-span-1`}>
+                                                <div key={`hour${hourIndex}`} className={`text-xxs w-60 text-center box-border h-4 col-start-${(hourIndex)} col-span-2 -left-20 row-start-2 row-span-1`}>{hour}</div>  
+                                                <div className={`w-30 h-4 col-start-${(hourIndex)} col-span-1 row-start-3 row-span-1 box-border border-r border-gray-300`}></div>
+                                                
+                           </div>: <></>)}
                         </div>
                 )}
 </div>  
@@ -101,4 +102,4 @@ const groupschedule = () => {
 export default groupschedule;
 
 //  purgecss: row-start-1, row-start-2, row-start-3, row-start-4, row-start-5, row-start-6, row-start-7, row-start-8, row-start-9, row-start-10, row-start-11, row-start-12, row-start-13, row-start-14, row-start-15, row-start-16, row-start-17, row-start-18, row-start-19, row-start-20, row-start-21, row-start-22, row-start-23, row-start-24, row-start-25, row-start-26, row-start-27, row-start-28, row-start-29, row-start-30
-//  purgecss: col-start-1, col-start-2, , col-start-3, col-start-4, col-start-5, col-start-6, col-start-7, col-start-8, col-start-9, col-start-10, col-start-11, col-start-12, col-start-13, col-start-14, col-start-15, col-start-16, col-start-17, col-start-18, col-start-19, col-start-20, col-start-21, col-start-22, col-start-23, col-start-24, col-start-25, col-start-26, col-start-27, col-start-28, col-start-29, col-start-30, col-start-31
+//  purgecss: col-start-1, col-start-2, col-start-3, col-start-4, col-start-5, col-start-6, col-start-7, col-start-8, col-start-9, col-start-10, col-start-11, col-start-12, col-start-13, col-start-14, col-start-15, col-start-16, col-start-17, col-start-18, col-start-19, col-start-20, col-start-21, col-start-22, col-start-23, col-start-24, col-start-25, col-start-26, col-start-27, col-start-28, col-start-29, col-start-30, col-start-31
