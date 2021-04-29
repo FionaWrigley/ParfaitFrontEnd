@@ -1,9 +1,19 @@
 module.exports = {
-  purge: [
+  purge: {
+    
+    content: [
     './pages/*.js',
     './components/**/*.js',
     './components/*.js',
-  ],
+    ],
+
+    options: {
+      safelist: ['col-start-*', 'row-start-*']
+    }
+  },
+
+
+
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     gradientColorStops: theme => ({
