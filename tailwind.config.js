@@ -33,7 +33,6 @@ module.exports = {
       },
 
       height: {
-
         '250': '250px'
       },
 
