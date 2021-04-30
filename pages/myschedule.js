@@ -92,7 +92,7 @@ const myschedule = () => {
                 value={date}/>
             </div>
             <div className ='overflow-y-scroll'>
-            { (ready)? ((events.length < 1) ?
+            { (ready)? ((events.length > 0) ?
                 <SwipeableList fullSwipe = {true}> 
                     {events.map((element, index) =>
                     <SwipeableListItem 

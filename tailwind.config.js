@@ -1,22 +1,22 @@
 module.exports = {
-  // purge: {
+  purge: {
     
-  //   content: [
-  //   './pages/*.js',
-  //   './components/**/*.js',
-  //   './components/*.js',
-  //   ],
+    content: [
+    './pages/*.js',
+    './components/**/*.js',
+    './components/*.js',
+    ],
 
-  //   safelist: {
-  //     standard: ['col-start-4','bg-indigo-200', 'bg-pink-200', 'bg-green-200', 'bg-yellow-100', 'bg-purple-200', /^col-start-/, /^row-start-/]
+    safelist: {
+      standard: ['col-start-4','bg-indigo-200', 'bg-pink-200', 'bg-green-200', 'bg-yellow-100', 'bg-purple-200', /^col-start-/, /^row-start-/]
 
-  //   },
+    },
     
-  //   options: {
-  //     whitelist: ['col-start-4','bg-indigo-200', 'bg-pink-200', 'bg-green-200', 'bg-yellow-100', 'bg-purple-200', /^col-start-/, /^row-start-/]
+    options: {
+      whitelist: ['col-start-4','bg-indigo-200', 'bg-pink-200', 'bg-green-200', 'bg-yellow-100', 'bg-purple-200', /^col-start-/, /^row-start-/]
 
-  //   }
-  // },
+    }
+  },
 
 
 

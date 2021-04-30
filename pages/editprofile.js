@@ -8,34 +8,6 @@ import {useState, useEffect} from 'react';
 
 const editprofile = (props) => {
      const [ready] = useState(true);
-    // const [user,
-    //     setUser] = useState([]);
-    // const [submit,
-    //     setSubmit] = useState(false);
-    // const [firstLoad,
-    //     setFirstLoad] = useState(true);
-
-    // const myLoader = ({ src, width, quality }) => {
-    //     return `${src}?w=${width}&q=${quality || 75}`
-    //   }
-
-    // useEffect(() => {
-    //    // if (firstLoad) {
-    //         fetch(process.env.parfaitServer+'/profile', {
-    //             method: 'GET',
-    //             headers: {'Content-Type': 'application/json'},
-    //                 credentials: 'include'
-    //             })
-    //             .then(res => res.json())
-    //             .then((data) => {
-    //                 setUser(data);
-    //                 setReady(true);
-    //                 //setFirstLoad(false);
-    //                 })
-    //             .catch(err => console.log("Oops: " + err));
-    //     //}
-    // }, []);
-
    
     return (
         <><div className="sticky top-0 z-50"><Plainheader backpage="groups" page="profile"/></div>
