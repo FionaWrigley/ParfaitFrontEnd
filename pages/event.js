@@ -1,7 +1,7 @@
 import Plainheader from '../components/navigation/Plainheader';
 import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 var compareAsc = require('date-fns/compareAsc')
 
 const event = () => {
@@ -17,9 +17,13 @@ const event = () => {
     const repeated = useRef({});
     repeated.current = watch("repeated", "");
     const onSubmit = data => formSubmit(data);
+    const [errMsg, setErrMsg] = useState('');
     
     
     const formSubmit = (form) => {
+
+        setErrMsg('');
+
         fetch(process.env.parfaitServer+'/createevent', {
                 method: 'POST',
                 body: JSON.stringify({form}),
@@ -37,7 +41,7 @@ const event = () => {
                         router.push('/login')
                         break;
                     }
-                }).catch(err => console.log("Oops: "+err));
+                }).catch(err => setErrMsg("Oops, we are currently experiencing a problem, please try again later"));
     }
     return (
         <>
@@ -63,7 +67,7 @@ const event = () => {
                                         required: 'Event name is required', 
                                         minLength: { value: 2, message: 'Event name must be between 2 and 50 characters' }, 
                                         maxLength: { value: 50, message: 'Event name must be between 2 and 50 characters' }, 
-                                        pattern: { value: /^[ A-Za-z0-9_@./#&+-]*$/, message: 'Event name may contain letters, numbers, or the following characters - , _, @, ., /, #, &, + .'}
+                                        pattern: { value: /^[ A-Za-z0-9_@./#&+'!,$*-]*$/, message: "Event name may contain letters, numbers, or the following characters - _ @ . / # & + , ! ' $ *"}
                                     })}/>
                                        {errors.eventName && <p className="errorMsg text-sm rounded-lg mt-1 text-red-500">{errors.eventName.message}</p>}
                             </div>
@@ -73,9 +77,9 @@ const event = () => {
                                     name="eventDescription"
                                     placeholder="Event details"
                                     className = "mt-1 block dark:bg-gray-700 w-full rounded-lg mt-1 dark:bg-white shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
-                                    ref={register({pattern: {value: /^[ A-Za-z0-9_@./#&+-]*$/, message: 'Event description may contain letters, numbers, or the following characters - , _, @, ., /, #, &, + .' } })}/>
+                                    ref={register({pattern: {value: /^[ A-Za-z0-9_@./#&+'!,$*-]*$/, message: "Event description may contain letters, numbers, or the following characters - _ @ . / # & + , ! ' $ *" } })}/>
                                               
-                                    {errors.eventDescription && <p className="errorMsg rounded-lg mt-1 text-sm text-red-500">errors.eventDescription.message</p>}
+                                    {errors.eventDescription && <p className="errorMsg rounded-lg mt-1 text-sm text-red-500">{errors.eventDescription.message}</p>}
                             </div>
                             <div className="w-full col-span-6 sm:col-span-4 grid grid-cols-6 gap-6">           
                             <div className="col-span-3">
@@ -87,7 +91,7 @@ const event = () => {
                                     ref={register({
                                         required: 'Event start date is required'
                                     })}/>
-                                {errors.startDate && <p className="errorMsg rounded-lg mt-1 text-sm text-red-500">errors.startDate.message</p>}
+                                {errors.startDate && <p className="errorMsg rounded-lg mt-1 text-sm text-red-500">{errors.startDate.message}</p>}
 
                             </div>
 
@@ -179,7 +183,8 @@ const event = () => {
                     
                 </div>
             </div> 
-            <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-right sm:px-6">
+            <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-right sm:px-6 flex w-full justify-end">
+            <p className="mt-1 text-m text-red-500 justify-end rounded-full mr-5 inline">{errMsg}</p>
                 <button
                     type="submit"
                     className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -193,7 +198,5 @@ const event = () => {
 </div>
         </>
     )
-
-
 }
 export default event;

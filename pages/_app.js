@@ -1,14 +1,11 @@
 import '../styles/globals.css'
 import "tailwindcss/tailwind.css";
 import 'react-swipeable-list/dist/styles.css';
-import {useRef} from 'react';
 import Head from 'next/head';
 import { ThemeProvider } from 'next-themes'
-//import Html from 'next/document'
 
 function MyApp({ Component, pageProps }) {
 
- 
    return <>
      <Head>
         <meta charset="utf-8" />
@@ -33,5 +30,4 @@ function MyApp({ Component, pageProps }) {
  
     </>
 }
-
 export default MyApp

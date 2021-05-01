@@ -1,6 +1,7 @@
 import {useState, useRef} from 'react';
 import {useRouter} from 'next/router';
 import { useForm } from "react-hook-form";
+import Link from 'next/link';
 
 
 
@@ -47,7 +48,7 @@ const register = (props) => {
                 }
             }).catch(err => setErrMsg('Oops, we are having a problem, please try again later'));
         }
-    return (
+    return (<>
         <div
             className="min-h-screen flex items-center justify-center to-gray-50 from-gray-50 g-gradient-to-r  dark:from-primaryDark dark:to-secondaryDark py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-8">
@@ -98,7 +99,23 @@ const register = (props) => {
                             />
                             {errors.lname && <p className="errorMsg text-sm text-red-500">{errors.lname.message}</p>}
                             </div>
-
+                            <div>
+                            <label htmlFor="email" className="sr-only">Email address</label>
+                            <input
+                                id="email"
+                                name="email"
+                                type="text"
+                                autoComplete="email"
+                                className="dark:bg-gray-700 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                placeholder="Email address"
+                                ref={register({ 
+                                    required: 'Email is required', 
+                                    maxLength: {value: 255, message: 'Email must be less than 256 characters'}, 
+                                    pattern: {value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: 'Email should be in standard format e.g. Fiona@hotmail.com'}
+                                 })}
+                            />
+                            {errors.email && <p className="errorMsg text-sm text-red-500">{errors.email.message}</p>}
+                            </div>
                         <div>
                             <label htmlFor="phone" className="sr-only">Phone</label>
                             <input
@@ -116,23 +133,7 @@ const register = (props) => {
                             />
                             {errors.phone && <p className="errorMsg text-sm text-red-500">{errors.phone.message}</p>}
                             </div>
-                        <div>
-                            <label htmlFor="email" className="sr-only">Email address</label>
-                            <input
-                                id="email"
-                                name="email"
-                                type="text"
-                                autoComplete="email"
-                                className="dark:bg-gray-700 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                placeholder="Email address"
-                                ref={register({ 
-                                    required: 'Email is required', 
-                                    maxLength: {value: 255, message: 'Email must be less than 256 characters'}, 
-                                    pattern: {value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: 'Email should be in standard format e.g. Fiona@hotmail.com'}
-                                 })}
-                            />
-                            {errors.email && <p className="errorMsg text-sm text-red-500">{errors.email.message}</p>}
-                            </div>
+                        
                         <div>
                             <label htmlFor="password" className="sr-only">Password</label>
                             <input
@@ -173,7 +174,6 @@ const register = (props) => {
                                   })}
                                 />
                                 {errors.password2 && <p className="errorMsg text-sm text-red-500">{errors.password2.message}</p>}
-
                                 </div>
                     </div>
                     <p className="errorMsg text-sm text-red-500">{errMsg}</p>
@@ -197,9 +197,19 @@ const register = (props) => {
                             Register
                         </button>
                     </div>
+                    <div>
+<p className='flex justify-center'><Link href="/login">
+                        <a className="font-medium text-center text-indigo-600 dark:text-white hover:text-indigo-500">
+                            Back to login
+                        </a>
+                    </Link></p>
+                    </div>
                 </form>
             </div>
+           
         </div>
+        
+     </>
     )
 
 }

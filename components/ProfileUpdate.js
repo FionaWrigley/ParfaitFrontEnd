@@ -32,7 +32,7 @@ const ProfileUpdate = () => {
                     setReady(true);
                     setFirstLoad(false);
                     })
-                .catch(err => console.log("Oops: " + err));
+                .catch(err => setErrMsg("Oops: " + err));
         }
     }, []);
 
