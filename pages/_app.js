@@ -1,10 +1,13 @@
-import '../styles/globals.css'
+import '../styles/globals.css';
 import "tailwindcss/tailwind.css";
 import 'react-swipeable-list/dist/styles.css';
 import Head from 'next/head';
-import { ThemeProvider } from 'next-themes'
+import { ThemeProvider, useTheme } from 'next-themes';
+//import {useTheme} from 'next-themes';
 
 function MyApp({ Component, pageProps }) {
+  
+  //const {theme, setTheme} = useTheme('light')
 
    return <>
      <Head>
@@ -24,6 +27,7 @@ function MyApp({ Component, pageProps }) {
         <title>Parfait</title>
         
       </Head>
+
       <ThemeProvider attribute="class">
           <Component {...pageProps} />
           </ThemeProvider>

@@ -44,7 +44,6 @@ const register = (props) => {
                     case 401:
                         router.push('register');
                         break;
-
                 }
             }).catch(err => setErrMsg('Oops, we are having a problem, please try again later'));
         }
@@ -70,7 +69,7 @@ const register = (props) => {
                                 name="fname"
                                 type="text"
                                 autoComplete="given-name"
-                                className="dark:bg-gray-700 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className="dark:bg-gray-700 dark:text-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="First name"
                                 ref={register({ 
                                     required: 'First name is required', 
@@ -88,7 +87,7 @@ const register = (props) => {
                                 name="lname"
                                 type="text"
                                 autoComplete="family-name"
-                                className="dark:bg-gray-700 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className="dark:bg-gray-700 dark:text-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Surname"
                                 ref={register({ 
                                     required: 'Surname is required', 
@@ -106,7 +105,7 @@ const register = (props) => {
                                 name="email"
                                 type="text"
                                 autoComplete="email"
-                                className="dark:bg-gray-700 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className="dark:bg-gray-700 dark:text-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Email address"
                                 ref={register({ 
                                     required: 'Email is required', 
@@ -123,7 +122,7 @@ const register = (props) => {
                                 name="phone"
                                 type="text"
                                 autoComplete="tel"
-                                className="dark:bg-gray-700 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className="dark:bg-gray-700 dark:text-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Phone number"
                                 ref={register({
                                     minLength: {value: 8, message: 'Phone number must be between 8 and 15 digits'}, 
@@ -141,20 +140,20 @@ const register = (props) => {
                                 name="password"
                                 type="password"
                                 autoComplete="current-password"
-                                className="dark:bg-gray-700 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className="dark:bg-gray-700 dark:text-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Password"
                                 ref={register({
                                     required: "Password is required",
                                     minLength: {
                                         value: 8,
-                                        message: "Password must have at least 8 characters"
+                                        message: 'Password must have at least 8 characters, and should contain a minimum of 8 characters, including one upper case letter, one lower case letter, one number, and one special character'
                                       },
                                     pattern: {
-                                        value: /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])[a-zA-Z0-9!"#\$%&'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]{8,}$/,
-                                        message: 'Password should contain a minimum of 8 characters, including one upper case letter, one lower case letter, and one number'
+                                        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                                        //value: /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])[a-zA-Z0-9!"#\$%&'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]{8,}$/,
+                                        message: 'Password must have at least 8 characters, and should contain a minimum of 8 characters, including one upper case letter, one lower case letter, one number, and one special character'
                                     }
-                                    
-                                    })}
+                                })}
                             />
                             {errors.password && <p className="errorMsg text-sm text-red-500">{errors.password.message}</p>}
                             </div>
@@ -166,7 +165,7 @@ const register = (props) => {
                                 name="password2"
                                 type="password"
                                 autoComplete="current-password"
-                                className="dark:bg-gray-700 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className="dark:bg-gray-700 dark:text-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Re-enter Password"
                                 ref={register({
                                     validate: (value) =>
@@ -180,7 +179,7 @@ const register = (props) => {
                     <div>
                         <button
                             type="submit"
-                            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 dark:bg-gray-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            className="group relative dark:text-white w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 dark:bg-gray-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                             <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                                 <svg
                                     className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"

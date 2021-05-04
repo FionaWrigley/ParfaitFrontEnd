@@ -32,8 +32,6 @@ export default function Home() {
               //setErrMsg("Oops, we are currently experiencing problem, please try again later")
               console.log("Oops: "+err)
           });
-
-      
     }else{
       router.push('/login');
     }

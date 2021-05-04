@@ -62,7 +62,7 @@ const event = () => {
                                     type="text"
                                     placeholder="Event Name"
                                     name="eventName"
-                                    className = "mt-1 h-9 dark:bg-gray-700 mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
+                                    className = "mt-1 h-9 dark:bg-gray-700 dark:text-white mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
                                     ref={register({ 
                                         required: 'Event name is required', 
                                         minLength: { value: 2, message: 'Event name must be between 2 and 50 characters' }, 
@@ -76,7 +76,7 @@ const event = () => {
                                 <textarea
                                     name="eventDescription"
                                     placeholder="Event details"
-                                    className = "mt-1 block dark:bg-gray-700 w-full rounded-lg mt-1 dark:bg-white shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
+                                    className = "mt-1 block dark:bg-gray-700 dark:text-white w-full rounded-lg mt-1 dark:bg-white shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
                                     ref={register({pattern: {value: /^[ A-Za-z0-9_@./#&+'!,$*-]*$/, message: "Event description may contain letters, numbers, or the following characters - _ @ . / # & + , ! ' $ *" } })}/>
                                               
                                     {errors.eventDescription && <p className="errorMsg rounded-lg mt-1 text-sm text-red-500">{errors.eventDescription.message}</p>}
@@ -87,7 +87,7 @@ const event = () => {
                                 <input
                                     type="date"
                                     name="startDate"
-                                    className = "mt-1 h-9 dark:bg-gray-700 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
+                                    className = "mt-1 h-9 dark:bg-gray-700 dark:text-white block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
                                     ref={register({
                                         required: 'Event start date is required'
                                     })}/>
@@ -100,7 +100,7 @@ const event = () => {
                                 <input
                                     type="time"
                                     name="startTime"
-                                    className = "mt-1 h-9 dark:bg-gray-700 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
+                                    className = "mt-1 h-9 dark:bg-gray-700 dark:text-white block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
                                     ref={register({
                                         required: 'Event start time is required'
                                     })}/>
@@ -115,7 +115,7 @@ const event = () => {
                                     type="date"
                                     name="endDate"
                                     defaultValue={startDate.current}
-                                    className = "mt-1 h-9 dark:bg-gray-700  block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
+                                    className = "mt-1 h-9 dark:bg-gray-700 dark:text-white block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
                                     ref={register({
                                         validate: (value) =>
                                         (value >= startDate.current || "The end date cannot be before the start date")
@@ -129,7 +129,7 @@ const event = () => {
                                     type="time"
                                     name="endTime"
                                     defaultValue={startTime.current}
-                                    className = "mt-1 h-9 dark:bg-gray-700 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
+                                    className = "mt-1 h-9 dark:bg-gray-700 dark:text-white block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
                                     ref={register({
                                         validate: (value) =>
                                         (( endDate.current > startDate.current || (value > startTime.current)) || "End time must be after the start time")
@@ -143,7 +143,7 @@ const event = () => {
                                     ref = {register}
                                     name="repeated"
                                     type="checkbox"
-                                    className="focus:ring-indigo-500 dark:bg-gray-300  h-4 w-4 text-indigo-600 border-gray-300 rounded"/>
+                                    className="focus:ring-indigo-500 dark:text-white dark:bg-gray-300  h-4 w-4 text-indigo-600 border-gray-300 rounded"/>
                             </div>
                             <div className="ml-3 text-sm">
                                 <label htmlFor="repeated" className="font-medium text-gray-700 dark:text-white">Repeat event</label>
@@ -153,7 +153,7 @@ const event = () => {
                        
                         <label htmlFor="frequency" className=" dark:text-white block text-sm font-medium text-gray-700">Repeat</label>
                             
-                        <select className = "h-9 rounded-lg mt-1 dark:bg-gray-700 "name='frequency' 
+                        <select className = "h-9 rounded-lg mt-1 dark:bg-gray-700 dark:text-white"name='frequency' 
                         ref={register({
                                 validate: (value) =>
                                          ((!repeated.current || (repeated.current && (value != 'null'))) || "Frequency is required if repeat is checked")      
@@ -172,7 +172,7 @@ const event = () => {
                                 <input
                                     type="date"
                                     name="repeatUntil"
-                                    className = "mt-1 dark:bg-gray-700 h-9 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
+                                    className = "mt-1 dark:bg-gray-700 dark:text-white h-9 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
                                     ref={register({
                                         validate: (value) =>
                                                  ((!repeated.current || (repeated.current && (value > endDate.current ))) || "Frequency is required if repeat is checked")      
@@ -183,7 +183,7 @@ const event = () => {
                     
                 </div>
             </div> 
-            <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-right sm:px-6 flex w-full justify-end">
+            <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700 dark:text-white text-right sm:px-6 flex w-full justify-end">
             <p className="mt-1 text-m text-red-500 justify-end rounded-full mr-5 inline">{errMsg}</p>
                 <button
                     type="submit"
