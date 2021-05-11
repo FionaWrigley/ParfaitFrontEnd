@@ -7,15 +7,16 @@ export default function Home() {
     // Make sure we're in the browser
     if (typeof window !== 'undefined') {
 
+      //extra
       useEffect(() => {
 
         if (localStorage.getItem('loggedIn') === 'true'){
 
         fetch(process.env.parfaitServer+ '/loggedin', {
           method: 'GET',
-          // headers: {
-          //     'Content-Type': 'application/json',
-          // },
+          headers: {
+              'Content-Type': 'application/json',
+          },
               credentials: 'include'
            })
            .then(res => { 
