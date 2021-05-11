@@ -21,9 +21,9 @@ const register = (props) => {
             fetch(process.env.parfaitServer+'/register', {
                 method: 'POST',
                 body: JSON.stringify(form),
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                // headers: {
+                //     'Content-Type': 'application/json'
+                // },
                 credentials: 'include'
             }).then(res => {
 

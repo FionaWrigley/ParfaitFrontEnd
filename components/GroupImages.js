@@ -19,7 +19,7 @@ const GroupImages = (props) => {
         fetch(process.env.parfaitServer+'/grouppics/' + props.groupID, {
             method: 'GET',
             // headers: {
-            //     'Content-Type': 'application/json'
+            //     'Content-Type': 'application/json; charset=utf-8',
             // },
             credentials: 'include'
         }).then((res) => {

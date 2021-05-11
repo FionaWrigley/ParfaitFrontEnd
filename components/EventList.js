@@ -13,9 +13,9 @@ const EventList = (dateField) => {
 
         fetch(process.env.parfaitServer+'/scheduleday/'+dateField.dateField, {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            // headers: {
+            //     'Content-Type': 'application/json'
+            // },
             credentials: 'include'
         }).then((res) => {
             switch (res.status) {

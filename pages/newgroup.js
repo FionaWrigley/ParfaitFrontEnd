@@ -60,9 +60,9 @@ const newgroup = () => {
         fetch(process.env.parfaitServer+'/creategroup', {
             method: 'POST',
             body: JSON.stringify(group),
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            // headers: {
+            //     'Content-Type': 'application/json'
+            // },
                 credentials: 'include'
             })
             .then(res => {           

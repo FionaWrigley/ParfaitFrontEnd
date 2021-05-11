@@ -35,10 +35,10 @@ import PulseLoader from "react-spinners/PulseLoader";
       useEffect(() => {
           fetch(process.env.parfaitServer+'/groups', {
               method: 'GET',
+              credentials: 'include',
             //   headers: {
-            //     //  'Content-Type': 'application/json; charset=utf-8'
-            //   },
-              credentials: 'include'
+            //     'Content-Type': 'application/json; charset=utf-8',
+            // }
           }).then((res) => {
               switch (res.status) {
                   case 401:

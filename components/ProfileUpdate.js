@@ -21,7 +21,7 @@ const ProfileUpdate = () => {
       
             fetch(process.env.parfaitServer+'/profile', {
                 method: 'GET',
-                headers: {'Content-Type': 'application/json'},
+                // headers: {'Content-Type': 'application/json'},
                     credentials: 'include'
                 })
                 .then(res => res.json())
@@ -40,9 +40,9 @@ const ProfileUpdate = () => {
         fetch(process.env.parfaitServer+'/profile', {
                 method: 'POST',
                 body: JSON.stringify(form),
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                // headers: {
+                //     'Content-Type': 'application/json'
+                // },
                     credentials: 'include'
                  })
                  .then(res => {

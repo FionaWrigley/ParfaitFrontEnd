@@ -13,7 +13,7 @@ const Plainheader = ({backpage, page}) => {
     const logOut = () => {
         fetch(process.env.parfaitServer+'/logout', {
             method: 'GET',
-            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            // headers: {'Content-Type': 'application/json; charset=utf-8'},
             credentials: 'include'
         }).then((res) => {
                 if(res.status == 204){

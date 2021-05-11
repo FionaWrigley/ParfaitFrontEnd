@@ -28,9 +28,9 @@ const event = () => {
         fetch(process.env.parfaitServer+'/createevent', {
                 method: 'POST',
                 body: JSON.stringify({form}),
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                // headers: {
+                //     'Content-Type': 'application/json'
+                // },
                     credentials: 'include'
                  })
                  .then(res => {   

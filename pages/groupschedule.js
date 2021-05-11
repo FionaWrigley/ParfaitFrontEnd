@@ -42,9 +42,9 @@ const groupschedule = () => {
 
         fetch(process.env.parfaitServer+'/groupschedule'+ querystring, {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            // headers: {
+            //     'Content-Type': 'application/json'
+            // },
             credentials: 'include'
         }).then((res) => {
             switch (res.status) {
