@@ -4,7 +4,7 @@ import PasswordUpdate from '../components/PasswordUpdate';
 import SettingsPanel from '../components/SettingsPanel';
 import ImageSaver from '../components/ImageSaver';
 import PulseLoader from "react-spinners/PulseLoader";
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 
 const editprofile = (props) => {
      const [ready] = useState(true);
@@ -13,8 +13,7 @@ const editprofile = (props) => {
         <><div className="sticky top-0 z-50"><Plainheader backpage="groups" page="profile"/></div>
         
         {(ready)
-        ? <div>
-                
+        ? <div>  
                 <div className="mt-6">
                     <div>
                         <div className="px-4 sm:px-0">
@@ -24,11 +23,8 @@ const editprofile = (props) => {
                             </p>
                         </div>
                         <ImageSaver />
-                       
-           
                     </div>
                 </div>
-
                 <div className="hidden sm:block" aria-hidden="true">
                     <div className="py-5">
                         <div className="border-t border-gray-200"></div >
@@ -47,7 +43,6 @@ const editprofile = (props) => {
                     </div>
                 </div>
                 <PasswordUpdate/>
-
                 <div className="hidden sm:block" aria-hidden="true">
                     <div className="py-5">
                         <div className="border-t border-gray-200"></div>

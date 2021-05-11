@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }) {
 
    return <>
      <Head>
-        <meta charset="utf-8" />
+        <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="description" content="Parfait Social Scheduling App" />
         <meta name="theme-color" content="#deb7c7" />
@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }) {
         <link href='images/logo80.svg' rel='icon' type='image/svg' sizes='80x80' />
         <link href='images/logo144.svg' rel='icon' type='image/svg' sizes='144x144' />
         <link href='images/logo512.png' rel='icon' type='image/svg' sizes='512x512' />
-        <link rel="canonical" href="https://parfait-coral.vercel.app"/>
+        <link rel="canonical" href="parfait-coral.vercel.app"/>
         <title>Parfait</title>
         
       </Head>

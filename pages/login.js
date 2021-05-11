@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import {useState} from 'react';
-import { useForm } from "react-hook-form";
+import {useForm } from "react-hook-form";
 import {useRouter} from 'next/router';
 
 
@@ -30,11 +30,12 @@ const login = (props) => {
                             router.push('/groups');
                             break;
                         case 401: 
-                            router.push('/login');
                              setErrorMessage("Invalid username or password");
                             break;
+                        case 403:
+                            setErrorMessage("This account has been deactivated");
+                            break;
                         case 422: 
-                            router.push('/login');
                              setErrorMessage("Invalid username or password");
                             break;
                         }
@@ -79,22 +80,6 @@ const login = (props) => {
                     </div>
 
                     <div className="flex items-center justify-between">
-                        {/* <div className="flex items-center">
-                            <input
-                                id="remember_me"
-                                name="remember_me"
-                                type="checkbox"
-                                className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"/>
-                            <label htmlFor="remember_me" className="ml-2 block text-sm text-gray-900">
-                                Remember me
-                            </label>
-                        </div> */}
-
-                        {/* <div className="text-sm">
-                            <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                Forgot your password?
-                            </a>
-                        </div> */}
                     </div>
 
                     <div>

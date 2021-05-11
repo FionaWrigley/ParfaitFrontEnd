@@ -83,8 +83,7 @@ const groupschedule = () => {
                            { hourArray.map((hour, hourIndex) => (hourIndex > 0) ?
                                             <div key={hourIndex} className = {`w-60 col-start-${(hourIndex)} col-span-2 box-border row-start-2 row-span-1`}>
                                                 <div key={`hour${hourIndex}`} className={`text-xxs w-60 text-center box-border h-4 col-start-${(hourIndex)} col-span-2 -left-20 row-start-2 row-span-1`}>{hour}</div>  
-                                                <div className={`w-30 h-4 col-start-${(hourIndex)} col-span-1 row-start-3 row-span-1 box-border border-r border-gray-300`}></div>
-                                                
+                                                <div className={`w-30 h-4 col-start-${(hourIndex)} col-span-1 row-start-3 row-span-1 box-border border-r border-gray-300`}></div>     
                            </div>: <></>)}
                         </div>
                 )}
@@ -106,4 +105,3 @@ const groupschedule = () => {
 }
 
 export default groupschedule;
-

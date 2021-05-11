@@ -12,15 +12,13 @@ const ProfileUpdate = () => {
         setReady] = useState(false);
     const [user,
         setUser] = useState([]);
-    const [firstLoad,
-        setFirstLoad] = useState(true);
     const [message, setMessage] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const router = useRouter();
 
 
     useEffect(() => {
-        if (firstLoad) {
+      
             fetch(process.env.parfaitServer+'/profile', {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
@@ -30,10 +28,8 @@ const ProfileUpdate = () => {
                 .then((data) => {
                     setUser(data);
                     setReady(true);
-                    setFirstLoad(false);
                     })
                 .catch(err => setErrMsg("Oops: " + err));
-        }
     }, []);
 
     const formSubmit = (form) => {
@@ -174,7 +170,7 @@ const ProfileUpdate = () => {
             </div>
         </div>
     </form>
-</div>
+</div>                     
 </div >
         </>:
         <></>

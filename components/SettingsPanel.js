@@ -6,7 +6,7 @@ import {useTheme} from 'next-themes'
 
 const SettingsPanel = () => {
 
-    const {theme, setTheme} = useTheme('')
+    const {theme, setTheme} = useTheme((localStorage.getItem('theme') || 'light'));
 
     return ( 
     <><div className="mt-4 sm:mt-0">
