@@ -1,12 +1,16 @@
 
-import {useState, useEffect} from 'react';
+import {useEffect} from 'react';
 import React from 'react';
 import {useTheme} from 'next-themes'
 
 
 const SettingsPanel = () => {
 
+    useEffect(() => {
+
     const {theme, setTheme} = useTheme((localStorage.getItem('theme') || 'light'));
+
+    },[]);
 
     return ( 
     <><div className="mt-4 sm:mt-0">
