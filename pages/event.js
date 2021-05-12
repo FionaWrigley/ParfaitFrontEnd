@@ -24,7 +24,6 @@ const event = () => {
     const formSubmit = (form) => {
 
         setErrMsg('');
-        console.log(JSON.stringify({form}));
 
         fetch(process.env.parfaitServer+'/createevent', {
                 method: 'POST',

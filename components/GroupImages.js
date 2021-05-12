@@ -42,7 +42,7 @@ const GroupImages = (props) => {
                                     groupImages.push(
                                         <span
                                             key={i}
-                                            className={`inline-block h-${size} w-${size} rounded-full overflow-hidden`}>
+                                            className={`inline-block h-${size} w-${size} rounded-full bg-gray-100 overflow-hidden`}>
                                             <svg
                                                 className="h-full w-full text-gray-300"
                                                 fill="currentColor"
@@ -58,7 +58,7 @@ const GroupImages = (props) => {
                                         key={i}
                                         className={`inline-block h-${size} w-${size} rounded-full overflow-hidden`}>
                                             <Image
-                                            src={`${process.env.parfaitServer}/${data[i].profilePicPath}`}
+                                            src={data[i].profilePicPath}
                                             alt=""
                                             width={150}
                                             height={150} /></div>);

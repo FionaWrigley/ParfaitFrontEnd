@@ -111,7 +111,7 @@ const isSelected = (id) => {
        {results.map((element, index) => <>
                         <span key={'span'+index}
                           className="mx-2 col-start-1 col-span-1 inline-block h-11 w-11 rounded-full overflow-hidden bg-gray-100 items-center">
-                        { (!element.profilePicPath) ?
+                        { (element.profilePicPath === "") ?
                                                  <svg
                                                     className="h-11 w-11 text-gray-300"
                                                     fill="currentColor"
@@ -123,7 +123,7 @@ const isSelected = (id) => {
                         key={index}
                         className={`h-11 w-11 rounded-full`}>
                             <Image
-                            src={`${process.env.parfaitServer}/${element.profilePicPath}`}
+                            src={element.profilePicPath}
                             alt=""
                             width={150}
                             height={150} />

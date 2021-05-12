@@ -8,8 +8,7 @@ settings = {
     },
     
     images: {
-        //domains: ['localhost', '127.0.0.1'],
-        domains: ['https://parfait-findthegaps.herokuapp.com'],
+        domains: ['res.cloudinary.com'],
       },
       pwa: {
         dest: 'public'

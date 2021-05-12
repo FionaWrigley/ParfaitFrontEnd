@@ -13,9 +13,6 @@ const login = (props) => {
      const [error, setErrorMessage] = useState('');
 
     const formSubmit = (user) => {
-        console.log('in submit')
-        console.log(JSON.stringify(user))
-        console.log(process.env.parfaitServer);
 
         fetch(process.env.parfaitServer+ '/login', {
                     method: 'POST',

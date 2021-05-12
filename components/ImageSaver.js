@@ -20,15 +20,10 @@ const ImageSaver = () => {
             setSelectedFile(image);
             setSelected(true);
         }
-
-        // const myLoader = ({ src, width, quality }) => {
-           
-        //     return `${src}?w=${width}&q=${quality || 75}`
-        //   }
     
         useEffect(() => {
 
-                fetch(process.env.parfaitServer+'/profilepic2',
+                fetch(process.env.parfaitServer+'/profilepiccloud',
                 {
                     method: 'GET',
                     headers: {
@@ -38,9 +33,9 @@ const ImageSaver = () => {
                   })
                 .then(res => res.json())
                 .then(data => {
-                    setObjectURL(process.env.parfaitServer+'/'+data.profilePicPath);
+                    setObjectURL(data.profilePicPath);
                     setImageExists(true);
-                });
+                }).catch(err => console.log('Oops! ',err))
         },[]);
 
         const saveImage = (e) => {
@@ -49,14 +44,14 @@ const ImageSaver = () => {
              setErrMsg('');
 
               var formData = new FormData();
-       
               formData.append('profilepic', selectedFile);
+             
         
-             fetch(process.env.parfaitServer+'/profilepic', {
+            fetch(process.env.parfaitServer+'/profilepiccloud', {
                      method: 'POST',
-                     headers: {
-                        'Content-Type': 'application/json; charset=utf-8',
-                    },
+                    //  headers: {
+                    //     'Content-Type': 'application/json',
+                    // },
                     credentials: 'include',
                     body: formData,
                 })

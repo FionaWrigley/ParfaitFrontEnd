@@ -38,7 +38,6 @@ const groupschedule = () => {
 
     useEffect(() => {
         let querystring = "/"+groupID+"/"+format(new Date(), "yyyy-MM-dd")+'/'+numberOfDays;
-        console.log(querystring);
 
         fetch(process.env.parfaitServer+'/groupschedule'+ querystring, {
             method: 'GET',
@@ -54,8 +53,6 @@ const groupschedule = () => {
                         .then((data) => {
 
                             setScheduleData(data);
-                            console.log("this is the data")
-                            console.log(data);
                             setReady(true);
                         })
             }

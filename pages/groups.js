@@ -69,7 +69,7 @@ return (
                 <div className="inline-block min-w-full">
                 <p className="errorMsg dark:bg-white rounded-m text-sm text-red-600">{errorMessage}</p>
                         
-        {
+        { groupData.length > 0 ?
             groupData.map((element, index) => 
             <SwipeableListItem 
                 key ={index}
@@ -95,8 +95,10 @@ return (
                         </div> 
                     </div>
                 </Link>
-            </SwipeableListItem>)}
-                </div>
+            </SwipeableListItem>  )
+            : <div className="text-md justify-center mt-2 text-center text-weight-bold text-gray-900 dark:text-white whitespace-no-wrap">Create a group to get started</div>
+           } 
+            </div>
             </div>
         </div>
     </div> 

@@ -13,7 +13,7 @@ const Navbar = ({page}) => {
 
     useEffect(() => {
 
-            fetch(process.env.parfaitServer+'/profilepic2',
+            fetch(process.env.parfaitServer+'/profilepiccloud',
             {
                 method: 'GET',
                  headers: { 'Content-Type': 'application/json; charset=utf-8' },
@@ -24,14 +24,13 @@ const Navbar = ({page}) => {
                     
                     case 200: 
                         res.json().then(data => {
-                            setObjectURL(process.env.parfaitServer+'/'+data.profilePicPath)
+                            setObjectURL(data.profilePicPath);
+                            //setImageExists(true);
+                          
                         });
-                        break;
-                    case 422: 
-        
-                        break;
+                     
                 }
-            }).catch((err) => console.log("something went very wrong!!!!!!"));
+            }).catch((err) => console.log("Oops ", err));
                 
             
     },[]);
@@ -47,7 +46,7 @@ const Navbar = ({page}) => {
                                     id="user-menu"
                                     aria-haspopup="true"
                                     aria-label="Profile">
-                                    { (imageExists) ?
+                                    { (objectURL !== "") ?
                                     <div 
                                     className="h-10 w-10 rounded-full overflow-hidden">
                                     <Image
