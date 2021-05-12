@@ -1,6 +1,6 @@
 
 import {useState, useEffect} from 'react';
-import React from 'react';
+import react from 'react';
 
 
 const NotificationUpdate = () => {

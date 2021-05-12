@@ -24,13 +24,14 @@ const event = () => {
     const formSubmit = (form) => {
 
         setErrMsg('');
+        console.log(JSON.stringify({form}));
 
         fetch(process.env.parfaitServer+'/createevent', {
                 method: 'POST',
-                body: JSON.stringify({form}),
-                // headers: {
-                //     'Content-Type': 'application/json'
-                // },
+                body: JSON.stringify(form),
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8',
+                },
                     credentials: 'include'
                  })
                  .then(res => {   

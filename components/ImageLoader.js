@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import {useRef} from 'react';
 
 const ImageLoader = (props) => {
    
-    const imageInput = React.useRef(null);
+    const imageInput = useRef(null);
 
     const changeHandler = (event) => {
         const fileUploaded = event.target.files[0];

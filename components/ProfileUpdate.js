@@ -1,6 +1,5 @@
 import {useState, useEffect} from 'react';
 import { useForm } from "react-hook-form";
-import React from 'react';
 import {useRouter} from 'next/router';
 
 const ProfileUpdate = () => {
@@ -21,7 +20,9 @@ const ProfileUpdate = () => {
       
             fetch(process.env.parfaitServer+'/profile', {
                 method: 'GET',
-                // headers: {'Content-Type': 'application/json'},
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8',
+                },
                     credentials: 'include'
                 })
                 .then(res => res.json())
@@ -40,9 +41,9 @@ const ProfileUpdate = () => {
         fetch(process.env.parfaitServer+'/profile', {
                 method: 'POST',
                 body: JSON.stringify(form),
-                // headers: {
-                //     'Content-Type': 'application/json'
-                // },
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8',
+                },
                     credentials: 'include'
                  })
                  .then(res => {

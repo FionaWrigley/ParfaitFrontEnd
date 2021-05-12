@@ -1,20 +1,5 @@
 
-import {useState, useEffect} from 'react';
-import React from 'react';
-
-
 const PasswordUpdate = () => {
-
-    const [ready,
-        setReady] = useState(false);
-    const [user,
-        setUser] = useState([]);
-    const [submit,
-        setSubmit] = useState(false);
-    const [firstLoad,
-        setFirstLoad] = useState(true);
-
-
 
     // useEffect(() => {
     //     if (firstLoad) {
@@ -32,7 +17,6 @@ const PasswordUpdate = () => {
     //             .catch(err => console.log("Oops: " + err));
     //     }
     // }, [submit]);
-
 
     return ( <>
       

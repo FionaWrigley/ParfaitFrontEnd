@@ -15,8 +15,8 @@ export default function Home() {
         fetch(process.env.parfaitServer+ '/loggedin', {
           method: 'GET',
           headers: {
-              'Content-Type': 'application/json',
-          },
+            'Content-Type': 'application/json; charset=utf-8',
+        },
               credentials: 'include'
            })
            .then(res => { 

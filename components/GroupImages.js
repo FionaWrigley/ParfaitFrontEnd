@@ -18,9 +18,9 @@ const GroupImages = (props) => {
     useEffect(() => {
         fetch(process.env.parfaitServer+'/grouppics/' + props.groupID, {
             method: 'GET',
-            // headers: {
-            //     'Content-Type': 'application/json; charset=utf-8',
-            // },
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+            },
             credentials: 'include'
         }).then((res) => {
             switch (res.status) {

@@ -37,9 +37,9 @@ const deleteEvent = (eventID) => {
     fetch(process.env.parfaitServer+'/deleteevent', {
         method: 'POST',
         body: JSON.stringify({eventID}),
-        // headers: {
-        //     'Content-Type': 'application/json'
-        // },
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+        },
             credentials: 'include'
         })
         .then(res => {
@@ -64,9 +64,9 @@ const myschedule = () => {
 
         fetch(process.env.parfaitServer+'/scheduleday/'+fetchDate, {
             method: 'GET',
-            // headers: {
-            //     'Content-Type': 'application/json'
-            // },
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+            },
             credentials: 'include'
         }).then((res) => {
             switch (res.status) {

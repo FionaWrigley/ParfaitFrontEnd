@@ -1,14 +1,15 @@
 
 import {useEffect} from 'react';
-import React from 'react';
 import {useTheme} from 'next-themes'
 
 
 const SettingsPanel = () => {
 
+    const {theme, setTheme} = useTheme();
+
     useEffect(() => {
 
-    const {theme, setTheme} = useTheme((localStorage.getItem('theme') || 'light'));
+        setTheme(localStorage.getItem('theme') || 'light');
 
     },[]);
 
@@ -38,7 +39,7 @@ const SettingsPanel = () => {
                                     </div>
                                     {/* <!-- label --> */}
                                     <div className="ml-3 text-gray-700 dark:text-white w-full font-medium">
-                                        Dark Mode
+                                        Toggle Dark Mode
                                     </div>
                                 </label>
 </div></div>

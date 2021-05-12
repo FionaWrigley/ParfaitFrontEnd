@@ -1,7 +1,6 @@
 
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import Image from 'next/image';
-import React from 'react';
 import ImageLoader from '../components/ImageLoader';
 import {useRouter} from 'next/router';
 
@@ -11,26 +10,30 @@ const ImageSaver = () => {
         const [imageExists, setImageExists] = useState(false);
         const [selectedFile, setSelectedFile] = useState();
         const [selected, setSelected] = useState(false);
-        const profilepic = React.useRef(null);
+        const profilepic = useRef(null);
         const [message, setMessage] = useState('');
         const [errMsg, setErrMsg] = useState('');
         const router = useRouter();
 
-        function uploadImage(image) {
+        const uploadImage = (image) => {
             setObjectURL(URL.createObjectURL(image))
             setSelectedFile(image);
             setSelected(true);
         }
 
-        const myLoader = ({ src, width, quality }) => {
+        // const myLoader = ({ src, width, quality }) => {
            
-            return `${src}?w=${width}&q=${quality || 75}`
-          }
+        //     return `${src}?w=${width}&q=${quality || 75}`
+        //   }
     
         useEffect(() => {
+
                 fetch(process.env.parfaitServer+'/profilepic2',
                 {
                     method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8',
+                    },
                     credentials: 'include'
                   })
                 .then(res => res.json())
@@ -51,6 +54,9 @@ const ImageSaver = () => {
         
              fetch(process.env.parfaitServer+'/profilepic', {
                      method: 'POST',
+                     headers: {
+                        'Content-Type': 'application/json; charset=utf-8',
+                    },
                     credentials: 'include',
                     body: formData,
                 })
@@ -87,7 +93,6 @@ const ImageSaver = () => {
                                                 </svg> : */}
                                           
                                                  <img 
-                                              //  loader={myLoader}
                                                 src={
                                                      (selectedFile)?
                                                     window
@@ -95,11 +100,7 @@ const ImageSaver = () => {
                                                     .createObjectURL(selectedFile)
                                                         : 
                                                         `${objectURL}`}
-                                                       
-                                                    // width="100"
-                                                    // height="100"
-                                                    // className="min-h-full min-w-full rounded-full inline overflow-hidden"
-                                                    // ref={profilepic}
+                                         
                                                 /> 
                                             </span>
                                            <ImageLoader handleFile={uploadImage}/>
@@ -110,7 +111,7 @@ const ImageSaver = () => {
                                     <p className="mt-1 text-m text-gray-800 justify-end rounded-full dark:text-white mr-5 inline">{message} </p>
                                     <p className="mt-1 text-m text-red-500 justify-end rounded-full mr-5 inline">{errMsg} </p>
                                     <button
-                                        //type="submit"
+                                      
                                         onClick={saveImage}
                                         className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                         Save

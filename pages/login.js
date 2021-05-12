@@ -13,22 +13,30 @@ const login = (props) => {
      const [error, setErrorMessage] = useState('');
 
     const formSubmit = (user) => {
+        console.log('in submit')
+        console.log(JSON.stringify(user))
+        console.log(process.env.parfaitServer);
 
         fetch(process.env.parfaitServer+ '/login', {
                     method: 'POST',
                     body: JSON.stringify(user),
-                    // headers: {
-                    //     'Content-Type': 'application/json; charset=utf-8',
-                    // },
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8',
+                    },
                         credentials: 'include'
                      })
                      .then(res => { 
                         switch(res.status){
-                        case 204:
+                        case 200:
                             localStorage.setItem('loggedIn', true);
                             localStorage.setItem('lastLogIn', new Date());
                             router.push('/groups');
                             break;
+                            case 204:
+                                localStorage.setItem('loggedIn', true);
+                                localStorage.setItem('lastLogIn', new Date());
+                                router.push('/groups');
+                                break;
                         case 401: 
                              setErrorMessage("Invalid username or password");
                             break;
