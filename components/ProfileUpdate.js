@@ -71,7 +71,7 @@ const ProfileUpdate = () => {
                         <div className="mt-4 sm:mt-0">
 
 <div>
-    <div className="px-4 sm:px-0">
+    <div className="px-4 sm:px-0 lg:mx-6 md:mx-6">
         <h3 className="text-lg font-medium leading-6 text-gray-900 dark:text-white">Personal Information</h3 >
         <p className="mt-1 text-sm text-gray-600 dark:text-gray-200">
             Update your personal information.
@@ -93,7 +93,7 @@ const ProfileUpdate = () => {
                             placeholder="First name"
                             defaultValue={user.fname}
                             autoComplete="given-name"
-                            className = "dark:bg-gray-700 mt-1 block w-full h-9 shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
+                            className = "dark:bg-gray-700 dark:text-white mt-1 block w-full h-9 shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
                             ref={register({ 
                                 required: 'First name is required', 
                                 minLength: {value: 2, message: 'First name must be between 2 and 50 characters'},
@@ -112,7 +112,7 @@ const ProfileUpdate = () => {
                             defaultValue={user.lname}
                             id="lname"
                             autoComplete="family-name"
-                            className = "dark:bg-gray-700 mt-1 h-9 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
+                            className = "dark:bg-gray-700 dark:text-white mt-1 h-9 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
                              ref={register({ 
                                     required: 'Surname is required', 
                                     minLength: {value: 2, message: 'Surname must be between 2 and 50 characters'},
@@ -131,7 +131,7 @@ const ProfileUpdate = () => {
                             placeholder="Phone number"
                             defaultValue={user.phone}
                             autoComplete="tel"
-                            className = "dark:bg-gray-700 mt-1 h-9 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
+                            className = "dark:bg-gray-700 dark:text-white mt-1 h-9 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
                             ref={register({
                                 minLength: {value: 8, message: 'Phone number must be between 8 and 15 digits'}, 
                                 maxLength: {value: 15, message: 'Phone number must be between 8 and 15 digits'}, 
@@ -144,7 +144,7 @@ const ProfileUpdate = () => {
                     <div className="col-span-6 sm:col-span-4">                       
                         <input
                             type="text"
-                            className = "dark:bg-gray-700 mt-1 h-9 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none invalid:border-red-500"
+                            className = "dark:bg-gray-700 dark:text-white mt-1 h-9 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none invalid:border-red-500"
                             name="email"
                             id="email"
                             placeholder="Email address"

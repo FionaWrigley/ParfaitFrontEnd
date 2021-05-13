@@ -16,7 +16,7 @@ const SettingsPanel = () => {
     return ( 
     <><div className="mt-4 sm:mt-0">
         <div>
-            <div className="px-4 sm:px-0">
+            <div className="px-4 sm:px-0 lg:mx-6 md:mx-6">
                 <h3 className="text-lg font-medium leading-6 text-gray-900 dark:text-white">Settings</h3 >
             </div>
         </div >
@@ -24,8 +24,8 @@ const SettingsPanel = () => {
             <form action="#" method="POST">
                 <div className="shadow overflow-hidden sm:rounded-md">
                     <div className="px-4 py-5 sm:p-6">
-                        <div className="grid grid-cols-6 gap-6">     
-                            <div className="ml-10 flex items-center justify-center w-full mb-12">
+                        <div className="flex">     
+                            <div className="ml-10 flex items-left justify-left w-full mb-12">
                                 <label htmlFor="toggleB" className="flex items-center cursor-pointer" >
                                     {/* <!-- toggle --> */}
                                     <div className="relative">
@@ -52,12 +52,7 @@ const SettingsPanel = () => {
 
 </div >
                         
-
-
-        </>
-        
+        </>  
     )
-
-
 }
 export default SettingsPanel;

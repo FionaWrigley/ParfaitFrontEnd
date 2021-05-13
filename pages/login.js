@@ -2,6 +2,9 @@ import Link from 'next/link';
 import {useState} from 'react';
 import {useForm } from "react-hook-form";
 import {useRouter} from 'next/router';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+const eye = <FontAwesomeIcon icon={faEye} size="lg" />;
 
 
 const login = (props) => {
@@ -9,6 +12,7 @@ const login = (props) => {
     const router = useRouter();
     const { register, handleSubmit} = useForm();
     const onSubmit = data => formSubmit(data);
+    const [passwordShown, setPasswordShown] = useState(false);
 
      const [error, setErrorMessage] = useState('');
 
@@ -73,15 +77,19 @@ const login = (props) => {
                          className="dark:bg-gray-700 dark:text-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address" 
                          ref={register}
                          required/></div>
-                        <div>
+                        <div className='relative'>
                             <label htmlFor="password" className="sr-only">Password</label>
-                            <input id="password" name="password" type="password" // value={user.password
-                         autoComplete="current-password" 
-                         required
-                         ref={register}
-                         required 
-                         className="dark:bg-gray-700 dark:text-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" 
-                         placeholder="Password" /></div>
+                            <input 
+                            id="password" 
+                            name="password" 
+                            type={passwordShown ? "text" : "password"}
+                            required// value={user.password
+                            autoComplete="current-password" 
+                            ref={register}
+                            className="dark:bg-gray-700 dark:text-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" 
+                            placeholder="Password" />
+                         <i className = 'absolute top-3 right-2 h-6 w-6 text-gray-500 dark:text-white' onClick={() => setPasswordShown(passwordShown ? false : true)}>{eye}</i>
+</div>
                     </div>
 
                     <div className="flex items-center justify-between">

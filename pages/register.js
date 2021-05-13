@@ -2,7 +2,9 @@ import {useState, useRef} from 'react';
 import {useRouter} from 'next/router';
 import { useForm } from "react-hook-form";
 import Link from 'next/link';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+const eye = <FontAwesomeIcon icon={faEye} size="lg" />;
 
 
 
@@ -13,6 +15,8 @@ const register = (props) => {
     const [errMsg, setErrMsg] = useState('');
     const router = useRouter();
     const password = useRef({});
+    const [passwordShown, setPasswordShown] = useState(false);
+    const [password2Shown, setPassword2Shown] = useState(false);
     password.current = watch("password", "");
 
     const formSubmit = (form) => {
@@ -133,12 +137,12 @@ const register = (props) => {
                             {errors.phone && <p className="errorMsg text-sm text-red-500">{errors.phone.message}</p>}
                             </div>
                         
-                        <div>
+                        <div className='relative'>
                             <label htmlFor="password" className="sr-only">Password</label>
                             <input
                                 id="password"
                                 name="password"
-                                type="password"
+                                type={passwordShown ? "text" : "password"}
                                 autoComplete="current-password"
                                 className="dark:bg-gray-700 dark:text-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Password"
@@ -156,14 +160,15 @@ const register = (props) => {
                                 })}
                             />
                             {errors.password && <p className="errorMsg text-sm text-red-500">{errors.password.message}</p>}
+                            <i className = 'absolute top-3 right-2 h-6 w-6 text-gray-500 dark:text-white' onClick={() => setPasswordShown(passwordShown ? false : true)}>{eye}</i>
                             </div>
 
-                        <div>
+                        <div className='relative'>
                             <label htmlFor="password2" className="sr-only">Re-enter Password</label>
                             <input
                                 id="password2"
                                 name="password2"
-                                type="password"
+                                type={password2Shown ? "text" : "password"}
                                 autoComplete="current-password"
                                 className="dark:bg-gray-700 dark:text-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Re-enter Password"
@@ -173,6 +178,7 @@ const register = (props) => {
                                   })}
                                 />
                                 {errors.password2 && <p className="errorMsg text-sm text-red-500">{errors.password2.message}</p>}
+                                <i className = 'absolute top-3 right-2 h-6 w-6 text-gray-500 dark:text-white' onClick={() => setPassword2Shown(password2Shown ? false : true)}>{eye}</i>
                                 </div>
                     </div>
                     <p className="errorMsg text-sm text-red-500">{errMsg}</p>
