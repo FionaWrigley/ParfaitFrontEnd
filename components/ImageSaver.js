@@ -26,9 +26,7 @@ const ImageSaver = () => {
                 fetch(process.env.parfaitServer+'/profilepiccloud',
                 {
                     method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json; charset=utf-8',
-                    },
+                    headers: {'Content-Type': 'application/json; charset=utf-8'},
                     credentials: 'include'
                   })
                 .then(res => res.json())
@@ -49,9 +47,7 @@ const ImageSaver = () => {
         
             fetch(process.env.parfaitServer+'/profilepiccloud', {
                      method: 'POST',
-                    //  headers: {
-                    //     'Content-Type': 'application/json',
-                    // },
+                     headers: {},
                     credentials: 'include',
                     body: formData,
                 })
