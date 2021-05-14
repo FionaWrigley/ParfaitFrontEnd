@@ -4,6 +4,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import FooterMenu from '../components/navigation/FooterMenu';
 import Navbar from '../components/navigation/Navbar';
+import Link from 'next/link';
 import { css } from "@emotion/core";
 import PulseLoader from "react-spinners/PulseLoader";
 import {useEffect, useState} from 'react';
@@ -84,7 +85,7 @@ const myschedule = () => {
 
     return (
         <>
-            <div className="sticky top-0 z-50"><Navbar page="My Schedule"/></div>
+            <div className="sticky top-0 z-50"><Navbar page="My Schedule" selectedDate={format(date, 'yyyy-MM-dd')}/></div>
             <div className= "flex justify-center m-2">
                 <Calendar 
                 className="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-white"
@@ -97,14 +98,18 @@ const myschedule = () => {
                     {events.map((element, index) =>
                     <SwipeableListItem 
                         trailingActions={trailingActions(element.eventID)} key = {element.eventID}>
-                        <div className=' border-b border-b-2 border-gray-200 dark:border-gray-700'>               
+                        <Link href={( {pathname: 'event', query: {crudType: 'edit', eventID: element.eventID}})}>
+
+                        <div className=' border-b border-b-2 border-gray-200 dark:border-gray-700'
+                        >               
                             <div className="px-5 py-4 text-md font-semibold min-w-full">
                                 <div className="flex items-center">
                                     <div className="ml-3 h-full">
-                                            <div className='text-sm text-gray-600 dark:text-gray-200'>{`${element.startTime.slice(0,5)} ${new Date(element.startDate).toDateString()} - ${element.endTime.slice(0,5)} ${new Date(element.endDate).toDateString()}`}</div>                                       
-                                            <div className="text-md text-weight-bold text-gray-900 dark:text-white whitespace-no-wrap">{`${element.eventName} ~ ${element.eventDescription}`}</div>
+                                            <div className='text-xs text-gray-600 dark:text-gray-200'>{`${element.startTime.slice(0,5)} ${new Date(element.startDate).toDateString()} - ${element.endTime.slice(0,5)} ${new Date(element.endDate).toDateString()}`}</div>                                       
+                                            <div className="text-md mr-4 text-weight-bold text-gray-900 dark:text-white whitespace-no-wrap inline">{`${element.eventName}`}</div>
+                                            <div className="text-sm  text-gray-600 dark:text-gray-300 whitespace-no-wrap inline">{`${element.eventDescription}`}</div>
                                     </div>
-                        </div></div></div>
+                        </div></div></div></Link>
                         </SwipeableListItem>
                     )} 
                 </SwipeableList> : <div className="text-md justify-center text-center text-weight-bold text-gray-900 dark:text-white whitespace-no-wrap">No events scheduled</div>)

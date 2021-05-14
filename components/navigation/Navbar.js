@@ -4,7 +4,7 @@ import Link from 'next/link';
 import {useEffect, useState} from 'react';
 import Image from 'next/image';
 
-const Navbar = ({page}) => {
+const Navbar = (props) => {
 
     const groupIcon = <FontAwesomeIcon icon={faEdit} size="lg"/>
     const profileIcon = <FontAwesomeIcon icon={faUser} size='lg' />
@@ -66,7 +66,7 @@ const Navbar = ({page}) => {
                         className="flex-1 flex items-center justify-center sm:items-stretch ">
                         
                         <div className="flex-shrink-0 flex items-center text-center">
-                            <p  className="font-bold text-indigo-900 text-black dark:text-white text-xl">{page}</p>
+                            <p  className="font-bold text-indigo-900 text-black dark:text-white text-xl">{props.page}</p>
                         </div>
                     </div>
 
@@ -74,7 +74,7 @@ const Navbar = ({page}) => {
                         <div
                             className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 
-                            <Link href={(page === "My Groups" ? 'newgroup' : "event")}>
+                            <Link href={(props.page === "My Groups" ? 'newgroup' : {pathname: 'event', query: {selectedDate: props.selectedDate, crudType: 'create'}})}>
                                 <button
                                     aria-label="Create new"
                                     className="p-1 rounded-full text-gray-600 dark:text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
