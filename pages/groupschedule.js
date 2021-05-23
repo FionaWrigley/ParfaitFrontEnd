@@ -26,7 +26,7 @@ const groupschedule = () => {
     const [ready,
             setReady] = useState(false);
     const [numberOfDays,
-                setNumberOfDays] = useState(30);
+                setNumberOfDays] = useState(28);
 
     const contactColor = ["bg-indigo-200", "bg-pink-200", "bg-green-200", "bg-yellow-100", "bg-purple-200"];
 
@@ -54,6 +54,8 @@ const groupschedule = () => {
                     res
                         .json()
                         .then((data) => {
+                            console.log('we got data!!!')
+                            console.log(data);
 
                             setScheduleData(data);
                             setReady(true);
