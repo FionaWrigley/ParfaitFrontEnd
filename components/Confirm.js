@@ -3,7 +3,6 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const Confirm = (props) => {
 
-    console.log('in confirmation alert');
       return(
       confirmAlert({
         customUI: ({ onClose }) => {

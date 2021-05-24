@@ -5,6 +5,7 @@ import SettingsPanel from '../components/SettingsPanel';
 import ImageSaver from '../components/ImageSaver';
 import PulseLoader from "react-spinners/PulseLoader";
 import {useState} from 'react';
+import Link from 'next/link';
 
 const editprofile = (props) => {
      
@@ -47,7 +48,24 @@ const editprofile = (props) => {
                 </div>
 
                 <SettingsPanel/>
-            </div></>
+
+                <Link href='help'>
+                <div className="sm:block ml-4 mb-7 text-lg" >
+                    <div className="py-5">
+                        <a className="text-blue-600 dark:text-white dark:underline visited:text-purple-600">
+
+                            Need help?
+                            
+                        </a>
+                    </div>
+                    
+                </div>
+                </Link>
+            </div>
+            
+            
+            
+            </>
         
 )}
 export default editprofile;

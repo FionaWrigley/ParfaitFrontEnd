@@ -57,7 +57,6 @@ const event = (props) => {
     const formSubmit = (form) => {
         setErrMsg('');
 
-        console.log('formy form form', JSON.stringify(form));
         let urlStr;
         if(props.query && props.query.crudType === 'edit'){
             urlStr = '/editevent';
