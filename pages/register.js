@@ -129,6 +129,7 @@ const register = (props) => {
                                 className="dark:bg-gray-700 dark:text-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Phone number"
                                 ref={register({
+                                    required: 'Phone number is required', 
                                     minLength: {value: 8, message: 'Phone number must be between 8 and 15 digits'}, 
                                     maxLength: {value: 15, message: 'Phone number must be between 8 and 15 digits'}, 
                                     pattern: {value: /^[0-9]*$/, message: 'Phone number may only contain numbers'}
